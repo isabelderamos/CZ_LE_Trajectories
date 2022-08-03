@@ -1,0 +1,1 @@
+Note: the NCHS data is restricted and cannot be shared publicly. For information on how to obtain it, please check: https://www.cdc.gov/nchs/nvss/nvss-restricted-data.htm
