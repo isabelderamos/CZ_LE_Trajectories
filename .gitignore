@@ -1,4 +1,5 @@
 
+.DS_Store
 NCHS Mortality Data/Clean/Raw/mort2019.rdata
 NCHS Mortality Data/Clean/Raw/mort2018.rdata
 NCHS Mortality Data/Clean/Raw/mort2017.rdata
