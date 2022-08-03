@@ -34,3 +34,10 @@ NCHS Mortality Data/Clean/Raw/mort1989.rdata
 Population Data/pop_county_asrh.csv
 Population Data/bridged_pop_county_asrhLT.csv
 Population Data/bridged_pop_county_asrh.csv
+LE Trajectories/Analysis/Rogues/.RData
+LE Trajectories/Analysis/Rogues/.Rhistory
+LE Trajectories/Analysis/Rogues/Rogue CBSAsCZs.Rmd
+LE Trajectories/Analysis/Rogues/Rogue-CBSAsCZs.html
+LE Trajectories/Analysis/Rogues/rogue_cbsa_cz.csv
+LE Trajectories/Analysis/Rogues/rogue_cbsa_cz.R
+LE Trajectories/Analysis/Rogues/rogue_plots.pdf
