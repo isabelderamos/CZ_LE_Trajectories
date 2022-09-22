@@ -321,7 +321,7 @@ df_canada <- ne_countries(country='canada', scale=50, returnclass = "sf") %>% se
 
 # LE CALCULATIONS ----
 
-# IMPORTANT NOTE: ALL RESULTS BELOW HAVE ALREADY BEEN STORED IN LE_CBSA_RESULTS.RDATA (SKIP TO LINE 395)
+# IMPORTANT NOTE: ALL RESULTS BELOW HAVE ALREADY BEEN STORED IN LE_CBSA_RESULTS.RDATA
 run_LE<-F
 if (run_LE){
   ## cz, 3 yr pooled ----
@@ -967,7 +967,7 @@ results_cbsa_cz <-
     results_czyr5 %>% ungroup() %>% mutate(type="cz", year_type="year5", year=year5, id=cz) %>% 
       select(-year5, -cz) 
   ) %>% 
-  #filter(!id%in%c("14720", "20780", "587")) %>% # QUARANTINING ROGUE CBSA/CZS FOR NOW 
+  #filter(!id%in%c("14720", "20780", "587")) %>% # QUARANTINING ROGUE CBSA/CZS FOR NOW -- only 587 down the line 
   filter(!id%in%c(cz_ak, cz_hi)) # DROPPING CZ'S IN ALASKA AND HAWAII
 
 
