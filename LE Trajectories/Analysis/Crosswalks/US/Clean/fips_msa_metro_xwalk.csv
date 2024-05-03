@@ -1,0 +1,1833 @@
+fips,cbsa,cbsa_name,county,msa,delineation
+46013,10100,"Aberdeen, SD","Brown County, South Dakota",micro,march_2020
+46045,10100,"Aberdeen, SD","Edmunds County, South Dakota",micro,march_2020
+53027,10140,"Aberdeen, WA","Grays Harbor County, Washington",micro,march_2020
+48059,10180,"Abilene, TX","Callahan County, Texas",metro,march_2020
+48253,10180,"Abilene, TX","Jones County, Texas",metro,march_2020
+48441,10180,"Abilene, TX","Taylor County, Texas",metro,march_2020
+40123,10220,"Ada, OK","Pontotoc County, Oklahoma",micro,march_2020
+26091,10300,"Adrian, MI","Lenawee County, Michigan",micro,march_2020
+39133,10420,"Akron, OH","Portage County, Ohio",metro,march_2020
+39153,10420,"Akron, OH","Summit County, Ohio",metro,march_2020
+35035,10460,"Alamogordo, NM","Otero County, New Mexico",micro,march_2020
+13095,10500,"Albany, GA","Dougherty County, Georgia",metro,march_2020
+13177,10500,"Albany, GA","Lee County, Georgia",metro,march_2020
+13273,10500,"Albany, GA","Terrell County, Georgia",metro,march_2020
+13321,10500,"Albany, GA","Worth County, Georgia",metro,march_2020
+41043,10540,"Albany-Lebanon, OR","Linn County, Oregon",metro,march_2020
+36001,10580,"Albany-Schenectady-Troy, NY","Albany County, New York",metro,march_2020
+36083,10580,"Albany-Schenectady-Troy, NY","Rensselaer County, New York",metro,march_2020
+36091,10580,"Albany-Schenectady-Troy, NY","Saratoga County, New York",metro,march_2020
+36093,10580,"Albany-Schenectady-Troy, NY","Schenectady County, New York",metro,march_2020
+36095,10580,"Albany-Schenectady-Troy, NY","Schoharie County, New York",metro,march_2020
+37167,10620,"Albemarle, NC","Stanly County, North Carolina",micro,march_2020
+27047,10660,"Albert Lea, MN","Freeborn County, Minnesota",micro,march_2020
+01095,10700,"Albertville, AL","Marshall County, Alabama",micro,march_2020
+35001,10740,"Albuquerque, NM","Bernalillo County, New Mexico",metro,march_2020
+35043,10740,"Albuquerque, NM","Sandoval County, New Mexico",metro,march_2020
+35057,10740,"Albuquerque, NM","Torrance County, New Mexico",metro,march_2020
+35061,10740,"Albuquerque, NM","Valencia County, New Mexico",metro,march_2020
+01037,10760,"Alexander City, AL","Coosa County, Alabama",micro,march_2020
+01123,10760,"Alexander City, AL","Tallapoosa County, Alabama",micro,march_2020
+22043,10780,"Alexandria, LA","Grant Parish, Louisiana",metro,march_2020
+22079,10780,"Alexandria, LA","Rapides Parish, Louisiana",metro,march_2020
+27041,10820,"Alexandria, MN","Douglas County, Minnesota",micro,march_2020
+48131,10860,"Alice, TX","Duval County, Texas",micro,march_2020
+48249,10860,"Alice, TX","Jim Wells County, Texas",micro,march_2020
+34041,10900,"Allentown-Bethlehem-Easton, PA-NJ","Warren County, New Jersey",metro,march_2020
+42025,10900,"Allentown-Bethlehem-Easton, PA-NJ","Carbon County, Pennsylvania",metro,march_2020
+42077,10900,"Allentown-Bethlehem-Easton, PA-NJ","Lehigh County, Pennsylvania",metro,march_2020
+42095,10900,"Allentown-Bethlehem-Easton, PA-NJ","Northampton County, Pennsylvania",metro,march_2020
+26057,10940,"Alma, MI","Gratiot County, Michigan",micro,march_2020
+26007,10980,"Alpena, MI","Alpena County, Michigan",micro,march_2020
+42013,11020,"Altoona, PA","Blair County, Pennsylvania",metro,march_2020
+40065,11060,"Altus, OK","Jackson County, Oklahoma",micro,march_2020
+48011,11100,"Amarillo, TX","Armstrong County, Texas",metro,march_2020
+48065,11100,"Amarillo, TX","Carson County, Texas",metro,march_2020
+48359,11100,"Amarillo, TX","Oldham County, Texas",metro,march_2020
+48375,11100,"Amarillo, TX","Potter County, Texas",metro,march_2020
+48381,11100,"Amarillo, TX","Randall County, Texas",metro,march_2020
+13249,11140,"Americus, GA","Schley County, Georgia",micro,march_2020
+13261,11140,"Americus, GA","Sumter County, Georgia",micro,march_2020
+19015,11180,"Ames, IA","Boone County, Iowa",metro,march_2020
+19169,11180,"Ames, IA","Story County, Iowa",metro,march_2020
+36057,11220,"Amsterdam, NY","Montgomery County, New York",micro,march_2020
+48003,11380,"Andrews, TX","Andrews County, Texas",micro,march_2020
+18151,11420,"Angola, IN","Steuben County, Indiana",micro,march_2020
+26161,11460,"Ann Arbor, MI","Washtenaw County, Michigan",metro,march_2020
+01015,11500,"Anniston-Oxford, AL","Calhoun County, Alabama",metro,march_2020
+55015,11540,"Appleton, WI","Calumet County, Wisconsin",metro,march_2020
+55087,11540,"Appleton, WI","Outagamie County, Wisconsin",metro,march_2020
+12027,11580,"Arcadia, FL","DeSoto County, Florida",micro,march_2020
+40019,11620,"Ardmore, OK","Carter County, Oklahoma",micro,march_2020
+40085,11620,"Ardmore, OK","Love County, Oklahoma",micro,march_2020
+05019,11660,"Arkadelphia, AR","Clark County, Arkansas",micro,march_2020
+37021,11700,"Asheville, NC","Buncombe County, North Carolina",metro,march_2020
+37087,11700,"Asheville, NC","Haywood County, North Carolina",metro,march_2020
+37089,11700,"Asheville, NC","Henderson County, North Carolina",metro,march_2020
+37115,11700,"Asheville, NC","Madison County, North Carolina",metro,march_2020
+39005,11740,"Ashland, OH","Ashland County, Ohio",micro,march_2020
+39007,11780,"Ashtabula, OH","Ashtabula County, Ohio",micro,march_2020
+41007,11820,"Astoria, OR","Clatsop County, Oregon",micro,march_2020
+20005,11860,"Atchison, KS","Atchison County, Kansas",micro,march_2020
+39009,11900,"Athens, OH","Athens County, Ohio",micro,march_2020
+47107,11940,"Athens, TN","McMinn County, Tennessee",micro,march_2020
+48213,11980,"Athens, TX","Henderson County, Texas",micro,march_2020
+13059,12020,"Athens-Clarke County, GA","Clarke County, Georgia",metro,march_2020
+13195,12020,"Athens-Clarke County, GA","Madison County, Georgia",metro,march_2020
+13219,12020,"Athens-Clarke County, GA","Oconee County, Georgia",metro,march_2020
+13221,12020,"Athens-Clarke County, GA","Oglethorpe County, Georgia",metro,march_2020
+13013,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Barrow County, Georgia",metro,march_2020
+13015,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Bartow County, Georgia",metro,march_2020
+13035,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Butts County, Georgia",metro,march_2020
+13045,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Carroll County, Georgia",metro,march_2020
+13057,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Cherokee County, Georgia",metro,march_2020
+13063,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Clayton County, Georgia",metro,march_2020
+13067,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Cobb County, Georgia",metro,march_2020
+13077,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Coweta County, Georgia",metro,march_2020
+13085,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Dawson County, Georgia",metro,march_2020
+13089,12060,"Atlanta-Sandy Springs-Alpharetta, GA","DeKalb County, Georgia",metro,march_2020
+13097,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Douglas County, Georgia",metro,march_2020
+13113,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Fayette County, Georgia",metro,march_2020
+13117,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Forsyth County, Georgia",metro,march_2020
+13121,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Fulton County, Georgia",metro,march_2020
+13135,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Gwinnett County, Georgia",metro,march_2020
+13143,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Haralson County, Georgia",metro,march_2020
+13149,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Heard County, Georgia",metro,march_2020
+13151,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Henry County, Georgia",metro,march_2020
+13159,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Jasper County, Georgia",metro,march_2020
+13171,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Lamar County, Georgia",metro,march_2020
+13199,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Meriwether County, Georgia",metro,march_2020
+13211,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Morgan County, Georgia",metro,march_2020
+13217,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Newton County, Georgia",metro,march_2020
+13223,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Paulding County, Georgia",metro,march_2020
+13227,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Pickens County, Georgia",metro,march_2020
+13231,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Pike County, Georgia",metro,march_2020
+13247,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Rockdale County, Georgia",metro,march_2020
+13255,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Spalding County, Georgia",metro,march_2020
+13297,12060,"Atlanta-Sandy Springs-Alpharetta, GA","Walton County, Georgia",metro,march_2020
+34001,12100,"Atlantic City-Hammonton, NJ","Atlantic County, New Jersey",metro,march_2020
+01053,12120,"Atmore, AL","Escambia County, Alabama",micro,march_2020
+18033,12140,"Auburn, IN","DeKalb County, Indiana",micro,march_2020
+36011,12180,"Auburn, NY","Cayuga County, New York",micro,march_2020
+01081,12220,"Auburn-Opelika, AL","Lee County, Alabama",metro,march_2020
+13033,12260,"Augusta-Richmond County, GA-SC","Burke County, Georgia",metro,march_2020
+13073,12260,"Augusta-Richmond County, GA-SC","Columbia County, Georgia",metro,march_2020
+13181,12260,"Augusta-Richmond County, GA-SC","Lincoln County, Georgia",metro,march_2020
+13189,12260,"Augusta-Richmond County, GA-SC","McDuffie County, Georgia",metro,march_2020
+13245,12260,"Augusta-Richmond County, GA-SC","Richmond County, Georgia",metro,march_2020
+45003,12260,"Augusta-Richmond County, GA-SC","Aiken County, South Carolina",metro,march_2020
+45037,12260,"Augusta-Richmond County, GA-SC","Edgefield County, South Carolina",metro,march_2020
+23011,12300,"Augusta-Waterville, ME","Kennebec County, Maine",micro,march_2020
+27099,12380,"Austin, MN","Mower County, Minnesota",micro,march_2020
+48021,12420,"Austin-Round Rock-Georgetown, TX","Bastrop County, Texas",metro,march_2020
+48055,12420,"Austin-Round Rock-Georgetown, TX","Caldwell County, Texas",metro,march_2020
+48209,12420,"Austin-Round Rock-Georgetown, TX","Hays County, Texas",metro,march_2020
+48453,12420,"Austin-Round Rock-Georgetown, TX","Travis County, Texas",metro,march_2020
+48491,12420,"Austin-Round Rock-Georgetown, TX","Williamson County, Texas",metro,march_2020
+13087,12460,"Bainbridge, GA","Decatur County, Georgia",micro,march_2020
+06029,12540,"Bakersfield, CA","Kern County, California",metro,march_2020
+24003,12580,"Baltimore-Columbia-Towson, MD","Anne Arundel County, Maryland",metro,march_2020
+24005,12580,"Baltimore-Columbia-Towson, MD","Baltimore County, Maryland",metro,march_2020
+24013,12580,"Baltimore-Columbia-Towson, MD","Carroll County, Maryland",metro,march_2020
+24025,12580,"Baltimore-Columbia-Towson, MD","Harford County, Maryland",metro,march_2020
+24027,12580,"Baltimore-Columbia-Towson, MD","Howard County, Maryland",metro,march_2020
+24035,12580,"Baltimore-Columbia-Towson, MD","Queen Anne's County, Maryland",metro,march_2020
+24510,12580,"Baltimore-Columbia-Towson, MD","Baltimore city, Maryland",metro,march_2020
+23019,12620,"Bangor, ME","Penobscot County, Maine",metro,march_2020
+55111,12660,"Baraboo, WI","Sauk County, Wisconsin",micro,march_2020
+21179,12680,"Bardstown, KY","Nelson County, Kentucky",micro,march_2020
+25001,12700,"Barnstable Town, MA","Barnstable County, Massachusetts",metro,march_2020
+50023,12740,"Barre, VT","Washington County, Vermont",micro,march_2020
+40147,12780,"Bartlesville, OK","Washington County, Oklahoma",micro,march_2020
+36037,12860,"Batavia, NY","Genesee County, New York",micro,march_2020
+05063,12900,"Batesville, AR","Independence County, Arkansas",micro,march_2020
+05135,12900,"Batesville, AR","Sharp County, Arkansas",micro,march_2020
+22005,12940,"Baton Rouge, LA","Ascension Parish, Louisiana",metro,march_2020
+22007,12940,"Baton Rouge, LA","Assumption Parish, Louisiana",metro,march_2020
+22033,12940,"Baton Rouge, LA","East Baton Rouge Parish, Louisiana",metro,march_2020
+22037,12940,"Baton Rouge, LA","East Feliciana Parish, Louisiana",metro,march_2020
+22047,12940,"Baton Rouge, LA","Iberville Parish, Louisiana",metro,march_2020
+22063,12940,"Baton Rouge, LA","Livingston Parish, Louisiana",metro,march_2020
+22077,12940,"Baton Rouge, LA","Pointe Coupee Parish, Louisiana",metro,march_2020
+22091,12940,"Baton Rouge, LA","St. Helena Parish, Louisiana",metro,march_2020
+22121,12940,"Baton Rouge, LA","West Baton Rouge Parish, Louisiana",metro,march_2020
+22125,12940,"Baton Rouge, LA","West Feliciana Parish, Louisiana",metro,march_2020
+26025,12980,"Battle Creek, MI","Calhoun County, Michigan",metro,march_2020
+26017,13020,"Bay City, MI","Bay County, Michigan",metro,march_2020
+48321,13060,"Bay City, TX","Matagorda County, Texas",micro,march_2020
+31067,13100,"Beatrice, NE","Gage County, Nebraska",micro,march_2020
+48199,13140,"Beaumont-Port Arthur, TX","Hardin County, Texas",metro,march_2020
+48245,13140,"Beaumont-Port Arthur, TX","Jefferson County, Texas",metro,march_2020
+48361,13140,"Beaumont-Port Arthur, TX","Orange County, Texas",metro,march_2020
+55027,13180,"Beaver Dam, WI","Dodge County, Wisconsin",micro,march_2020
+54019,13220,"Beckley, WV","Fayette County, West Virginia",metro,march_2020
+54081,13220,"Beckley, WV","Raleigh County, West Virginia",metro,march_2020
+18093,13260,"Bedford, IN","Lawrence County, Indiana",micro,march_2020
+48025,13300,"Beeville, TX","Bee County, Texas",micro,march_2020
+39091,13340,"Bellefontaine, OH","Logan County, Ohio",micro,march_2020
+53073,13380,"Bellingham, WA","Whatcom County, Washington",metro,march_2020
+27007,13420,"Bemidji, MN","Beltrami County, Minnesota",micro,march_2020
+41017,13460,"Bend, OR","Deschutes County, Oregon",metro,march_2020
+45069,13500,"Bennettsville, SC","Marlboro County, South Carolina",micro,march_2020
+50003,13540,"Bennington, VT","Bennington County, Vermont",micro,march_2020
+33007,13620,"Berlin, NH","Coos County, New Hampshire",micro,march_2020
+26107,13660,"Big Rapids, MI","Mecosta County, Michigan",micro,march_2020
+48227,13700,"Big Spring, TX","Howard County, Texas",micro,march_2020
+51195,13720,"Big Stone Gap, VA","Wise County, Virginia",micro,march_2020
+51720,13720,"Big Stone Gap, VA","Norton city, Virginia",micro,march_2020
+30009,13740,"Billings, MT","Carbon County, Montana",metro,march_2020
+30095,13740,"Billings, MT","Stillwater County, Montana",metro,march_2020
+30111,13740,"Billings, MT","Yellowstone County, Montana",metro,march_2020
+36007,13780,"Binghamton, NY","Broome County, New York",metro,march_2020
+36107,13780,"Binghamton, NY","Tioga County, New York",metro,march_2020
+01007,13820,"Birmingham-Hoover, AL","Bibb County, Alabama",metro,march_2020
+01009,13820,"Birmingham-Hoover, AL","Blount County, Alabama",metro,march_2020
+01021,13820,"Birmingham-Hoover, AL","Chilton County, Alabama",metro,march_2020
+01073,13820,"Birmingham-Hoover, AL","Jefferson County, Alabama",metro,march_2020
+01115,13820,"Birmingham-Hoover, AL","St. Clair County, Alabama",metro,march_2020
+01117,13820,"Birmingham-Hoover, AL","Shelby County, Alabama",metro,march_2020
+38015,13900,"Bismarck, ND","Burleigh County, North Dakota",metro,march_2020
+38059,13900,"Bismarck, ND","Morton County, North Dakota",metro,march_2020
+38065,13900,"Bismarck, ND","Oliver County, North Dakota",metro,march_2020
+16011,13940,"Blackfoot, ID","Bingham County, Idaho",micro,march_2020
+51071,13980,"Blacksburg-Christiansburg, VA","Giles County, Virginia",metro,march_2020
+51121,13980,"Blacksburg-Christiansburg, VA","Montgomery County, Virginia",metro,march_2020
+51155,13980,"Blacksburg-Christiansburg, VA","Pulaski County, Virginia",metro,march_2020
+51750,13980,"Blacksburg-Christiansburg, VA","Radford city, Virginia",metro,march_2020
+17113,14010,"Bloomington, IL","McLean County, Illinois",metro,march_2020
+18105,14020,"Bloomington, IN","Monroe County, Indiana",metro,march_2020
+18119,14020,"Bloomington, IN","Owen County, Indiana",metro,march_2020
+42037,14100,"Bloomsburg-Berwick, PA","Columbia County, Pennsylvania",metro,march_2020
+42093,14100,"Bloomsburg-Berwick, PA","Montour County, Pennsylvania",metro,march_2020
+51021,14140,"Bluefield, WV-VA","Bland County, Virginia",micro,march_2020
+51185,14140,"Bluefield, WV-VA","Tazewell County, Virginia",micro,march_2020
+54055,14140,"Bluefield, WV-VA","Mercer County, West Virginia",micro,march_2020
+18179,14160,"Bluffton, IN","Wells County, Indiana",micro,march_2020
+05093,14180,"Blytheville, AR","Mississippi County, Arkansas",micro,march_2020
+22117,14220,"Bogalusa, LA","Washington Parish, Louisiana",micro,march_2020
+16001,14260,"Boise City, ID","Ada County, Idaho",metro,march_2020
+16015,14260,"Boise City, ID","Boise County, Idaho",metro,march_2020
+16027,14260,"Boise City, ID","Canyon County, Idaho",metro,march_2020
+16045,14260,"Boise City, ID","Gem County, Idaho",metro,march_2020
+16073,14260,"Boise City, ID","Owyhee County, Idaho",metro,march_2020
+48147,14300,"Bonham, TX","Fannin County, Texas",micro,march_2020
+37189,14380,"Boone, NC","Watauga County, North Carolina",micro,march_2020
+48233,14420,"Borger, TX","Hutchinson County, Texas",micro,march_2020
+25021,14460,"Boston-Cambridge-Newton, MA-NH","Norfolk County, Massachusetts",metro,march_2020
+25023,14460,"Boston-Cambridge-Newton, MA-NH","Plymouth County, Massachusetts",metro,march_2020
+25025,14460,"Boston-Cambridge-Newton, MA-NH","Suffolk County, Massachusetts",metro,march_2020
+25009,14460,"Boston-Cambridge-Newton, MA-NH","Essex County, Massachusetts",metro,march_2020
+25017,14460,"Boston-Cambridge-Newton, MA-NH","Middlesex County, Massachusetts",metro,march_2020
+33015,14460,"Boston-Cambridge-Newton, MA-NH","Rockingham County, New Hampshire",metro,march_2020
+33017,14460,"Boston-Cambridge-Newton, MA-NH","Strafford County, New Hampshire",metro,march_2020
+08013,14500,"Boulder, CO","Boulder County, Colorado",metro,march_2020
+21003,14540,"Bowling Green, KY","Allen County, Kentucky",metro,march_2020
+21031,14540,"Bowling Green, KY","Butler County, Kentucky",metro,march_2020
+21061,14540,"Bowling Green, KY","Edmonson County, Kentucky",metro,march_2020
+21227,14540,"Bowling Green, KY","Warren County, Kentucky",metro,march_2020
+30031,14580,"Bozeman, MT","Gallatin County, Montana",micro,march_2020
+42083,14620,"Bradford, PA","McKean County, Pennsylvania",micro,march_2020
+27021,14660,"Brainerd, MN","Cass County, Minnesota",micro,march_2020
+27035,14660,"Brainerd, MN","Crow Wing County, Minnesota",micro,march_2020
+29213,14700,"Branson, MO","Taney County, Missouri",micro,march_2020
+08117,14720,"Breckenridge, CO","Summit County, Colorado",micro,march_2020
+53035,14740,"Bremerton-Silverdale-Port Orchard, WA","Kitsap County, Washington",metro,march_2020
+48477,14780,"Brenham, TX","Washington County, Texas",micro,march_2020
+37175,14820,"Brevard, NC","Transylvania County, North Carolina",micro,march_2020
+09001,14860,"Bridgeport-Stamford-Norwalk, CT","Fairfield County, Connecticut",metro,march_2020
+28085,15020,"Brookhaven, MS","Lincoln County, Mississippi",micro,march_2020
+41015,15060,"Brookings, OR","Curry County, Oregon",micro,march_2020
+46011,15100,"Brookings, SD","Brookings County, South Dakota",micro,march_2020
+47075,15140,"Brownsville, TN","Haywood County, Tennessee",micro,march_2020
+48061,15180,"Brownsville-Harlingen, TX","Cameron County, Texas",metro,march_2020
+48049,15220,"Brownwood, TX","Brown County, Texas",micro,march_2020
+13025,15260,"Brunswick, GA","Brantley County, Georgia",metro,march_2020
+13127,15260,"Brunswick, GA","Glynn County, Georgia",metro,march_2020
+13191,15260,"Brunswick, GA","McIntosh County, Georgia",metro,march_2020
+39033,15340,"Bucyrus-Galion, OH","Crawford County, Ohio",micro,march_2020
+36029,15380,"Buffalo-Cheektowaga, NY","Erie County, New York",metro,march_2020
+36063,15380,"Buffalo-Cheektowaga, NY","Niagara County, New York",metro,march_2020
+16031,15420,"Burley, ID","Cassia County, Idaho",micro,march_2020
+16067,15420,"Burley, ID","Minidoka County, Idaho",micro,march_2020
+17071,15460,"Burlington, IA-IL","Henderson County, Illinois",micro,march_2020
+19057,15460,"Burlington, IA-IL","Des Moines County, Iowa",micro,march_2020
+37001,15500,"Burlington, NC","Alamance County, North Carolina",metro,march_2020
+50007,15540,"Burlington-South Burlington, VT","Chittenden County, Vermont",metro,march_2020
+50011,15540,"Burlington-South Burlington, VT","Franklin County, Vermont",metro,march_2020
+50013,15540,"Burlington-South Burlington, VT","Grand Isle County, Vermont",metro,march_2020
+30093,15580,"Butte-Silver Bow, MT","Silver Bow County, Montana",micro,march_2020
+26113,15620,"Cadillac, MI","Missaukee County, Michigan",micro,march_2020
+26165,15620,"Cadillac, MI","Wexford County, Michigan",micro,march_2020
+13129,15660,"Calhoun, GA","Gordon County, Georgia",micro,march_2020
+24037,15680,"California-Lexington Park, MD","St. Mary's County, Maryland",metro,march_2020
+24019,15700,"Cambridge, MD","Dorchester County, Maryland",micro,march_2020
+39059,15740,"Cambridge, OH","Guernsey County, Ohio",micro,march_2020
+05013,15780,"Camden, AR","Calhoun County, Arkansas",micro,march_2020
+05103,15780,"Camden, AR","Ouachita County, Arkansas",micro,march_2020
+21087,15820,"Campbellsville, KY","Green County, Kentucky",micro,march_2020
+21217,15820,"Campbellsville, KY","Taylor County, Kentucky",micro,march_2020
+08043,15860,"Cañon City, CO","Fremont County, Colorado",micro,march_2020
+39019,15940,"Canton-Massillon, OH","Carroll County, Ohio",metro,march_2020
+39151,15940,"Canton-Massillon, OH","Stark County, Ohio",metro,march_2020
+12071,15980,"Cape Coral-Fort Myers, FL","Lee County, Florida",metro,march_2020
+17003,16020,"Cape Girardeau, MO-IL","Alexander County, Illinois",metro,march_2020
+29017,16020,"Cape Girardeau, MO-IL","Bollinger County, Missouri",metro,march_2020
+29031,16020,"Cape Girardeau, MO-IL","Cape Girardeau County, Missouri",metro,march_2020
+17077,16060,"Carbondale-Marion, IL","Jackson County, Illinois",metro,march_2020
+17087,16060,"Carbondale-Marion, IL","Johnson County, Illinois",metro,march_2020
+17199,16060,"Carbondale-Marion, IL","Williamson County, Illinois",metro,march_2020
+35015,16100,"Carlsbad-Artesia, NM","Eddy County, New Mexico",micro,march_2020
+19027,16140,"Carroll, IA","Carroll County, Iowa",micro,march_2020
+32510,16180,"Carson City, NV","Carson City, Nevada",metro,march_2020
+56025,16220,"Casper, WY","Natrona County, Wyoming",metro,march_2020
+49021,16260,"Cedar City, UT","Iron County, Utah",micro,march_2020
+19011,16300,"Cedar Rapids, IA","Benton County, Iowa",metro,march_2020
+19105,16300,"Cedar Rapids, IA","Jones County, Iowa",metro,march_2020
+19113,16300,"Cedar Rapids, IA","Linn County, Iowa",metro,march_2020
+13233,16340,"Cedartown, GA","Polk County, Georgia",micro,march_2020
+39107,16380,"Celina, OH","Mercer County, Ohio",micro,march_2020
+21177,16420,"Central City, KY","Muhlenberg County, Kentucky",micro,march_2020
+17121,16460,"Centralia, IL","Marion County, Illinois",micro,march_2020
+53041,16500,"Centralia, WA","Lewis County, Washington",micro,march_2020
+42055,16540,"Chambersburg-Waynesboro, PA","Franklin County, Pennsylvania",metro,march_2020
+17019,16580,"Champaign-Urbana, IL","Champaign County, Illinois",metro,march_2020
+17147,16580,"Champaign-Urbana, IL","Piatt County, Illinois",metro,march_2020
+54005,16620,"Charleston, WV","Boone County, West Virginia",metro,march_2020
+54015,16620,"Charleston, WV","Clay County, West Virginia",metro,march_2020
+54035,16620,"Charleston, WV","Jackson County, West Virginia",metro,march_2020
+54039,16620,"Charleston, WV","Kanawha County, West Virginia",metro,march_2020
+54043,16620,"Charleston, WV","Lincoln County, West Virginia",metro,march_2020
+17029,16660,"Charleston-Mattoon, IL","Coles County, Illinois",micro,march_2020
+17035,16660,"Charleston-Mattoon, IL","Cumberland County, Illinois",micro,march_2020
+45015,16700,"Charleston-North Charleston, SC","Berkeley County, South Carolina",metro,march_2020
+45019,16700,"Charleston-North Charleston, SC","Charleston County, South Carolina",metro,march_2020
+45035,16700,"Charleston-North Charleston, SC","Dorchester County, South Carolina",metro,march_2020
+37007,16740,"Charlotte-Concord-Gastonia, NC-SC","Anson County, North Carolina",metro,march_2020
+37025,16740,"Charlotte-Concord-Gastonia, NC-SC","Cabarrus County, North Carolina",metro,march_2020
+37071,16740,"Charlotte-Concord-Gastonia, NC-SC","Gaston County, North Carolina",metro,march_2020
+37097,16740,"Charlotte-Concord-Gastonia, NC-SC","Iredell County, North Carolina",metro,march_2020
+37109,16740,"Charlotte-Concord-Gastonia, NC-SC","Lincoln County, North Carolina",metro,march_2020
+37119,16740,"Charlotte-Concord-Gastonia, NC-SC","Mecklenburg County, North Carolina",metro,march_2020
+37159,16740,"Charlotte-Concord-Gastonia, NC-SC","Rowan County, North Carolina",metro,march_2020
+37179,16740,"Charlotte-Concord-Gastonia, NC-SC","Union County, North Carolina",metro,march_2020
+45023,16740,"Charlotte-Concord-Gastonia, NC-SC","Chester County, South Carolina",metro,march_2020
+45057,16740,"Charlotte-Concord-Gastonia, NC-SC","Lancaster County, South Carolina",metro,march_2020
+45091,16740,"Charlotte-Concord-Gastonia, NC-SC","York County, South Carolina",metro,march_2020
+51003,16820,"Charlottesville, VA","Albemarle County, Virginia",metro,march_2020
+51065,16820,"Charlottesville, VA","Fluvanna County, Virginia",metro,march_2020
+51079,16820,"Charlottesville, VA","Greene County, Virginia",metro,march_2020
+51125,16820,"Charlottesville, VA","Nelson County, Virginia",metro,march_2020
+51540,16820,"Charlottesville, VA","Charlottesville city, Virginia",metro,march_2020
+13047,16860,"Chattanooga, TN-GA","Catoosa County, Georgia",metro,march_2020
+13083,16860,"Chattanooga, TN-GA","Dade County, Georgia",metro,march_2020
+13295,16860,"Chattanooga, TN-GA","Walker County, Georgia",metro,march_2020
+47065,16860,"Chattanooga, TN-GA","Hamilton County, Tennessee",metro,march_2020
+47115,16860,"Chattanooga, TN-GA","Marion County, Tennessee",metro,march_2020
+47153,16860,"Chattanooga, TN-GA","Sequatchie County, Tennessee",metro,march_2020
+56021,16940,"Cheyenne, WY","Laramie County, Wyoming",metro,march_2020
+17031,16980,"Chicago-Naperville-Elgin, IL-IN-WI","Cook County, Illinois",metro,march_2020
+17043,16980,"Chicago-Naperville-Elgin, IL-IN-WI","DuPage County, Illinois",metro,march_2020
+17063,16980,"Chicago-Naperville-Elgin, IL-IN-WI","Grundy County, Illinois",metro,march_2020
+17111,16980,"Chicago-Naperville-Elgin, IL-IN-WI","McHenry County, Illinois",metro,march_2020
+17197,16980,"Chicago-Naperville-Elgin, IL-IN-WI","Will County, Illinois",metro,march_2020
+17037,16980,"Chicago-Naperville-Elgin, IL-IN-WI","DeKalb County, Illinois",metro,march_2020
+17089,16980,"Chicago-Naperville-Elgin, IL-IN-WI","Kane County, Illinois",metro,march_2020
+17093,16980,"Chicago-Naperville-Elgin, IL-IN-WI","Kendall County, Illinois",metro,march_2020
+18073,16980,"Chicago-Naperville-Elgin, IL-IN-WI","Jasper County, Indiana",metro,march_2020
+18089,16980,"Chicago-Naperville-Elgin, IL-IN-WI","Lake County, Indiana",metro,march_2020
+18111,16980,"Chicago-Naperville-Elgin, IL-IN-WI","Newton County, Indiana",metro,march_2020
+18127,16980,"Chicago-Naperville-Elgin, IL-IN-WI","Porter County, Indiana",metro,march_2020
+17097,16980,"Chicago-Naperville-Elgin, IL-IN-WI","Lake County, Illinois",metro,march_2020
+55059,16980,"Chicago-Naperville-Elgin, IL-IN-WI","Kenosha County, Wisconsin",metro,march_2020
+06007,17020,"Chico, CA","Butte County, California",metro,march_2020
+39141,17060,"Chillicothe, OH","Ross County, Ohio",micro,march_2020
+18029,17140,"Cincinnati, OH-KY-IN","Dearborn County, Indiana",metro,march_2020
+18047,17140,"Cincinnati, OH-KY-IN","Franklin County, Indiana",metro,march_2020
+18115,17140,"Cincinnati, OH-KY-IN","Ohio County, Indiana",metro,march_2020
+18161,17140,"Cincinnati, OH-KY-IN","Union County, Indiana",metro,march_2020
+21015,17140,"Cincinnati, OH-KY-IN","Boone County, Kentucky",metro,march_2020
+21023,17140,"Cincinnati, OH-KY-IN","Bracken County, Kentucky",metro,march_2020
+21037,17140,"Cincinnati, OH-KY-IN","Campbell County, Kentucky",metro,march_2020
+21077,17140,"Cincinnati, OH-KY-IN","Gallatin County, Kentucky",metro,march_2020
+21081,17140,"Cincinnati, OH-KY-IN","Grant County, Kentucky",metro,march_2020
+21117,17140,"Cincinnati, OH-KY-IN","Kenton County, Kentucky",metro,march_2020
+21191,17140,"Cincinnati, OH-KY-IN","Pendleton County, Kentucky",metro,march_2020
+39015,17140,"Cincinnati, OH-KY-IN","Brown County, Ohio",metro,march_2020
+39017,17140,"Cincinnati, OH-KY-IN","Butler County, Ohio",metro,march_2020
+39025,17140,"Cincinnati, OH-KY-IN","Clermont County, Ohio",metro,march_2020
+39061,17140,"Cincinnati, OH-KY-IN","Hamilton County, Ohio",metro,march_2020
+39165,17140,"Cincinnati, OH-KY-IN","Warren County, Ohio",metro,march_2020
+54017,17220,"Clarksburg, WV","Doddridge County, West Virginia",micro,march_2020
+54033,17220,"Clarksburg, WV","Harrison County, West Virginia",micro,march_2020
+54091,17220,"Clarksburg, WV","Taylor County, West Virginia",micro,march_2020
+28027,17260,"Clarksdale, MS","Coahoma County, Mississippi",micro,march_2020
+21047,17300,"Clarksville, TN-KY","Christian County, Kentucky",metro,march_2020
+21221,17300,"Clarksville, TN-KY","Trigg County, Kentucky",metro,march_2020
+47125,17300,"Clarksville, TN-KY","Montgomery County, Tennessee",metro,march_2020
+47161,17300,"Clarksville, TN-KY","Stewart County, Tennessee",metro,march_2020
+06033,17340,"Clearlake, CA","Lake County, California",micro,march_2020
+28011,17380,"Cleveland, MS","Bolivar County, Mississippi",micro,march_2020
+47011,17420,"Cleveland, TN","Bradley County, Tennessee",metro,march_2020
+47139,17420,"Cleveland, TN","Polk County, Tennessee",metro,march_2020
+39035,17460,"Cleveland-Elyria, OH","Cuyahoga County, Ohio",metro,march_2020
+39055,17460,"Cleveland-Elyria, OH","Geauga County, Ohio",metro,march_2020
+39085,17460,"Cleveland-Elyria, OH","Lake County, Ohio",metro,march_2020
+39093,17460,"Cleveland-Elyria, OH","Lorain County, Ohio",metro,march_2020
+39103,17460,"Cleveland-Elyria, OH","Medina County, Ohio",metro,march_2020
+12051,17500,"Clewiston, FL","Hendry County, Florida",micro,march_2020
+19045,17540,"Clinton, IA","Clinton County, Iowa",micro,march_2020
+35009,17580,"Clovis, NM","Curry County, New Mexico",micro,march_2020
+16055,17660,"Coeur d'Alene, ID","Kootenai County, Idaho",metro,march_2020
+20125,17700,"Coffeyville, KS","Montgomery County, Kansas",micro,march_2020
+26023,17740,"Coldwater, MI","Branch County, Michigan",micro,march_2020
+48041,17780,"College Station-Bryan, TX","Brazos County, Texas",metro,march_2020
+48051,17780,"College Station-Bryan, TX","Burleson County, Texas",metro,march_2020
+48395,17780,"College Station-Bryan, TX","Robertson County, Texas",metro,march_2020
+08041,17820,"Colorado Springs, CO","El Paso County, Colorado",metro,march_2020
+08119,17820,"Colorado Springs, CO","Teller County, Colorado",metro,march_2020
+29019,17860,"Columbia, MO","Boone County, Missouri",metro,march_2020
+29053,17860,"Columbia, MO","Cooper County, Missouri",metro,march_2020
+29089,17860,"Columbia, MO","Howard County, Missouri",metro,march_2020
+45017,17900,"Columbia, SC","Calhoun County, South Carolina",metro,march_2020
+45039,17900,"Columbia, SC","Fairfield County, South Carolina",metro,march_2020
+45055,17900,"Columbia, SC","Kershaw County, South Carolina",metro,march_2020
+45063,17900,"Columbia, SC","Lexington County, South Carolina",metro,march_2020
+45079,17900,"Columbia, SC","Richland County, South Carolina",metro,march_2020
+45081,17900,"Columbia, SC","Saluda County, South Carolina",metro,march_2020
+01113,17980,"Columbus, GA-AL","Russell County, Alabama",metro,march_2020
+13053,17980,"Columbus, GA-AL","Chattahoochee County, Georgia",metro,march_2020
+13145,17980,"Columbus, GA-AL","Harris County, Georgia",metro,march_2020
+13197,17980,"Columbus, GA-AL","Marion County, Georgia",metro,march_2020
+13215,17980,"Columbus, GA-AL","Muscogee County, Georgia",metro,march_2020
+13259,17980,"Columbus, GA-AL","Stewart County, Georgia",metro,march_2020
+13263,17980,"Columbus, GA-AL","Talbot County, Georgia",metro,march_2020
+18005,18020,"Columbus, IN","Bartholomew County, Indiana",metro,march_2020
+28087,18060,"Columbus, MS","Lowndes County, Mississippi",micro,march_2020
+31141,18100,"Columbus, NE","Platte County, Nebraska",micro,march_2020
+39041,18140,"Columbus, OH","Delaware County, Ohio",metro,march_2020
+39045,18140,"Columbus, OH","Fairfield County, Ohio",metro,march_2020
+39049,18140,"Columbus, OH","Franklin County, Ohio",metro,march_2020
+39073,18140,"Columbus, OH","Hocking County, Ohio",metro,march_2020
+39089,18140,"Columbus, OH","Licking County, Ohio",metro,march_2020
+39097,18140,"Columbus, OH","Madison County, Ohio",metro,march_2020
+39117,18140,"Columbus, OH","Morrow County, Ohio",metro,march_2020
+39127,18140,"Columbus, OH","Perry County, Ohio",metro,march_2020
+39129,18140,"Columbus, OH","Pickaway County, Ohio",metro,march_2020
+39159,18140,"Columbus, OH","Union County, Ohio",metro,march_2020
+33013,18180,"Concord, NH","Merrimack County, New Hampshire",micro,march_2020
+18041,18220,"Connersville, IN","Fayette County, Indiana",micro,march_2020
+47087,18260,"Cookeville, TN","Jackson County, Tennessee",micro,march_2020
+47133,18260,"Cookeville, TN","Overton County, Tennessee",micro,march_2020
+47141,18260,"Cookeville, TN","Putnam County, Tennessee",micro,march_2020
+41011,18300,"Coos Bay, OR","Coos County, Oregon",micro,march_2020
+13081,18380,"Cordele, GA","Crisp County, Georgia",micro,march_2020
+28003,18420,"Corinth, MS","Alcorn County, Mississippi",micro,march_2020
+13137,18460,"Cornelia, GA","Habersham County, Georgia",micro,march_2020
+36101,18500,"Corning, NY","Steuben County, New York",micro,march_2020
+48355,18580,"Corpus Christi, TX","Nueces County, Texas",metro,march_2020
+48409,18580,"Corpus Christi, TX","San Patricio County, Texas",metro,march_2020
+48349,18620,"Corsicana, TX","Navarro County, Texas",micro,march_2020
+36023,18660,"Cortland, NY","Cortland County, New York",micro,march_2020
+41003,18700,"Corvallis, OR","Benton County, Oregon",metro,march_2020
+39031,18740,"Coshocton, OH","Coshocton County, Ohio",micro,march_2020
+08081,18780,"Craig, CO","Moffat County, Colorado",micro,march_2020
+18107,18820,"Crawfordsville, IN","Montgomery County, Indiana",micro,march_2020
+06015,18860,"Crescent City, CA","Del Norte County, California",micro,march_2020
+12091,18880,"Crestview-Fort Walton Beach-Destin, FL","Okaloosa County, Florida",metro,march_2020
+12131,18880,"Crestview-Fort Walton Beach-Destin, FL","Walton County, Florida",metro,march_2020
+47035,18900,"Crossville, TN","Cumberland County, Tennessee",micro,march_2020
+01043,18980,"Cullman, AL","Cullman County, Alabama",micro,march_2020
+37099,19000,"Cullowhee, NC","Jackson County, North Carolina",micro,march_2020
+37173,19000,"Cullowhee, NC","Swain County, North Carolina",micro,march_2020
+24001,19060,"Cumberland, MD-WV","Allegany County, Maryland",metro,march_2020
+54057,19060,"Cumberland, MD-WV","Mineral County, West Virginia",metro,march_2020
+48085,19100,"Dallas-Fort Worth-Arlington, TX","Collin County, Texas",metro,march_2020
+48113,19100,"Dallas-Fort Worth-Arlington, TX","Dallas County, Texas",metro,march_2020
+48121,19100,"Dallas-Fort Worth-Arlington, TX","Denton County, Texas",metro,march_2020
+48139,19100,"Dallas-Fort Worth-Arlington, TX","Ellis County, Texas",metro,march_2020
+48231,19100,"Dallas-Fort Worth-Arlington, TX","Hunt County, Texas",metro,march_2020
+48257,19100,"Dallas-Fort Worth-Arlington, TX","Kaufman County, Texas",metro,march_2020
+48397,19100,"Dallas-Fort Worth-Arlington, TX","Rockwall County, Texas",metro,march_2020
+48251,19100,"Dallas-Fort Worth-Arlington, TX","Johnson County, Texas",metro,march_2020
+48367,19100,"Dallas-Fort Worth-Arlington, TX","Parker County, Texas",metro,march_2020
+48439,19100,"Dallas-Fort Worth-Arlington, TX","Tarrant County, Texas",metro,march_2020
+48497,19100,"Dallas-Fort Worth-Arlington, TX","Wise County, Texas",metro,march_2020
+13213,19140,"Dalton, GA","Murray County, Georgia",metro,march_2020
+13313,19140,"Dalton, GA","Whitfield County, Georgia",metro,march_2020
+17183,19180,"Danville, IL","Vermilion County, Illinois",metro,march_2020
+21021,19220,"Danville, KY","Boyle County, Kentucky",micro,march_2020
+21137,19220,"Danville, KY","Lincoln County, Kentucky",micro,march_2020
+51143,19260,"Danville, VA","Pittsylvania County, Virginia",micro,march_2020
+51590,19260,"Danville, VA","Danville city, Virginia",micro,march_2020
+01003,19300,"Daphne-Fairhope-Foley, AL","Baldwin County, Alabama",metro,march_2020
+17073,19340,"Davenport-Moline-Rock Island, IA-IL","Henry County, Illinois",metro,march_2020
+17131,19340,"Davenport-Moline-Rock Island, IA-IL","Mercer County, Illinois",metro,march_2020
+17161,19340,"Davenport-Moline-Rock Island, IA-IL","Rock Island County, Illinois",metro,march_2020
+19163,19340,"Davenport-Moline-Rock Island, IA-IL","Scott County, Iowa",metro,march_2020
+47143,19420,"Dayton, TN","Rhea County, Tennessee",micro,march_2020
+39057,19430,"Dayton-Kettering, OH","Greene County, Ohio",metro,march_2020
+39109,19430,"Dayton-Kettering, OH","Miami County, Ohio",metro,march_2020
+39113,19430,"Dayton-Kettering, OH","Montgomery County, Ohio",metro,march_2020
+01079,19460,"Decatur, AL","Lawrence County, Alabama",metro,march_2020
+01103,19460,"Decatur, AL","Morgan County, Alabama",metro,march_2020
+17115,19500,"Decatur, IL","Macon County, Illinois",metro,march_2020
+18001,19540,"Decatur, IN","Adams County, Indiana",micro,march_2020
+39039,19580,"Defiance, OH","Defiance County, Ohio",micro,march_2020
+48465,19620,"Del Rio, TX","Val Verde County, Texas",micro,march_2020
+12035,19660,"Deltona-Daytona Beach-Ormond Beach, FL","Flagler County, Florida",metro,march_2020
+12127,19660,"Deltona-Daytona Beach-Ormond Beach, FL","Volusia County, Florida",metro,march_2020
+35029,19700,"Deming, NM","Luna County, New Mexico",micro,march_2020
+08001,19740,"Denver-Aurora-Lakewood, CO","Adams County, Colorado",metro,march_2020
+08005,19740,"Denver-Aurora-Lakewood, CO","Arapahoe County, Colorado",metro,march_2020
+08014,19740,"Denver-Aurora-Lakewood, CO","Broomfield County, Colorado",metro,march_2020
+08019,19740,"Denver-Aurora-Lakewood, CO","Clear Creek County, Colorado",metro,march_2020
+08031,19740,"Denver-Aurora-Lakewood, CO","Denver County, Colorado",metro,march_2020
+08035,19740,"Denver-Aurora-Lakewood, CO","Douglas County, Colorado",metro,march_2020
+08039,19740,"Denver-Aurora-Lakewood, CO","Elbert County, Colorado",metro,march_2020
+08047,19740,"Denver-Aurora-Lakewood, CO","Gilpin County, Colorado",metro,march_2020
+08059,19740,"Denver-Aurora-Lakewood, CO","Jefferson County, Colorado",metro,march_2020
+08093,19740,"Denver-Aurora-Lakewood, CO","Park County, Colorado",metro,march_2020
+22011,19760,"DeRidder, LA","Beauregard Parish, Louisiana",micro,march_2020
+19049,19780,"Des Moines-West Des Moines, IA","Dallas County, Iowa",metro,march_2020
+19077,19780,"Des Moines-West Des Moines, IA","Guthrie County, Iowa",metro,march_2020
+19099,19780,"Des Moines-West Des Moines, IA","Jasper County, Iowa",metro,march_2020
+19121,19780,"Des Moines-West Des Moines, IA","Madison County, Iowa",metro,march_2020
+19153,19780,"Des Moines-West Des Moines, IA","Polk County, Iowa",metro,march_2020
+19181,19780,"Des Moines-West Des Moines, IA","Warren County, Iowa",metro,march_2020
+26163,19820,"Detroit-Warren-Dearborn, MI","Wayne County, Michigan",metro,march_2020
+26087,19820,"Detroit-Warren-Dearborn, MI","Lapeer County, Michigan",metro,march_2020
+26093,19820,"Detroit-Warren-Dearborn, MI","Livingston County, Michigan",metro,march_2020
+26099,19820,"Detroit-Warren-Dearborn, MI","Macomb County, Michigan",metro,march_2020
+26125,19820,"Detroit-Warren-Dearborn, MI","Oakland County, Michigan",metro,march_2020
+26147,19820,"Detroit-Warren-Dearborn, MI","St. Clair County, Michigan",metro,march_2020
+38007,19860,"Dickinson, ND","Billings County, North Dakota",micro,march_2020
+38089,19860,"Dickinson, ND","Stark County, North Dakota",micro,march_2020
+17103,19940,"Dixon, IL","Lee County, Illinois",micro,march_2020
+20057,19980,"Dodge City, KS","Ford County, Kansas",micro,march_2020
+01061,20020,"Dothan, AL","Geneva County, Alabama",metro,march_2020
+01067,20020,"Dothan, AL","Henry County, Alabama",metro,march_2020
+01069,20020,"Dothan, AL","Houston County, Alabama",metro,march_2020
+13003,20060,"Douglas, GA","Atkinson County, Georgia",micro,march_2020
+13069,20060,"Douglas, GA","Coffee County, Georgia",micro,march_2020
+10001,20100,"Dover, DE","Kent County, Delaware",metro,march_2020
+13167,20140,"Dublin, GA","Johnson County, Georgia",micro,march_2020
+13175,20140,"Dublin, GA","Laurens County, Georgia",micro,march_2020
+13283,20140,"Dublin, GA","Treutlen County, Georgia",micro,march_2020
+42033,20180,"DuBois, PA","Clearfield County, Pennsylvania",micro,march_2020
+19061,20220,"Dubuque, IA","Dubuque County, Iowa",metro,march_2020
+27017,20260,"Duluth, MN-WI","Carlton County, Minnesota",metro,march_2020
+27075,20260,"Duluth, MN-WI","Lake County, Minnesota",metro,march_2020
+27137,20260,"Duluth, MN-WI","St. Louis County, Minnesota",metro,march_2020
+55031,20260,"Duluth, MN-WI","Douglas County, Wisconsin",metro,march_2020
+48341,20300,"Dumas, TX","Moore County, Texas",micro,march_2020
+40137,20340,"Duncan, OK","Stephens County, Oklahoma",micro,march_2020
+08067,20420,"Durango, CO","La Plata County, Colorado",micro,march_2020
+40013,20460,"Durant, OK","Bryan County, Oklahoma",micro,march_2020
+37037,20500,"Durham-Chapel Hill, NC","Chatham County, North Carolina",metro,march_2020
+37063,20500,"Durham-Chapel Hill, NC","Durham County, North Carolina",metro,march_2020
+37077,20500,"Durham-Chapel Hill, NC","Granville County, North Carolina",metro,march_2020
+37135,20500,"Durham-Chapel Hill, NC","Orange County, North Carolina",metro,march_2020
+37145,20500,"Durham-Chapel Hill, NC","Person County, North Carolina",metro,march_2020
+47045,20540,"Dyersburg, TN","Dyer County, Tennessee",micro,march_2020
+48323,20580,"Eagle Pass, TX","Maverick County, Texas",micro,march_2020
+24041,20660,"Easton, MD","Talbot County, Maryland",micro,march_2020
+42089,20700,"East Stroudsburg, PA","Monroe County, Pennsylvania",metro,march_2020
+55017,20740,"Eau Claire, WI","Chippewa County, Wisconsin",metro,march_2020
+55035,20740,"Eau Claire, WI","Eau Claire County, Wisconsin",metro,march_2020
+08037,20780,"Edwards, CO","Eagle County, Colorado",micro,march_2020
+17049,20820,"Effingham, IL","Effingham County, Illinois",micro,march_2020
+48481,20900,"El Campo, TX","Wharton County, Texas",micro,march_2020
+06025,20940,"El Centro, CA","Imperial County, California",metro,march_2020
+05139,20980,"El Dorado, AR","Union County, Arkansas",micro,march_2020
+37139,21020,"Elizabeth City, NC","Pasquotank County, North Carolina",micro,march_2020
+37143,21020,"Elizabeth City, NC","Perquimans County, North Carolina",micro,march_2020
+21093,21060,"Elizabethtown-Fort Knox, KY","Hardin County, Kentucky",metro,march_2020
+21123,21060,"Elizabethtown-Fort Knox, KY","Larue County, Kentucky",metro,march_2020
+21163,21060,"Elizabethtown-Fort Knox, KY","Meade County, Kentucky",metro,march_2020
+40009,21120,"Elk City, OK","Beckham County, Oklahoma",micro,march_2020
+18039,21140,"Elkhart-Goshen, IN","Elkhart County, Indiana",metro,march_2020
+54083,21180,"Elkins, WV","Randolph County, West Virginia",micro,march_2020
+32007,21220,"Elko, NV","Elko County, Nevada",micro,march_2020
+32011,21220,"Elko, NV","Eureka County, Nevada",micro,march_2020
+53037,21260,"Ellensburg, WA","Kittitas County, Washington",micro,march_2020
+36015,21300,"Elmira, NY","Chemung County, New York",metro,march_2020
+48141,21340,"El Paso, TX","El Paso County, Texas",metro,march_2020
+48229,21340,"El Paso, TX","Hudspeth County, Texas",metro,march_2020
+20017,21380,"Emporia, KS","Chase County, Kansas",micro,march_2020
+20111,21380,"Emporia, KS","Lyon County, Kansas",micro,march_2020
+40047,21420,"Enid, OK","Garfield County, Oklahoma",metro,march_2020
+01031,21460,"Enterprise, AL","Coffee County, Alabama",micro,march_2020
+42049,21500,"Erie, PA","Erie County, Pennsylvania",metro,march_2020
+26041,21540,"Escanaba, MI","Delta County, Michigan",micro,march_2020
+35039,21580,"Española, NM","Rio Arriba County, New Mexico",micro,march_2020
+01005,21640,"Eufaula, AL-GA","Barbour County, Alabama",micro,march_2020
+13239,21640,"Eufaula, AL-GA","Quitman County, Georgia",micro,march_2020
+41039,21660,"Eugene-Springfield, OR","Lane County, Oregon",metro,march_2020
+06023,21700,"Eureka-Arcata, CA","Humboldt County, California",micro,march_2020
+56041,21740,"Evanston, WY","Uinta County, Wyoming",micro,march_2020
+18129,21780,"Evansville, IN-KY","Posey County, Indiana",metro,march_2020
+18163,21780,"Evansville, IN-KY","Vanderburgh County, Indiana",metro,march_2020
+18173,21780,"Evansville, IN-KY","Warrick County, Indiana",metro,march_2020
+21101,21780,"Evansville, IN-KY","Henderson County, Kentucky",metro,march_2020
+19101,21840,"Fairfield, IA","Jefferson County, Iowa",micro,march_2020
+27091,21860,"Fairmont, MN","Martin County, Minnesota",micro,march_2020
+54049,21900,"Fairmont, WV","Marion County, West Virginia",micro,march_2020
+32001,21980,"Fallon, NV","Churchill County, Nevada",micro,march_2020
+27027,22020,"Fargo, ND-MN","Clay County, Minnesota",metro,march_2020
+38017,22020,"Fargo, ND-MN","Cass County, North Dakota",metro,march_2020
+27131,22060,"Faribault-Northfield, MN","Rice County, Minnesota",micro,march_2020
+29187,22100,"Farmington, MO","St. Francois County, Missouri",micro,march_2020
+35045,22140,"Farmington, NM","San Juan County, New Mexico",metro,march_2020
+37051,22180,"Fayetteville, NC","Cumberland County, North Carolina",metro,march_2020
+37085,22180,"Fayetteville, NC","Harnett County, North Carolina",metro,march_2020
+37093,22180,"Fayetteville, NC","Hoke County, North Carolina",metro,march_2020
+05007,22220,"Fayetteville-Springdale-Rogers, AR","Benton County, Arkansas",metro,march_2020
+05087,22220,"Fayetteville-Springdale-Rogers, AR","Madison County, Arkansas",metro,march_2020
+05143,22220,"Fayetteville-Springdale-Rogers, AR","Washington County, Arkansas",metro,march_2020
+27111,22260,"Fergus Falls, MN","Otter Tail County, Minnesota",micro,march_2020
+32019,22280,"Fernley, NV","Lyon County, Nevada",micro,march_2020
+39063,22300,"Findlay, OH","Hancock County, Ohio",micro,march_2020
+13017,22340,"Fitzgerald, GA","Ben Hill County, Georgia",micro,march_2020
+04005,22380,"Flagstaff, AZ","Coconino County, Arizona",metro,march_2020
+26049,22420,"Flint, MI","Genesee County, Michigan",metro,march_2020
+45031,22500,"Florence, SC","Darlington County, South Carolina",metro,march_2020
+45041,22500,"Florence, SC","Florence County, South Carolina",metro,march_2020
+01033,22520,"Florence-Muscle Shoals, AL","Colbert County, Alabama",metro,march_2020
+01077,22520,"Florence-Muscle Shoals, AL","Lauderdale County, Alabama",metro,march_2020
+55039,22540,"Fond du Lac, WI","Fond du Lac County, Wisconsin",metro,march_2020
+37161,22580,"Forest City, NC","Rutherford County, North Carolina",micro,march_2020
+05123,22620,"Forrest City, AR","St. Francis County, Arkansas",micro,march_2020
+08069,22660,"Fort Collins, CO","Larimer County, Colorado",metro,march_2020
+19187,22700,"Fort Dodge, IA","Webster County, Iowa",micro,march_2020
+29169,22780,"Fort Leonard Wood, MO","Pulaski County, Missouri",micro,march_2020
+17067,22800,"Fort Madison-Keokuk, IA-IL-MO","Hancock County, Illinois",micro,march_2020
+19111,22800,"Fort Madison-Keokuk, IA-IL-MO","Lee County, Iowa",micro,march_2020
+29045,22800,"Fort Madison-Keokuk, IA-IL-MO","Clark County, Missouri",micro,march_2020
+08087,22820,"Fort Morgan, CO","Morgan County, Colorado",micro,march_2020
+01049,22840,"Fort Payne, AL","DeKalb County, Alabama",micro,march_2020
+22115,22860,"Fort Polk South, LA","Vernon Parish, Louisiana",micro,march_2020
+05033,22900,"Fort Smith, AR-OK","Crawford County, Arkansas",metro,march_2020
+05047,22900,"Fort Smith, AR-OK","Franklin County, Arkansas",metro,march_2020
+05131,22900,"Fort Smith, AR-OK","Sebastian County, Arkansas",metro,march_2020
+40135,22900,"Fort Smith, AR-OK","Sequoyah County, Oklahoma",metro,march_2020
+18003,23060,"Fort Wayne, IN","Allen County, Indiana",metro,march_2020
+18183,23060,"Fort Wayne, IN","Whitley County, Indiana",metro,march_2020
+18023,23140,"Frankfort, IN","Clinton County, Indiana",micro,march_2020
+21005,23180,"Frankfort, KY","Anderson County, Kentucky",micro,march_2020
+21073,23180,"Frankfort, KY","Franklin County, Kentucky",micro,march_2020
+48171,23240,"Fredericksburg, TX","Gillespie County, Texas",micro,march_2020
+17177,23300,"Freeport, IL","Stephenson County, Illinois",micro,march_2020
+31053,23340,"Fremont, NE","Dodge County, Nebraska",micro,march_2020
+39143,23380,"Fremont, OH","Sandusky County, Ohio",micro,march_2020
+06019,23420,"Fresno, CA","Fresno County, California",metro,march_2020
+01055,23460,"Gadsden, AL","Etowah County, Alabama",metro,march_2020
+45021,23500,"Gaffney, SC","Cherokee County, South Carolina",micro,march_2020
+12001,23540,"Gainesville, FL","Alachua County, Florida",metro,march_2020
+12041,23540,"Gainesville, FL","Gilchrist County, Florida",metro,march_2020
+12075,23540,"Gainesville, FL","Levy County, Florida",metro,march_2020
+13139,23580,"Gainesville, GA","Hall County, Georgia",metro,march_2020
+48097,23620,"Gainesville, TX","Cooke County, Texas",micro,march_2020
+17095,23660,"Galesburg, IL","Knox County, Illinois",micro,march_2020
+35031,23700,"Gallup, NM","McKinley County, New Mexico",micro,march_2020
+20055,23780,"Garden City, KS","Finney County, Kansas",micro,march_2020
+20093,23780,"Garden City, KS","Kearny County, Kansas",micro,march_2020
+32005,23820,"Gardnerville Ranchos, NV","Douglas County, Nevada",micro,march_2020
+45043,23860,"Georgetown, SC","Georgetown County, South Carolina",micro,march_2020
+42001,23900,"Gettysburg, PA","Adams County, Pennsylvania",metro,march_2020
+56005,23940,"Gillette, WY","Campbell County, Wyoming",micro,march_2020
+56011,23940,"Gillette, WY","Crook County, Wyoming",micro,march_2020
+56045,23940,"Gillette, WY","Weston County, Wyoming",micro,march_2020
+21009,23980,"Glasgow, KY","Barren County, Kentucky",micro,march_2020
+21169,23980,"Glasgow, KY","Metcalfe County, Kentucky",micro,march_2020
+36113,24020,"Glens Falls, NY","Warren County, New York",metro,march_2020
+36115,24020,"Glens Falls, NY","Washington County, New York",metro,march_2020
+08045,24060,"Glenwood Springs, CO","Garfield County, Colorado",micro,march_2020
+08097,24060,"Glenwood Springs, CO","Pitkin County, Colorado",micro,march_2020
+36035,24100,"Gloversville, NY","Fulton County, New York",micro,march_2020
+37191,24140,"Goldsboro, NC","Wayne County, North Carolina",metro,march_2020
+48221,24180,"Granbury, TX","Hood County, Texas",micro,march_2020
+27119,24220,"Grand Forks, ND-MN","Polk County, Minnesota",metro,march_2020
+38035,24220,"Grand Forks, ND-MN","Grand Forks County, North Dakota",metro,march_2020
+31079,24260,"Grand Island, NE","Hall County, Nebraska",metro,march_2020
+31093,24260,"Grand Island, NE","Howard County, Nebraska",metro,march_2020
+31121,24260,"Grand Island, NE","Merrick County, Nebraska",metro,march_2020
+08077,24300,"Grand Junction, CO","Mesa County, Colorado",metro,march_2020
+27061,24330,"Grand Rapids, MN","Itasca County, Minnesota",micro,march_2020
+26067,24340,"Grand Rapids-Kentwood, MI","Ionia County, Michigan",metro,march_2020
+26081,24340,"Grand Rapids-Kentwood, MI","Kent County, Michigan",metro,march_2020
+26117,24340,"Grand Rapids-Kentwood, MI","Montcalm County, Michigan",metro,march_2020
+26139,24340,"Grand Rapids-Kentwood, MI","Ottawa County, Michigan",metro,march_2020
+35006,24380,"Grants, NM","Cibola County, New Mexico",micro,march_2020
+41033,24420,"Grants Pass, OR","Josephine County, Oregon",metro,march_2020
+20009,24460,"Great Bend, KS","Barton County, Kansas",micro,march_2020
+30013,24500,"Great Falls, MT","Cascade County, Montana",metro,march_2020
+08123,24540,"Greeley, CO","Weld County, Colorado",metro,march_2020
+55009,24580,"Green Bay, WI","Brown County, Wisconsin",metro,march_2020
+55061,24580,"Green Bay, WI","Kewaunee County, Wisconsin",metro,march_2020
+55083,24580,"Green Bay, WI","Oconto County, Wisconsin",metro,march_2020
+47059,24620,"Greeneville, TN","Greene County, Tennessee",micro,march_2020
+37081,24660,"Greensboro-High Point, NC","Guilford County, North Carolina",metro,march_2020
+37151,24660,"Greensboro-High Point, NC","Randolph County, North Carolina",metro,march_2020
+37157,24660,"Greensboro-High Point, NC","Rockingham County, North Carolina",metro,march_2020
+18031,24700,"Greensburg, IN","Decatur County, Indiana",micro,march_2020
+28151,24740,"Greenville, MS","Washington County, Mississippi",micro,march_2020
+37147,24780,"Greenville, NC","Pitt County, North Carolina",metro,march_2020
+39037,24820,"Greenville, OH","Darke County, Ohio",micro,march_2020
+45007,24860,"Greenville-Anderson, SC","Anderson County, South Carolina",metro,march_2020
+45045,24860,"Greenville-Anderson, SC","Greenville County, South Carolina",metro,march_2020
+45059,24860,"Greenville-Anderson, SC","Laurens County, South Carolina",metro,march_2020
+45077,24860,"Greenville-Anderson, SC","Pickens County, South Carolina",metro,march_2020
+28015,24900,"Greenwood, MS","Carroll County, Mississippi",micro,march_2020
+28083,24900,"Greenwood, MS","Leflore County, Mississippi",micro,march_2020
+45047,24940,"Greenwood, SC","Greenwood County, South Carolina",micro,march_2020
+28043,24980,"Grenada, MS","Grenada County, Mississippi",micro,march_2020
+28045,25060,"Gulfport-Biloxi, MS","Hancock County, Mississippi",metro,march_2020
+28047,25060,"Gulfport-Biloxi, MS","Harrison County, Mississippi",metro,march_2020
+28059,25060,"Gulfport-Biloxi, MS","Jackson County, Mississippi",metro,march_2020
+28131,25060,"Gulfport-Biloxi, MS","Stone County, Mississippi",metro,march_2020
+40139,25100,"Guymon, OK","Texas County, Oklahoma",micro,march_2020
+24043,25180,"Hagerstown-Martinsburg, MD-WV","Washington County, Maryland",metro,march_2020
+54003,25180,"Hagerstown-Martinsburg, MD-WV","Berkeley County, West Virginia",metro,march_2020
+54065,25180,"Hagerstown-Martinsburg, MD-WV","Morgan County, West Virginia",metro,march_2020
+16013,25200,"Hailey, ID","Blaine County, Idaho",micro,march_2020
+16025,25200,"Hailey, ID","Camas County, Idaho",micro,march_2020
+22105,25220,"Hammond, LA","Tangipahoa Parish, Louisiana",metro,march_2020
+06031,25260,"Hanford-Corcoran, CA","Kings County, California",metro,march_2020
+29127,25300,"Hannibal, MO","Marion County, Missouri",micro,march_2020
+29173,25300,"Hannibal, MO","Ralls County, Missouri",micro,march_2020
+42041,25420,"Harrisburg-Carlisle, PA","Cumberland County, Pennsylvania",metro,march_2020
+42043,25420,"Harrisburg-Carlisle, PA","Dauphin County, Pennsylvania",metro,march_2020
+42099,25420,"Harrisburg-Carlisle, PA","Perry County, Pennsylvania",metro,march_2020
+05009,25460,"Harrison, AR","Boone County, Arkansas",micro,march_2020
+05101,25460,"Harrison, AR","Newton County, Arkansas",micro,march_2020
+51165,25500,"Harrisonburg, VA","Rockingham County, Virginia",metro,march_2020
+51660,25500,"Harrisonburg, VA","Harrisonburg city, Virginia",metro,march_2020
+09003,25540,"Hartford-East Hartford-Middletown, CT","Hartford County, Connecticut",metro,march_2020
+09007,25540,"Hartford-East Hartford-Middletown, CT","Middlesex County, Connecticut",metro,march_2020
+09013,25540,"Hartford-East Hartford-Middletown, CT","Tolland County, Connecticut",metro,march_2020
+31001,25580,"Hastings, NE","Adams County, Nebraska",micro,march_2020
+28031,25620,"Hattiesburg, MS","Covington County, Mississippi",metro,march_2020
+28035,25620,"Hattiesburg, MS","Forrest County, Mississippi",metro,march_2020
+28073,25620,"Hattiesburg, MS","Lamar County, Mississippi",metro,march_2020
+28111,25620,"Hattiesburg, MS","Perry County, Mississippi",metro,march_2020
+20051,25700,"Hays, KS","Ellis County, Kansas",micro,march_2020
+49043,25720,"Heber, UT","Summit County, Utah",micro,march_2020
+49051,25720,"Heber, UT","Wasatch County, Utah",micro,march_2020
+30043,25740,"Helena, MT","Jefferson County, Montana",micro,march_2020
+30049,25740,"Helena, MT","Lewis and Clark County, Montana",micro,march_2020
+05107,25760,"Helena-West Helena, AR","Phillips County, Arkansas",micro,march_2020
+37181,25780,"Henderson, NC","Vance County, North Carolina",micro,march_2020
+48117,25820,"Hereford, TX","Deaf Smith County, Texas",micro,march_2020
+41049,25840,"Hermiston-Pendleton, OR","Morrow County, Oregon",micro,march_2020
+41059,25840,"Hermiston-Pendleton, OR","Umatilla County, Oregon",micro,march_2020
+37003,25860,"Hickory-Lenoir-Morganton, NC","Alexander County, North Carolina",metro,march_2020
+37023,25860,"Hickory-Lenoir-Morganton, NC","Burke County, North Carolina",metro,march_2020
+37027,25860,"Hickory-Lenoir-Morganton, NC","Caldwell County, North Carolina",metro,march_2020
+37035,25860,"Hickory-Lenoir-Morganton, NC","Catawba County, North Carolina",metro,march_2020
+26059,25880,"Hillsdale, MI","Hillsdale County, Michigan",micro,march_2020
+45013,25940,"Hilton Head Island-Bluffton, SC","Beaufort County, South Carolina",metro,march_2020
+45053,25940,"Hilton Head Island-Bluffton, SC","Jasper County, South Carolina",metro,march_2020
+13179,25980,"Hinesville, GA","Liberty County, Georgia",metro,march_2020
+13183,25980,"Hinesville, GA","Long County, Georgia",metro,march_2020
+35025,26020,"Hobbs, NM","Lea County, New Mexico",micro,march_2020
+26005,26090,"Holland, MI","Allegan County, Michigan",micro,march_2020
+12017,26140,"Homosassa Springs, FL","Citrus County, Florida",metro,march_2020
+41027,26220,"Hood River, OR","Hood River County, Oregon",micro,march_2020
+05057,26260,"Hope, AR","Hempstead County, Arkansas",micro,march_2020
+05099,26260,"Hope, AR","Nevada County, Arkansas",micro,march_2020
+05051,26300,"Hot Springs, AR","Garland County, Arkansas",metro,march_2020
+26061,26340,"Houghton, MI","Houghton County, Michigan",micro,march_2020
+26083,26340,"Houghton, MI","Keweenaw County, Michigan",micro,march_2020
+22057,26380,"Houma-Thibodaux, LA","Lafourche Parish, Louisiana",metro,march_2020
+22109,26380,"Houma-Thibodaux, LA","Terrebonne Parish, Louisiana",metro,march_2020
+48015,26420,"Houston-The Woodlands-Sugar Land, TX","Austin County, Texas",metro,march_2020
+48039,26420,"Houston-The Woodlands-Sugar Land, TX","Brazoria County, Texas",metro,march_2020
+48071,26420,"Houston-The Woodlands-Sugar Land, TX","Chambers County, Texas",metro,march_2020
+48157,26420,"Houston-The Woodlands-Sugar Land, TX","Fort Bend County, Texas",metro,march_2020
+48167,26420,"Houston-The Woodlands-Sugar Land, TX","Galveston County, Texas",metro,march_2020
+48201,26420,"Houston-The Woodlands-Sugar Land, TX","Harris County, Texas",metro,march_2020
+48291,26420,"Houston-The Woodlands-Sugar Land, TX","Liberty County, Texas",metro,march_2020
+48339,26420,"Houston-The Woodlands-Sugar Land, TX","Montgomery County, Texas",metro,march_2020
+48473,26420,"Houston-The Woodlands-Sugar Land, TX","Waller County, Texas",metro,march_2020
+36021,26460,"Hudson, NY","Columbia County, New York",micro,march_2020
+42061,26500,"Huntingdon, PA","Huntingdon County, Pennsylvania",micro,march_2020
+18069,26540,"Huntington, IN","Huntington County, Indiana",micro,march_2020
+21019,26580,"Huntington-Ashland, WV-KY-OH","Boyd County, Kentucky",metro,march_2020
+21043,26580,"Huntington-Ashland, WV-KY-OH","Carter County, Kentucky",metro,march_2020
+21089,26580,"Huntington-Ashland, WV-KY-OH","Greenup County, Kentucky",metro,march_2020
+39087,26580,"Huntington-Ashland, WV-KY-OH","Lawrence County, Ohio",metro,march_2020
+54011,26580,"Huntington-Ashland, WV-KY-OH","Cabell County, West Virginia",metro,march_2020
+54079,26580,"Huntington-Ashland, WV-KY-OH","Putnam County, West Virginia",metro,march_2020
+54099,26580,"Huntington-Ashland, WV-KY-OH","Wayne County, West Virginia",metro,march_2020
+01083,26620,"Huntsville, AL","Limestone County, Alabama",metro,march_2020
+01089,26620,"Huntsville, AL","Madison County, Alabama",metro,march_2020
+48471,26660,"Huntsville, TX","Walker County, Texas",micro,march_2020
+46005,26700,"Huron, SD","Beadle County, South Dakota",micro,march_2020
+46073,26700,"Huron, SD","Jerauld County, South Dakota",micro,march_2020
+20155,26740,"Hutchinson, KS","Reno County, Kansas",micro,march_2020
+27085,26780,"Hutchinson, MN","McLeod County, Minnesota",micro,march_2020
+16019,26820,"Idaho Falls, ID","Bonneville County, Idaho",metro,march_2020
+16023,26820,"Idaho Falls, ID","Butte County, Idaho",metro,march_2020
+16051,26820,"Idaho Falls, ID","Jefferson County, Idaho",metro,march_2020
+42063,26860,"Indiana, PA","Indiana County, Pennsylvania",micro,march_2020
+18011,26900,"Indianapolis-Carmel-Anderson, IN","Boone County, Indiana",metro,march_2020
+18013,26900,"Indianapolis-Carmel-Anderson, IN","Brown County, Indiana",metro,march_2020
+18057,26900,"Indianapolis-Carmel-Anderson, IN","Hamilton County, Indiana",metro,march_2020
+18059,26900,"Indianapolis-Carmel-Anderson, IN","Hancock County, Indiana",metro,march_2020
+18063,26900,"Indianapolis-Carmel-Anderson, IN","Hendricks County, Indiana",metro,march_2020
+18081,26900,"Indianapolis-Carmel-Anderson, IN","Johnson County, Indiana",metro,march_2020
+18095,26900,"Indianapolis-Carmel-Anderson, IN","Madison County, Indiana",metro,march_2020
+18097,26900,"Indianapolis-Carmel-Anderson, IN","Marion County, Indiana",metro,march_2020
+18109,26900,"Indianapolis-Carmel-Anderson, IN","Morgan County, Indiana",metro,march_2020
+18133,26900,"Indianapolis-Carmel-Anderson, IN","Putnam County, Indiana",metro,march_2020
+18145,26900,"Indianapolis-Carmel-Anderson, IN","Shelby County, Indiana",metro,march_2020
+28133,26940,"Indianola, MS","Sunflower County, Mississippi",micro,march_2020
+19103,26980,"Iowa City, IA","Johnson County, Iowa",metro,march_2020
+19183,26980,"Iowa City, IA","Washington County, Iowa",metro,march_2020
+26043,27020,"Iron Mountain, MI-WI","Dickinson County, Michigan",micro,march_2020
+55037,27020,"Iron Mountain, MI-WI","Florence County, Wisconsin",micro,march_2020
+36109,27060,"Ithaca, NY","Tompkins County, New York",metro,march_2020
+26075,27100,"Jackson, MI","Jackson County, Michigan",metro,march_2020
+28029,27140,"Jackson, MS","Copiah County, Mississippi",metro,march_2020
+28049,27140,"Jackson, MS","Hinds County, Mississippi",metro,march_2020
+28051,27140,"Jackson, MS","Holmes County, Mississippi",metro,march_2020
+28089,27140,"Jackson, MS","Madison County, Mississippi",metro,march_2020
+28121,27140,"Jackson, MS","Rankin County, Mississippi",metro,march_2020
+28127,27140,"Jackson, MS","Simpson County, Mississippi",metro,march_2020
+28163,27140,"Jackson, MS","Yazoo County, Mississippi",metro,march_2020
+39079,27160,"Jackson, OH","Jackson County, Ohio",micro,march_2020
+47023,27180,"Jackson, TN","Chester County, Tennessee",metro,march_2020
+47033,27180,"Jackson, TN","Crockett County, Tennessee",metro,march_2020
+47053,27180,"Jackson, TN","Gibson County, Tennessee",metro,march_2020
+47113,27180,"Jackson, TN","Madison County, Tennessee",metro,march_2020
+16081,27220,"Jackson, WY-ID","Teton County, Idaho",micro,march_2020
+56039,27220,"Jackson, WY-ID","Teton County, Wyoming",micro,march_2020
+12003,27260,"Jacksonville, FL","Baker County, Florida",metro,march_2020
+12019,27260,"Jacksonville, FL","Clay County, Florida",metro,march_2020
+12031,27260,"Jacksonville, FL","Duval County, Florida",metro,march_2020
+12089,27260,"Jacksonville, FL","Nassau County, Florida",metro,march_2020
+12109,27260,"Jacksonville, FL","St. Johns County, Florida",metro,march_2020
+17137,27300,"Jacksonville, IL","Morgan County, Illinois",micro,march_2020
+17171,27300,"Jacksonville, IL","Scott County, Illinois",micro,march_2020
+37133,27340,"Jacksonville, NC","Onslow County, North Carolina",metro,march_2020
+48073,27380,"Jacksonville, TX","Cherokee County, Texas",micro,march_2020
+38093,27420,"Jamestown, ND","Stutsman County, North Dakota",micro,march_2020
+36013,27460,"Jamestown-Dunkirk-Fredonia, NY","Chautauqua County, New York",micro,march_2020
+55105,27500,"Janesville-Beloit, WI","Rock County, Wisconsin",metro,march_2020
+01127,27530,"Jasper, AL","Walker County, Alabama",micro,march_2020
+18037,27540,"Jasper, IN","Dubois County, Indiana",micro,march_2020
+18125,27540,"Jasper, IN","Pike County, Indiana",micro,march_2020
+13157,27600,"Jefferson, GA","Jackson County, Georgia",micro,march_2020
+29027,27620,"Jefferson City, MO","Callaway County, Missouri",metro,march_2020
+29051,27620,"Jefferson City, MO","Cole County, Missouri",metro,march_2020
+29135,27620,"Jefferson City, MO","Moniteau County, Missouri",metro,march_2020
+29151,27620,"Jefferson City, MO","Osage County, Missouri",metro,march_2020
+22053,27660,"Jennings, LA","Jefferson Davis Parish, Louisiana",micro,march_2020
+13305,27700,"Jesup, GA","Wayne County, Georgia",micro,march_2020
+47019,27740,"Johnson City, TN","Carter County, Tennessee",metro,march_2020
+47171,27740,"Johnson City, TN","Unicoi County, Tennessee",metro,march_2020
+47179,27740,"Johnson City, TN","Washington County, Tennessee",metro,march_2020
+42021,27780,"Johnstown, PA","Cambria County, Pennsylvania",metro,march_2020
+05031,27860,"Jonesboro, AR","Craighead County, Arkansas",metro,march_2020
+05111,27860,"Jonesboro, AR","Poinsett County, Arkansas",metro,march_2020
+29097,27900,"Joplin, MO","Jasper County, Missouri",metro,march_2020
+29145,27900,"Joplin, MO","Newton County, Missouri",metro,march_2020
+26077,28020,"Kalamazoo-Portage, MI","Kalamazoo County, Michigan",metro,march_2020
+30029,28060,"Kalispell, MT","Flathead County, Montana",micro,march_2020
+17091,28100,"Kankakee, IL","Kankakee County, Illinois",metro,march_2020
+20091,28140,"Kansas City, MO-KS","Johnson County, Kansas",metro,march_2020
+20103,28140,"Kansas City, MO-KS","Leavenworth County, Kansas",metro,march_2020
+20107,28140,"Kansas City, MO-KS","Linn County, Kansas",metro,march_2020
+20121,28140,"Kansas City, MO-KS","Miami County, Kansas",metro,march_2020
+20209,28140,"Kansas City, MO-KS","Wyandotte County, Kansas",metro,march_2020
+29013,28140,"Kansas City, MO-KS","Bates County, Missouri",metro,march_2020
+29025,28140,"Kansas City, MO-KS","Caldwell County, Missouri",metro,march_2020
+29037,28140,"Kansas City, MO-KS","Cass County, Missouri",metro,march_2020
+29047,28140,"Kansas City, MO-KS","Clay County, Missouri",metro,march_2020
+29049,28140,"Kansas City, MO-KS","Clinton County, Missouri",metro,march_2020
+29095,28140,"Kansas City, MO-KS","Jackson County, Missouri",metro,march_2020
+29107,28140,"Kansas City, MO-KS","Lafayette County, Missouri",metro,march_2020
+29165,28140,"Kansas City, MO-KS","Platte County, Missouri",metro,march_2020
+29177,28140,"Kansas City, MO-KS","Ray County, Missouri",metro,march_2020
+31019,28260,"Kearney, NE","Buffalo County, Nebraska",micro,march_2020
+31099,28260,"Kearney, NE","Kearney County, Nebraska",micro,march_2020
+33005,28300,"Keene, NH","Cheshire County, New Hampshire",micro,march_2020
+18113,28340,"Kendallville, IN","Noble County, Indiana",micro,march_2020
+29069,28380,"Kennett, MO","Dunklin County, Missouri",micro,march_2020
+53005,28420,"Kennewick-Richland, WA","Benton County, Washington",metro,march_2020
+53021,28420,"Kennewick-Richland, WA","Franklin County, Washington",metro,march_2020
+48265,28500,"Kerrville, TX","Kerr County, Texas",micro,march_2020
+12087,28580,"Key West, FL","Monroe County, Florida",micro,march_2020
+37055,28620,"Kill Devil Hills, NC","Dare County, North Carolina",micro,march_2020
+48027,28660,"Killeen-Temple, TX","Bell County, Texas",metro,march_2020
+48099,28660,"Killeen-Temple, TX","Coryell County, Texas",metro,march_2020
+48281,28660,"Killeen-Temple, TX","Lampasas County, Texas",metro,march_2020
+47073,28700,"Kingsport-Bristol, TN-VA","Hawkins County, Tennessee",metro,march_2020
+47163,28700,"Kingsport-Bristol, TN-VA","Sullivan County, Tennessee",metro,march_2020
+51169,28700,"Kingsport-Bristol, TN-VA","Scott County, Virginia",metro,march_2020
+51191,28700,"Kingsport-Bristol, TN-VA","Washington County, Virginia",metro,march_2020
+51520,28700,"Kingsport-Bristol, TN-VA","Bristol city, Virginia",metro,march_2020
+36111,28740,"Kingston, NY","Ulster County, New York",metro,march_2020
+48261,28780,"Kingsville, TX","Kenedy County, Texas",micro,march_2020
+48273,28780,"Kingsville, TX","Kleberg County, Texas",micro,march_2020
+37107,28820,"Kinston, NC","Lenoir County, North Carolina",micro,march_2020
+29001,28860,"Kirksville, MO","Adair County, Missouri",micro,march_2020
+29197,28860,"Kirksville, MO","Schuyler County, Missouri",micro,march_2020
+41035,28900,"Klamath Falls, OR","Klamath County, Oregon",micro,march_2020
+47001,28940,"Knoxville, TN","Anderson County, Tennessee",metro,march_2020
+47009,28940,"Knoxville, TN","Blount County, Tennessee",metro,march_2020
+47013,28940,"Knoxville, TN","Campbell County, Tennessee",metro,march_2020
+47093,28940,"Knoxville, TN","Knox County, Tennessee",metro,march_2020
+47105,28940,"Knoxville, TN","Loudon County, Tennessee",metro,march_2020
+47129,28940,"Knoxville, TN","Morgan County, Tennessee",metro,march_2020
+47145,28940,"Knoxville, TN","Roane County, Tennessee",metro,march_2020
+47173,28940,"Knoxville, TN","Union County, Tennessee",metro,march_2020
+18067,29020,"Kokomo, IN","Howard County, Indiana",metro,march_2020
+33001,29060,"Laconia, NH","Belknap County, New Hampshire",micro,march_2020
+27055,29100,"La Crosse-Onalaska, WI-MN","Houston County, Minnesota",metro,march_2020
+55063,29100,"La Crosse-Onalaska, WI-MN","La Crosse County, Wisconsin",metro,march_2020
+22001,29180,"Lafayette, LA","Acadia Parish, Louisiana",metro,march_2020
+22045,29180,"Lafayette, LA","Iberia Parish, Louisiana",metro,march_2020
+22055,29180,"Lafayette, LA","Lafayette Parish, Louisiana",metro,march_2020
+22099,29180,"Lafayette, LA","St. Martin Parish, Louisiana",metro,march_2020
+22113,29180,"Lafayette, LA","Vermilion Parish, Louisiana",metro,march_2020
+18007,29200,"Lafayette-West Lafayette, IN","Benton County, Indiana",metro,march_2020
+18015,29200,"Lafayette-West Lafayette, IN","Carroll County, Indiana",metro,march_2020
+18157,29200,"Lafayette-West Lafayette, IN","Tippecanoe County, Indiana",metro,march_2020
+18171,29200,"Lafayette-West Lafayette, IN","Warren County, Indiana",metro,march_2020
+41061,29260,"La Grande, OR","Union County, Oregon",micro,march_2020
+01017,29300,"LaGrange, GA-AL","Chambers County, Alabama",micro,march_2020
+13285,29300,"LaGrange, GA-AL","Troup County, Georgia",micro,march_2020
+22019,29340,"Lake Charles, LA","Calcasieu Parish, Louisiana",metro,march_2020
+22023,29340,"Lake Charles, LA","Cameron Parish, Louisiana",metro,march_2020
+12023,29380,"Lake City, FL","Columbia County, Florida",micro,march_2020
+04015,29420,"Lake Havasu City-Kingman, AZ","Mohave County, Arizona",metro,march_2020
+12105,29460,"Lakeland-Winter Haven, FL","Polk County, Florida",metro,march_2020
+48115,29500,"Lamesa, TX","Dawson County, Texas",micro,march_2020
+42071,29540,"Lancaster, PA","Lancaster County, Pennsylvania",metro,march_2020
+26037,29620,"Lansing-East Lansing, MI","Clinton County, Michigan",metro,march_2020
+26045,29620,"Lansing-East Lansing, MI","Eaton County, Michigan",metro,march_2020
+26065,29620,"Lansing-East Lansing, MI","Ingham County, Michigan",metro,march_2020
+26155,29620,"Lansing-East Lansing, MI","Shiawassee County, Michigan",metro,march_2020
+56001,29660,"Laramie, WY","Albany County, Wyoming",micro,march_2020
+48479,29700,"Laredo, TX","Webb County, Texas",metro,march_2020
+35013,29740,"Las Cruces, NM","Doña Ana County, New Mexico",metro,march_2020
+35033,29780,"Las Vegas, NM","Mora County, New Mexico",micro,march_2020
+35047,29780,"Las Vegas, NM","San Miguel County, New Mexico",micro,march_2020
+32003,29820,"Las Vegas-Henderson-Paradise, NV","Clark County, Nevada",metro,march_2020
+28061,29860,"Laurel, MS","Jasper County, Mississippi",micro,march_2020
+28067,29860,"Laurel, MS","Jones County, Mississippi",micro,march_2020
+37165,29900,"Laurinburg, NC","Scotland County, North Carolina",micro,march_2020
+20045,29940,"Lawrence, KS","Douglas County, Kansas",metro,march_2020
+47099,29980,"Lawrenceburg, TN","Lawrence County, Tennessee",micro,march_2020
+40031,30020,"Lawton, OK","Comanche County, Oklahoma",metro,march_2020
+40033,30020,"Lawton, OK","Cotton County, Oklahoma",metro,march_2020
+29105,30060,"Lebanon, MO","Laclede County, Missouri",micro,march_2020
+33009,30100,"Lebanon, NH-VT","Grafton County, New Hampshire",micro,march_2020
+33019,30100,"Lebanon, NH-VT","Sullivan County, New Hampshire",micro,march_2020
+50017,30100,"Lebanon, NH-VT","Orange County, Vermont",micro,march_2020
+50027,30100,"Lebanon, NH-VT","Windsor County, Vermont",micro,march_2020
+42075,30140,"Lebanon, PA","Lebanon County, Pennsylvania",metro,march_2020
+48219,30220,"Levelland, TX","Hockley County, Texas",micro,march_2020
+42119,30260,"Lewisburg, PA","Union County, Pennsylvania",micro,march_2020
+47117,30280,"Lewisburg, TN","Marshall County, Tennessee",micro,march_2020
+16069,30300,"Lewiston, ID-WA","Nez Perce County, Idaho",metro,march_2020
+53003,30300,"Lewiston, ID-WA","Asotin County, Washington",metro,march_2020
+23001,30340,"Lewiston-Auburn, ME","Androscoggin County, Maine",metro,march_2020
+42087,30380,"Lewistown, PA","Mifflin County, Pennsylvania",micro,march_2020
+31047,30420,"Lexington, NE","Dawson County, Nebraska",micro,march_2020
+31073,30420,"Lexington, NE","Gosper County, Nebraska",micro,march_2020
+21017,30460,"Lexington-Fayette, KY","Bourbon County, Kentucky",metro,march_2020
+21049,30460,"Lexington-Fayette, KY","Clark County, Kentucky",metro,march_2020
+21067,30460,"Lexington-Fayette, KY","Fayette County, Kentucky",metro,march_2020
+21113,30460,"Lexington-Fayette, KY","Jessamine County, Kentucky",metro,march_2020
+21209,30460,"Lexington-Fayette, KY","Scott County, Kentucky",metro,march_2020
+21239,30460,"Lexington-Fayette, KY","Woodford County, Kentucky",metro,march_2020
+20175,30580,"Liberal, KS","Seward County, Kansas",micro,march_2020
+39003,30620,"Lima, OH","Allen County, Ohio",metro,march_2020
+17107,30660,"Lincoln, IL","Logan County, Illinois",micro,march_2020
+31109,30700,"Lincoln, NE","Lancaster County, Nebraska",metro,march_2020
+31159,30700,"Lincoln, NE","Seward County, Nebraska",metro,march_2020
+05045,30780,"Little Rock-North Little Rock-Conway, AR","Faulkner County, Arkansas",metro,march_2020
+05053,30780,"Little Rock-North Little Rock-Conway, AR","Grant County, Arkansas",metro,march_2020
+05085,30780,"Little Rock-North Little Rock-Conway, AR","Lonoke County, Arkansas",metro,march_2020
+05105,30780,"Little Rock-North Little Rock-Conway, AR","Perry County, Arkansas",metro,march_2020
+05119,30780,"Little Rock-North Little Rock-Conway, AR","Pulaski County, Arkansas",metro,march_2020
+05125,30780,"Little Rock-North Little Rock-Conway, AR","Saline County, Arkansas",metro,march_2020
+42035,30820,"Lock Haven, PA","Clinton County, Pennsylvania",micro,march_2020
+16041,30860,"Logan, UT-ID","Franklin County, Idaho",metro,march_2020
+49005,30860,"Logan, UT-ID","Cache County, Utah",metro,march_2020
+18017,30900,"Logansport, IN","Cass County, Indiana",micro,march_2020
+21051,30940,"London, KY","Clay County, Kentucky",micro,march_2020
+21121,30940,"London, KY","Knox County, Kentucky",micro,march_2020
+21125,30940,"London, KY","Laurel County, Kentucky",micro,march_2020
+21235,30940,"London, KY","Whitley County, Kentucky",micro,march_2020
+48183,30980,"Longview, TX","Gregg County, Texas",metro,march_2020
+48203,30980,"Longview, TX","Harrison County, Texas",metro,march_2020
+48401,30980,"Longview, TX","Rusk County, Texas",metro,march_2020
+48459,30980,"Longview, TX","Upshur County, Texas",metro,march_2020
+53015,31020,"Longview, WA","Cowlitz County, Washington",metro,march_2020
+35028,31060,"Los Alamos, NM","Los Alamos County, New Mexico",micro,march_2020
+06059,31080,"Los Angeles-Long Beach-Anaheim, CA","Orange County, California",metro,march_2020
+06037,31080,"Los Angeles-Long Beach-Anaheim, CA","Los Angeles County, California",metro,march_2020
+18019,31140,"Louisville/Jefferson County, KY-IN","Clark County, Indiana",metro,march_2020
+18043,31140,"Louisville/Jefferson County, KY-IN","Floyd County, Indiana",metro,march_2020
+18061,31140,"Louisville/Jefferson County, KY-IN","Harrison County, Indiana",metro,march_2020
+18175,31140,"Louisville/Jefferson County, KY-IN","Washington County, Indiana",metro,march_2020
+21029,31140,"Louisville/Jefferson County, KY-IN","Bullitt County, Kentucky",metro,march_2020
+21103,31140,"Louisville/Jefferson County, KY-IN","Henry County, Kentucky",metro,march_2020
+21111,31140,"Louisville/Jefferson County, KY-IN","Jefferson County, Kentucky",metro,march_2020
+21185,31140,"Louisville/Jefferson County, KY-IN","Oldham County, Kentucky",metro,march_2020
+21211,31140,"Louisville/Jefferson County, KY-IN","Shelby County, Kentucky",metro,march_2020
+21215,31140,"Louisville/Jefferson County, KY-IN","Spencer County, Kentucky",metro,march_2020
+48107,31180,"Lubbock, TX","Crosby County, Texas",metro,march_2020
+48303,31180,"Lubbock, TX","Lubbock County, Texas",metro,march_2020
+48305,31180,"Lubbock, TX","Lynn County, Texas",metro,march_2020
+26105,31220,"Ludington, MI","Mason County, Michigan",micro,march_2020
+48005,31260,"Lufkin, TX","Angelina County, Texas",micro,march_2020
+37155,31300,"Lumberton, NC","Robeson County, North Carolina",micro,march_2020
+51009,31340,"Lynchburg, VA","Amherst County, Virginia",metro,march_2020
+51011,31340,"Lynchburg, VA","Appomattox County, Virginia",metro,march_2020
+51019,31340,"Lynchburg, VA","Bedford County, Virginia",metro,march_2020
+51031,31340,"Lynchburg, VA","Campbell County, Virginia",metro,march_2020
+51680,31340,"Lynchburg, VA","Lynchburg city, Virginia",metro,march_2020
+17109,31380,"Macomb, IL","McDonough County, Illinois",micro,march_2020
+13021,31420,"Macon-Bibb County, GA","Bibb County, Georgia",metro,march_2020
+13079,31420,"Macon-Bibb County, GA","Crawford County, Georgia",metro,march_2020
+13169,31420,"Macon-Bibb County, GA","Jones County, Georgia",metro,march_2020
+13207,31420,"Macon-Bibb County, GA","Monroe County, Georgia",metro,march_2020
+13289,31420,"Macon-Bibb County, GA","Twiggs County, Georgia",metro,march_2020
+06039,31460,"Madera, CA","Madera County, California",metro,march_2020
+18077,31500,"Madison, IN","Jefferson County, Indiana",micro,march_2020
+55021,31540,"Madison, WI","Columbia County, Wisconsin",metro,march_2020
+55025,31540,"Madison, WI","Dane County, Wisconsin",metro,march_2020
+55045,31540,"Madison, WI","Green County, Wisconsin",metro,march_2020
+55049,31540,"Madison, WI","Iowa County, Wisconsin",metro,march_2020
+21107,31580,"Madisonville, KY","Hopkins County, Kentucky",micro,march_2020
+05027,31620,"Magnolia, AR","Columbia County, Arkansas",micro,march_2020
+36033,31660,"Malone, NY","Franklin County, New York",micro,march_2020
+05059,31680,"Malvern, AR","Hot Spring County, Arkansas",micro,march_2020
+33011,31700,"Manchester-Nashua, NH","Hillsborough County, New Hampshire",metro,march_2020
+20061,31740,"Manhattan, KS","Geary County, Kansas",metro,march_2020
+20149,31740,"Manhattan, KS","Pottawatomie County, Kansas",metro,march_2020
+20161,31740,"Manhattan, KS","Riley County, Kansas",metro,march_2020
+55071,31820,"Manitowoc, WI","Manitowoc County, Wisconsin",micro,march_2020
+27013,31860,"Mankato, MN","Blue Earth County, Minnesota",metro,march_2020
+27103,31860,"Mankato, MN","Nicollet County, Minnesota",metro,march_2020
+39139,31900,"Mansfield, OH","Richland County, Ohio",metro,march_2020
+39167,31930,"Marietta, OH","Washington County, Ohio",micro,march_2020
+26109,31940,"Marinette, WI-MI","Menominee County, Michigan",micro,march_2020
+55075,31940,"Marinette, WI-MI","Marinette County, Wisconsin",micro,march_2020
+18053,31980,"Marion, IN","Grant County, Indiana",micro,march_2020
+37111,32000,"Marion, NC","McDowell County, North Carolina",micro,march_2020
+39101,32020,"Marion, OH","Marion County, Ohio",micro,march_2020
+26103,32100,"Marquette, MI","Marquette County, Michigan",micro,march_2020
+27083,32140,"Marshall, MN","Lyon County, Minnesota",micro,march_2020
+29195,32180,"Marshall, MO","Saline County, Missouri",micro,march_2020
+19127,32260,"Marshalltown, IA","Marshall County, Iowa",micro,march_2020
+47183,32280,"Martin, TN","Weakley County, Tennessee",micro,march_2020
+51089,32300,"Martinsville, VA","Henry County, Virginia",micro,march_2020
+51690,32300,"Martinsville, VA","Martinsville city, Virginia",micro,march_2020
+29147,32340,"Maryville, MO","Nodaway County, Missouri",micro,march_2020
+19033,32380,"Mason City, IA","Cerro Gordo County, Iowa",micro,march_2020
+19195,32380,"Mason City, IA","Worth County, Iowa",micro,march_2020
+21083,32460,"Mayfield, KY","Graves County, Kentucky",micro,march_2020
+21161,32500,"Maysville, KY","Mason County, Kentucky",micro,march_2020
+40121,32540,"McAlester, OK","Pittsburg County, Oklahoma",micro,march_2020
+48215,32580,"McAllen-Edinburg-Mission, TX","Hidalgo County, Texas",metro,march_2020
+28113,32620,"McComb, MS","Pike County, Mississippi",micro,march_2020
+47177,32660,"McMinnville, TN","Warren County, Tennessee",micro,march_2020
+20113,32700,"McPherson, KS","McPherson County, Kansas",micro,march_2020
+42039,32740,"Meadville, PA","Crawford County, Pennsylvania",micro,march_2020
+41029,32780,"Medford, OR","Jackson County, Oregon",metro,march_2020
+05035,32820,"Memphis, TN-MS-AR","Crittenden County, Arkansas",metro,march_2020
+28033,32820,"Memphis, TN-MS-AR","DeSoto County, Mississippi",metro,march_2020
+28093,32820,"Memphis, TN-MS-AR","Marshall County, Mississippi",metro,march_2020
+28137,32820,"Memphis, TN-MS-AR","Tate County, Mississippi",metro,march_2020
+28143,32820,"Memphis, TN-MS-AR","Tunica County, Mississippi",metro,march_2020
+47047,32820,"Memphis, TN-MS-AR","Fayette County, Tennessee",metro,march_2020
+47157,32820,"Memphis, TN-MS-AR","Shelby County, Tennessee",metro,march_2020
+47167,32820,"Memphis, TN-MS-AR","Tipton County, Tennessee",metro,march_2020
+55033,32860,"Menomonie, WI","Dunn County, Wisconsin",micro,march_2020
+06047,32900,"Merced, CA","Merced County, California",metro,march_2020
+28023,32940,"Meridian, MS","Clarke County, Mississippi",micro,march_2020
+28069,32940,"Meridian, MS","Kemper County, Mississippi",micro,march_2020
+28075,32940,"Meridian, MS","Lauderdale County, Mississippi",micro,march_2020
+29007,33020,"Mexico, MO","Audrain County, Missouri",micro,march_2020
+40115,33060,"Miami, OK","Ottawa County, Oklahoma",micro,march_2020
+12011,33100,"Miami-Fort Lauderdale-Pompano Beach, FL","Broward County, Florida",metro,march_2020
+12086,33100,"Miami-Fort Lauderdale-Pompano Beach, FL","Miami-Dade County, Florida",metro,march_2020
+12099,33100,"Miami-Fort Lauderdale-Pompano Beach, FL","Palm Beach County, Florida",metro,march_2020
+18091,33140,"Michigan City-La Porte, IN","LaPorte County, Indiana",metro,march_2020
+21013,33180,"Middlesborough, KY","Bell County, Kentucky",micro,march_2020
+26111,33220,"Midland, MI","Midland County, Michigan",metro,march_2020
+48317,33260,"Midland, TX","Martin County, Texas",metro,march_2020
+48329,33260,"Midland, TX","Midland County, Texas",metro,march_2020
+13009,33300,"Milledgeville, GA","Baldwin County, Georgia",micro,march_2020
+13141,33300,"Milledgeville, GA","Hancock County, Georgia",micro,march_2020
+55079,33340,"Milwaukee-Waukesha, WI","Milwaukee County, Wisconsin",metro,march_2020
+55089,33340,"Milwaukee-Waukesha, WI","Ozaukee County, Wisconsin",metro,march_2020
+55131,33340,"Milwaukee-Waukesha, WI","Washington County, Wisconsin",metro,march_2020
+55133,33340,"Milwaukee-Waukesha, WI","Waukesha County, Wisconsin",metro,march_2020
+22119,33380,"Minden, LA","Webster Parish, Louisiana",micro,march_2020
+48363,33420,"Mineral Wells, TX","Palo Pinto County, Texas",micro,march_2020
+27003,33460,"Minneapolis-St. Paul-Bloomington, MN-WI","Anoka County, Minnesota",metro,march_2020
+27019,33460,"Minneapolis-St. Paul-Bloomington, MN-WI","Carver County, Minnesota",metro,march_2020
+27025,33460,"Minneapolis-St. Paul-Bloomington, MN-WI","Chisago County, Minnesota",metro,march_2020
+27037,33460,"Minneapolis-St. Paul-Bloomington, MN-WI","Dakota County, Minnesota",metro,march_2020
+27053,33460,"Minneapolis-St. Paul-Bloomington, MN-WI","Hennepin County, Minnesota",metro,march_2020
+27059,33460,"Minneapolis-St. Paul-Bloomington, MN-WI","Isanti County, Minnesota",metro,march_2020
+27079,33460,"Minneapolis-St. Paul-Bloomington, MN-WI","Le Sueur County, Minnesota",metro,march_2020
+27095,33460,"Minneapolis-St. Paul-Bloomington, MN-WI","Mille Lacs County, Minnesota",metro,march_2020
+27123,33460,"Minneapolis-St. Paul-Bloomington, MN-WI","Ramsey County, Minnesota",metro,march_2020
+27139,33460,"Minneapolis-St. Paul-Bloomington, MN-WI","Scott County, Minnesota",metro,march_2020
+27141,33460,"Minneapolis-St. Paul-Bloomington, MN-WI","Sherburne County, Minnesota",metro,march_2020
+27163,33460,"Minneapolis-St. Paul-Bloomington, MN-WI","Washington County, Minnesota",metro,march_2020
+27171,33460,"Minneapolis-St. Paul-Bloomington, MN-WI","Wright County, Minnesota",metro,march_2020
+55093,33460,"Minneapolis-St. Paul-Bloomington, MN-WI","Pierce County, Wisconsin",metro,march_2020
+55109,33460,"Minneapolis-St. Paul-Bloomington, MN-WI","St. Croix County, Wisconsin",metro,march_2020
+38049,33500,"Minot, ND","McHenry County, North Dakota",micro,march_2020
+38075,33500,"Minot, ND","Renville County, North Dakota",micro,march_2020
+38101,33500,"Minot, ND","Ward County, North Dakota",micro,march_2020
+30063,33540,"Missoula, MT","Missoula County, Montana",metro,march_2020
+46035,33580,"Mitchell, SD","Davison County, South Dakota",micro,march_2020
+46061,33580,"Mitchell, SD","Hanson County, South Dakota",micro,march_2020
+29175,33620,"Moberly, MO","Randolph County, Missouri",micro,march_2020
+01097,33660,"Mobile, AL","Mobile County, Alabama",metro,march_2020
+01129,33660,"Mobile, AL","Washington County, Alabama",metro,march_2020
+06099,33700,"Modesto, CA","Stanislaus County, California",metro,march_2020
+22067,33740,"Monroe, LA","Morehouse Parish, Louisiana",metro,march_2020
+22073,33740,"Monroe, LA","Ouachita Parish, Louisiana",metro,march_2020
+22111,33740,"Monroe, LA","Union Parish, Louisiana",metro,march_2020
+26115,33780,"Monroe, MI","Monroe County, Michigan",metro,march_2020
+01001,33860,"Montgomery, AL","Autauga County, Alabama",metro,march_2020
+01051,33860,"Montgomery, AL","Elmore County, Alabama",metro,march_2020
+01085,33860,"Montgomery, AL","Lowndes County, Alabama",metro,march_2020
+01101,33860,"Montgomery, AL","Montgomery County, Alabama",metro,march_2020
+08085,33940,"Montrose, CO","Montrose County, Colorado",micro,march_2020
+08091,33940,"Montrose, CO","Ouray County, Colorado",micro,march_2020
+37031,33980,"Morehead City, NC","Carteret County, North Carolina",micro,march_2020
+22101,34020,"Morgan City, LA","St. Mary Parish, Louisiana",micro,march_2020
+54061,34060,"Morgantown, WV","Monongalia County, West Virginia",metro,march_2020
+54077,34060,"Morgantown, WV","Preston County, West Virginia",metro,march_2020
+47057,34100,"Morristown, TN","Grainger County, Tennessee",metro,march_2020
+47063,34100,"Morristown, TN","Hamblen County, Tennessee",metro,march_2020
+47089,34100,"Morristown, TN","Jefferson County, Tennessee",metro,march_2020
+16057,34140,"Moscow, ID","Latah County, Idaho",micro,march_2020
+53025,34180,"Moses Lake, WA","Grant County, Washington",micro,march_2020
+13071,34220,"Moultrie, GA","Colquitt County, Georgia",micro,march_2020
+05005,34260,"Mountain Home, AR","Baxter County, Arkansas",micro,march_2020
+16039,34300,"Mountain Home, ID","Elmore County, Idaho",micro,march_2020
+37171,34340,"Mount Airy, NC","Surry County, North Carolina",micro,march_2020
+54045,34350,"Mount Gay-Shamrock, WV","Logan County, West Virginia",micro,march_2020
+26073,34380,"Mount Pleasant, MI","Isabella County, Michigan",micro,march_2020
+48063,34420,"Mount Pleasant, TX","Camp County, Texas",micro,march_2020
+48449,34420,"Mount Pleasant, TX","Titus County, Texas",micro,march_2020
+21011,34460,"Mount Sterling, KY","Bath County, Kentucky",micro,march_2020
+21165,34460,"Mount Sterling, KY","Menifee County, Kentucky",micro,march_2020
+21173,34460,"Mount Sterling, KY","Montgomery County, Kentucky",micro,march_2020
+17081,34500,"Mount Vernon, IL","Jefferson County, Illinois",micro,march_2020
+39083,34540,"Mount Vernon, OH","Knox County, Ohio",micro,march_2020
+53057,34580,"Mount Vernon-Anacortes, WA","Skagit County, Washington",metro,march_2020
+18035,34620,"Muncie, IN","Delaware County, Indiana",metro,march_2020
+21035,34660,"Murray, KY","Calloway County, Kentucky",micro,march_2020
+19139,34700,"Muscatine, IA","Muscatine County, Iowa",micro,march_2020
+26121,34740,"Muskegon, MI","Muskegon County, Michigan",metro,march_2020
+40101,34780,"Muskogee, OK","Muskogee County, Oklahoma",micro,march_2020
+37019,34820,"Myrtle Beach-Conway-North Myrtle Beach, SC-NC","Brunswick County, North Carolina",metro,march_2020
+45051,34820,"Myrtle Beach-Conway-North Myrtle Beach, SC-NC","Horry County, South Carolina",metro,march_2020
+48347,34860,"Nacogdoches, TX","Nacogdoches County, Texas",micro,march_2020
+06055,34900,"Napa, CA","Napa County, California",metro,march_2020
+12021,34940,"Naples-Marco Island, FL","Collier County, Florida",metro,march_2020
+47015,34980,"Nashville-Davidson--Murfreesboro--Franklin, TN","Cannon County, Tennessee",metro,march_2020
+47021,34980,"Nashville-Davidson--Murfreesboro--Franklin, TN","Cheatham County, Tennessee",metro,march_2020
+47037,34980,"Nashville-Davidson--Murfreesboro--Franklin, TN","Davidson County, Tennessee",metro,march_2020
+47043,34980,"Nashville-Davidson--Murfreesboro--Franklin, TN","Dickson County, Tennessee",metro,march_2020
+47111,34980,"Nashville-Davidson--Murfreesboro--Franklin, TN","Macon County, Tennessee",metro,march_2020
+47119,34980,"Nashville-Davidson--Murfreesboro--Franklin, TN","Maury County, Tennessee",metro,march_2020
+47147,34980,"Nashville-Davidson--Murfreesboro--Franklin, TN","Robertson County, Tennessee",metro,march_2020
+47149,34980,"Nashville-Davidson--Murfreesboro--Franklin, TN","Rutherford County, Tennessee",metro,march_2020
+47159,34980,"Nashville-Davidson--Murfreesboro--Franklin, TN","Smith County, Tennessee",metro,march_2020
+47165,34980,"Nashville-Davidson--Murfreesboro--Franklin, TN","Sumner County, Tennessee",metro,march_2020
+47169,34980,"Nashville-Davidson--Murfreesboro--Franklin, TN","Trousdale County, Tennessee",metro,march_2020
+47187,34980,"Nashville-Davidson--Murfreesboro--Franklin, TN","Williamson County, Tennessee",metro,march_2020
+47189,34980,"Nashville-Davidson--Murfreesboro--Franklin, TN","Wilson County, Tennessee",metro,march_2020
+22029,35020,"Natchez, MS-LA","Concordia Parish, Louisiana",micro,march_2020
+28001,35020,"Natchez, MS-LA","Adams County, Mississippi",micro,march_2020
+22069,35060,"Natchitoches, LA","Natchitoches Parish, Louisiana",micro,march_2020
+37049,35100,"New Bern, NC","Craven County, North Carolina",metro,march_2020
+37103,35100,"New Bern, NC","Jones County, North Carolina",metro,march_2020
+37137,35100,"New Bern, NC","Pamlico County, North Carolina",metro,march_2020
+45071,35140,"Newberry, SC","Newberry County, South Carolina",micro,march_2020
+18065,35220,"New Castle, IN","Henry County, Indiana",micro,march_2020
+42073,35260,"New Castle, PA","Lawrence County, Pennsylvania",micro,march_2020
+09009,35300,"New Haven-Milford, CT","New Haven County, Connecticut",metro,march_2020
+22051,35380,"New Orleans-Metairie, LA","Jefferson Parish, Louisiana",metro,march_2020
+22071,35380,"New Orleans-Metairie, LA","Orleans Parish, Louisiana",metro,march_2020
+22075,35380,"New Orleans-Metairie, LA","Plaquemines Parish, Louisiana",metro,march_2020
+22087,35380,"New Orleans-Metairie, LA","St. Bernard Parish, Louisiana",metro,march_2020
+22089,35380,"New Orleans-Metairie, LA","St. Charles Parish, Louisiana",metro,march_2020
+22093,35380,"New Orleans-Metairie, LA","St. James Parish, Louisiana",metro,march_2020
+22095,35380,"New Orleans-Metairie, LA","St. John the Baptist Parish, Louisiana",metro,march_2020
+22103,35380,"New Orleans-Metairie, LA","St. Tammany Parish, Louisiana",metro,march_2020
+39157,35420,"New Philadelphia-Dover, OH","Tuscarawas County, Ohio",micro,march_2020
+41041,35440,"Newport, OR","Lincoln County, Oregon",micro,march_2020
+47029,35460,"Newport, TN","Cocke County, Tennessee",micro,march_2020
+27015,35580,"New Ulm, MN","Brown County, Minnesota",micro,march_2020
+36059,35620,"New York-Newark-Jersey City, NY-NJ-PA","Nassau County, New York",metro,march_2020
+36103,35620,"New York-Newark-Jersey City, NY-NJ-PA","Suffolk County, New York",metro,march_2020
+34013,35620,"New York-Newark-Jersey City, NY-NJ-PA","Essex County, New Jersey",metro,march_2020
+34019,35620,"New York-Newark-Jersey City, NY-NJ-PA","Hunterdon County, New Jersey",metro,march_2020
+34027,35620,"New York-Newark-Jersey City, NY-NJ-PA","Morris County, New Jersey",metro,march_2020
+34037,35620,"New York-Newark-Jersey City, NY-NJ-PA","Sussex County, New Jersey",metro,march_2020
+34039,35620,"New York-Newark-Jersey City, NY-NJ-PA","Union County, New Jersey",metro,march_2020
+42103,35620,"New York-Newark-Jersey City, NY-NJ-PA","Pike County, Pennsylvania",metro,march_2020
+34023,35620,"New York-Newark-Jersey City, NY-NJ-PA","Middlesex County, New Jersey",metro,march_2020
+34025,35620,"New York-Newark-Jersey City, NY-NJ-PA","Monmouth County, New Jersey",metro,march_2020
+34029,35620,"New York-Newark-Jersey City, NY-NJ-PA","Ocean County, New Jersey",metro,march_2020
+34035,35620,"New York-Newark-Jersey City, NY-NJ-PA","Somerset County, New Jersey",metro,march_2020
+34003,35620,"New York-Newark-Jersey City, NY-NJ-PA","Bergen County, New Jersey",metro,march_2020
+34017,35620,"New York-Newark-Jersey City, NY-NJ-PA","Hudson County, New Jersey",metro,march_2020
+34031,35620,"New York-Newark-Jersey City, NY-NJ-PA","Passaic County, New Jersey",metro,march_2020
+36005,35620,"New York-Newark-Jersey City, NY-NJ-PA","Bronx County, New York",metro,march_2020
+36047,35620,"New York-Newark-Jersey City, NY-NJ-PA","Kings County, New York",metro,march_2020
+36061,35620,"New York-Newark-Jersey City, NY-NJ-PA","New York County, New York",metro,march_2020
+36079,35620,"New York-Newark-Jersey City, NY-NJ-PA","Putnam County, New York",metro,march_2020
+36081,35620,"New York-Newark-Jersey City, NY-NJ-PA","Queens County, New York",metro,march_2020
+36085,35620,"New York-Newark-Jersey City, NY-NJ-PA","Richmond County, New York",metro,march_2020
+36087,35620,"New York-Newark-Jersey City, NY-NJ-PA","Rockland County, New York",metro,march_2020
+36119,35620,"New York-Newark-Jersey City, NY-NJ-PA","Westchester County, New York",metro,march_2020
+26021,35660,"Niles, MI","Berrien County, Michigan",metro,march_2020
+04023,35700,"Nogales, AZ","Santa Cruz County, Arizona",micro,march_2020
+31119,35740,"Norfolk, NE","Madison County, Nebraska",micro,march_2020
+31139,35740,"Norfolk, NE","Pierce County, Nebraska",micro,march_2020
+31167,35740,"Norfolk, NE","Stanton County, Nebraska",micro,march_2020
+31111,35820,"North Platte, NE","Lincoln County, Nebraska",micro,march_2020
+31113,35820,"North Platte, NE","Logan County, Nebraska",micro,march_2020
+31117,35820,"North Platte, NE","McPherson County, Nebraska",micro,march_2020
+12081,35840,"North Port-Sarasota-Bradenton, FL","Manatee County, Florida",metro,march_2020
+12115,35840,"North Port-Sarasota-Bradenton, FL","Sarasota County, Florida",metro,march_2020
+18079,35860,"North Vernon, IN","Jennings County, Indiana",micro,march_2020
+37193,35900,"North Wilkesboro, NC","Wilkes County, North Carolina",micro,march_2020
+39077,35940,"Norwalk, OH","Huron County, Ohio",micro,march_2020
+09011,35980,"Norwich-New London, CT","New London County, Connecticut",metro,march_2020
+53029,36020,"Oak Harbor, WA","Island County, Washington",micro,march_2020
+12083,36100,"Ocala, FL","Marion County, Florida",metro,march_2020
+34009,36140,"Ocean City, NJ","Cape May County, New Jersey",metro,march_2020
+48135,36220,"Odessa, TX","Ector County, Texas",metro,march_2020
+49003,36260,"Ogden-Clearfield, UT","Box Elder County, Utah",metro,march_2020
+49011,36260,"Ogden-Clearfield, UT","Davis County, Utah",metro,march_2020
+49029,36260,"Ogden-Clearfield, UT","Morgan County, Utah",metro,march_2020
+49057,36260,"Ogden-Clearfield, UT","Weber County, Utah",metro,march_2020
+36089,36300,"Ogdensburg-Massena, NY","St. Lawrence County, New York",micro,march_2020
+42121,36340,"Oil City, PA","Venango County, Pennsylvania",micro,march_2020
+12093,36380,"Okeechobee, FL","Okeechobee County, Florida",micro,march_2020
+40017,36420,"Oklahoma City, OK","Canadian County, Oklahoma",metro,march_2020
+40027,36420,"Oklahoma City, OK","Cleveland County, Oklahoma",metro,march_2020
+40051,36420,"Oklahoma City, OK","Grady County, Oklahoma",metro,march_2020
+40081,36420,"Oklahoma City, OK","Lincoln County, Oklahoma",metro,march_2020
+40083,36420,"Oklahoma City, OK","Logan County, Oklahoma",metro,march_2020
+40087,36420,"Oklahoma City, OK","McClain County, Oklahoma",metro,march_2020
+40109,36420,"Oklahoma City, OK","Oklahoma County, Oklahoma",metro,march_2020
+36009,36460,"Olean, NY","Cattaraugus County, New York",micro,march_2020
+53067,36500,"Olympia-Lacey-Tumwater, WA","Thurston County, Washington",metro,march_2020
+19085,36540,"Omaha-Council Bluffs, NE-IA","Harrison County, Iowa",metro,march_2020
+19129,36540,"Omaha-Council Bluffs, NE-IA","Mills County, Iowa",metro,march_2020
+19155,36540,"Omaha-Council Bluffs, NE-IA","Pottawattamie County, Iowa",metro,march_2020
+31025,36540,"Omaha-Council Bluffs, NE-IA","Cass County, Nebraska",metro,march_2020
+31055,36540,"Omaha-Council Bluffs, NE-IA","Douglas County, Nebraska",metro,march_2020
+31153,36540,"Omaha-Council Bluffs, NE-IA","Sarpy County, Nebraska",metro,march_2020
+31155,36540,"Omaha-Council Bluffs, NE-IA","Saunders County, Nebraska",metro,march_2020
+31177,36540,"Omaha-Council Bluffs, NE-IA","Washington County, Nebraska",metro,march_2020
+36077,36580,"Oneonta, NY","Otsego County, New York",micro,march_2020
+16075,36620,"Ontario, OR-ID","Payette County, Idaho",micro,march_2020
+41045,36620,"Ontario, OR-ID","Malheur County, Oregon",micro,march_2020
+22097,36660,"Opelousas, LA","St. Landry Parish, Louisiana",micro,march_2020
+45075,36700,"Orangeburg, SC","Orangeburg County, South Carolina",micro,march_2020
+12069,36740,"Orlando-Kissimmee-Sanford, FL","Lake County, Florida",metro,march_2020
+12095,36740,"Orlando-Kissimmee-Sanford, FL","Orange County, Florida",metro,march_2020
+12097,36740,"Orlando-Kissimmee-Sanford, FL","Osceola County, Florida",metro,march_2020
+12117,36740,"Orlando-Kissimmee-Sanford, FL","Seminole County, Florida",metro,march_2020
+55139,36780,"Oshkosh-Neenah, WI","Winnebago County, Wisconsin",metro,march_2020
+19123,36820,"Oskaloosa, IA","Mahaska County, Iowa",micro,march_2020
+53001,36830,"Othello, WA","Adams County, Washington",micro,march_2020
+17011,36837,"Ottawa, IL","Bureau County, Illinois",micro,march_2020
+17099,36837,"Ottawa, IL","LaSalle County, Illinois",micro,march_2020
+17155,36837,"Ottawa, IL","Putnam County, Illinois",micro,march_2020
+20059,36840,"Ottawa, KS","Franklin County, Kansas",micro,march_2020
+19179,36900,"Ottumwa, IA","Wapello County, Iowa",micro,march_2020
+27147,36940,"Owatonna, MN","Steele County, Minnesota",micro,march_2020
+21059,36980,"Owensboro, KY","Daviess County, Kentucky",metro,march_2020
+21091,36980,"Owensboro, KY","Hancock County, Kentucky",metro,march_2020
+21149,36980,"Owensboro, KY","McLean County, Kentucky",metro,march_2020
+28071,37060,"Oxford, MS","Lafayette County, Mississippi",micro,march_2020
+06111,37100,"Oxnard-Thousand Oaks-Ventura, CA","Ventura County, California",metro,march_2020
+01045,37120,"Ozark, AL","Dale County, Alabama",micro,march_2020
+17127,37140,"Paducah, KY-IL","Massac County, Illinois",micro,march_2020
+21007,37140,"Paducah, KY-IL","Ballard County, Kentucky",micro,march_2020
+21139,37140,"Paducah, KY-IL","Livingston County, Kentucky",micro,march_2020
+21145,37140,"Paducah, KY-IL","McCracken County, Kentucky",micro,march_2020
+32023,37220,"Pahrump, NV","Nye County, Nevada",micro,march_2020
+12107,37260,"Palatka, FL","Putnam County, Florida",micro,march_2020
+48001,37300,"Palestine, TX","Anderson County, Texas",micro,march_2020
+12009,37340,"Palm Bay-Melbourne-Titusville, FL","Brevard County, Florida",metro,march_2020
+48179,37420,"Pampa, TX","Gray County, Texas",micro,march_2020
+48393,37420,"Pampa, TX","Roberts County, Texas",micro,march_2020
+12005,37460,"Panama City, FL","Bay County, Florida",metro,march_2020
+05055,37500,"Paragould, AR","Greene County, Arkansas",micro,march_2020
+47079,37540,"Paris, TN","Henry County, Tennessee",micro,march_2020
+48277,37580,"Paris, TX","Lamar County, Texas",micro,march_2020
+54105,37620,"Parkersburg-Vienna, WV","Wirt County, West Virginia",metro,march_2020
+54107,37620,"Parkersburg-Vienna, WV","Wood County, West Virginia",metro,march_2020
+20099,37660,"Parsons, KS","Labette County, Kansas",micro,march_2020
+04007,37740,"Payson, AZ","Gila County, Arizona",micro,march_2020
+48163,37770,"Pearsall, TX","Frio County, Texas",micro,march_2020
+48301,37780,"Pecos, TX","Loving County, Texas",micro,march_2020
+48389,37780,"Pecos, TX","Reeves County, Texas",micro,march_2020
+19125,37800,"Pella, IA","Marion County, Iowa",micro,march_2020
+12033,37860,"Pensacola-Ferry Pass-Brent, FL","Escambia County, Florida",metro,march_2020
+12113,37860,"Pensacola-Ferry Pass-Brent, FL","Santa Rosa County, Florida",metro,march_2020
+17057,37900,"Peoria, IL","Fulton County, Illinois",metro,march_2020
+17123,37900,"Peoria, IL","Marshall County, Illinois",metro,march_2020
+17143,37900,"Peoria, IL","Peoria County, Illinois",metro,march_2020
+17175,37900,"Peoria, IL","Stark County, Illinois",metro,march_2020
+17179,37900,"Peoria, IL","Tazewell County, Illinois",metro,march_2020
+17203,37900,"Peoria, IL","Woodford County, Illinois",metro,march_2020
+18103,37940,"Peru, IN","Miami County, Indiana",micro,march_2020
+34005,37980,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD","Burlington County, New Jersey",metro,march_2020
+34007,37980,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD","Camden County, New Jersey",metro,march_2020
+34015,37980,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD","Gloucester County, New Jersey",metro,march_2020
+42017,37980,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD","Bucks County, Pennsylvania",metro,march_2020
+42029,37980,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD","Chester County, Pennsylvania",metro,march_2020
+42091,37980,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD","Montgomery County, Pennsylvania",metro,march_2020
+42045,37980,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD","Delaware County, Pennsylvania",metro,march_2020
+42101,37980,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD","Philadelphia County, Pennsylvania",metro,march_2020
+10003,37980,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD","New Castle County, Delaware",metro,march_2020
+24015,37980,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD","Cecil County, Maryland",metro,march_2020
+34033,37980,"Philadelphia-Camden-Wilmington, PA-NJ-DE-MD","Salem County, New Jersey",metro,march_2020
+04013,38060,"Phoenix-Mesa-Chandler, AZ","Maricopa County, Arizona",metro,march_2020
+04021,38060,"Phoenix-Mesa-Chandler, AZ","Pinal County, Arizona",metro,march_2020
+28109,38100,"Picayune, MS","Pearl River County, Mississippi",micro,march_2020
+46065,38180,"Pierre, SD","Hughes County, South Dakota",micro,march_2020
+46117,38180,"Pierre, SD","Stanley County, South Dakota",micro,march_2020
+05025,38220,"Pine Bluff, AR","Cleveland County, Arkansas",metro,march_2020
+05069,38220,"Pine Bluff, AR","Jefferson County, Arkansas",metro,march_2020
+05079,38220,"Pine Bluff, AR","Lincoln County, Arkansas",metro,march_2020
+37125,38240,"Pinehurst-Southern Pines, NC","Moore County, North Carolina",micro,march_2020
+20037,38260,"Pittsburg, KS","Crawford County, Kansas",micro,march_2020
+42003,38300,"Pittsburgh, PA","Allegheny County, Pennsylvania",metro,march_2020
+42005,38300,"Pittsburgh, PA","Armstrong County, Pennsylvania",metro,march_2020
+42007,38300,"Pittsburgh, PA","Beaver County, Pennsylvania",metro,march_2020
+42019,38300,"Pittsburgh, PA","Butler County, Pennsylvania",metro,march_2020
+42051,38300,"Pittsburgh, PA","Fayette County, Pennsylvania",metro,march_2020
+42125,38300,"Pittsburgh, PA","Washington County, Pennsylvania",metro,march_2020
+42129,38300,"Pittsburgh, PA","Westmoreland County, Pennsylvania",metro,march_2020
+25003,38340,"Pittsfield, MA","Berkshire County, Massachusetts",metro,march_2020
+48189,38380,"Plainview, TX","Hale County, Texas",micro,march_2020
+55043,38420,"Platteville, WI","Grant County, Wisconsin",micro,march_2020
+36019,38460,"Plattsburgh, NY","Clinton County, New York",micro,march_2020
+18099,38500,"Plymouth, IN","Marshall County, Indiana",micro,march_2020
+16005,38540,"Pocatello, ID","Bannock County, Idaho",metro,march_2020
+16077,38540,"Pocatello, ID","Power County, Idaho",metro,march_2020
+39053,38580,"Point Pleasant, WV-OH","Gallia County, Ohio",micro,march_2020
+54053,38580,"Point Pleasant, WV-OH","Mason County, West Virginia",micro,march_2020
+40071,38620,"Ponca City, OK","Kay County, Oklahoma",micro,march_2020
+17105,38700,"Pontiac, IL","Livingston County, Illinois",micro,march_2020
+29023,38740,"Poplar Bluff, MO","Butler County, Missouri",micro,march_2020
+29181,38740,"Poplar Bluff, MO","Ripley County, Missouri",micro,march_2020
+35041,38780,"Portales, NM","Roosevelt County, New Mexico",micro,march_2020
+53009,38820,"Port Angeles, WA","Clallam County, Washington",micro,march_2020
+23005,38860,"Portland-South Portland, ME","Cumberland County, Maine",metro,march_2020
+23023,38860,"Portland-South Portland, ME","Sagadahoc County, Maine",metro,march_2020
+23031,38860,"Portland-South Portland, ME","York County, Maine",metro,march_2020
+41005,38900,"Portland-Vancouver-Hillsboro, OR-WA","Clackamas County, Oregon",metro,march_2020
+41009,38900,"Portland-Vancouver-Hillsboro, OR-WA","Columbia County, Oregon",metro,march_2020
+41051,38900,"Portland-Vancouver-Hillsboro, OR-WA","Multnomah County, Oregon",metro,march_2020
+41067,38900,"Portland-Vancouver-Hillsboro, OR-WA","Washington County, Oregon",metro,march_2020
+41071,38900,"Portland-Vancouver-Hillsboro, OR-WA","Yamhill County, Oregon",metro,march_2020
+53011,38900,"Portland-Vancouver-Hillsboro, OR-WA","Clark County, Washington",metro,march_2020
+53059,38900,"Portland-Vancouver-Hillsboro, OR-WA","Skamania County, Washington",metro,march_2020
+48057,38920,"Port Lavaca, TX","Calhoun County, Texas",micro,march_2020
+12085,38940,"Port St. Lucie, FL","Martin County, Florida",metro,march_2020
+12111,38940,"Port St. Lucie, FL","St. Lucie County, Florida",metro,march_2020
+39145,39020,"Portsmouth, OH","Scioto County, Ohio",micro,march_2020
+42107,39060,"Pottsville, PA","Schuylkill County, Pennsylvania",micro,march_2020
+36027,39100,"Poughkeepsie-Newburgh-Middletown, NY","Dutchess County, New York",metro,march_2020
+36071,39100,"Poughkeepsie-Newburgh-Middletown, NY","Orange County, New York",metro,march_2020
+04025,39150,"Prescott Valley-Prescott, AZ","Yavapai County, Arizona",metro,march_2020
+49007,39220,"Price, UT","Carbon County, Utah",micro,march_2020
+41013,39260,"Prineville, OR","Crook County, Oregon",micro,march_2020
+25005,39300,"Providence-Warwick, RI-MA","Bristol County, Massachusetts",metro,march_2020
+44001,39300,"Providence-Warwick, RI-MA","Bristol County, Rhode Island",metro,march_2020
+44003,39300,"Providence-Warwick, RI-MA","Kent County, Rhode Island",metro,march_2020
+44005,39300,"Providence-Warwick, RI-MA","Newport County, Rhode Island",metro,march_2020
+44007,39300,"Providence-Warwick, RI-MA","Providence County, Rhode Island",metro,march_2020
+44009,39300,"Providence-Warwick, RI-MA","Washington County, Rhode Island",metro,march_2020
+49023,39340,"Provo-Orem, UT","Juab County, Utah",metro,march_2020
+49049,39340,"Provo-Orem, UT","Utah County, Utah",metro,march_2020
+08101,39380,"Pueblo, CO","Pueblo County, Colorado",metro,march_2020
+53075,39420,"Pullman, WA","Whitman County, Washington",micro,march_2020
+12015,39460,"Punta Gorda, FL","Charlotte County, Florida",metro,march_2020
+17001,39500,"Quincy, IL-MO","Adams County, Illinois",micro,march_2020
+29111,39500,"Quincy, IL-MO","Lewis County, Missouri",micro,march_2020
+55101,39540,"Racine, WI","Racine County, Wisconsin",metro,march_2020
+37069,39580,"Raleigh-Cary, NC","Franklin County, North Carolina",metro,march_2020
+37101,39580,"Raleigh-Cary, NC","Johnston County, North Carolina",metro,march_2020
+37183,39580,"Raleigh-Cary, NC","Wake County, North Carolina",metro,march_2020
+46093,39660,"Rapid City, SD","Meade County, South Dakota",metro,march_2020
+46103,39660,"Rapid City, SD","Pennington County, South Dakota",metro,march_2020
+48489,39700,"Raymondville, TX","Willacy County, Texas",micro,march_2020
+42011,39740,"Reading, PA","Berks County, Pennsylvania",metro,march_2020
+06103,39780,"Red Bluff, CA","Tehama County, California",micro,march_2020
+06089,39820,"Redding, CA","Shasta County, California",metro,march_2020
+27049,39860,"Red Wing, MN","Goodhue County, Minnesota",micro,march_2020
+32029,39900,"Reno, NV","Storey County, Nevada",metro,march_2020
+32031,39900,"Reno, NV","Washoe County, Nevada",metro,march_2020
+16043,39940,"Rexburg, ID","Fremont County, Idaho",micro,march_2020
+16065,39940,"Rexburg, ID","Madison County, Idaho",micro,march_2020
+18177,39980,"Richmond, IN","Wayne County, Indiana",micro,march_2020
+51007,40060,"Richmond, VA","Amelia County, Virginia",metro,march_2020
+51036,40060,"Richmond, VA","Charles City County, Virginia",metro,march_2020
+51041,40060,"Richmond, VA","Chesterfield County, Virginia",metro,march_2020
+51053,40060,"Richmond, VA","Dinwiddie County, Virginia",metro,march_2020
+51075,40060,"Richmond, VA","Goochland County, Virginia",metro,march_2020
+51085,40060,"Richmond, VA","Hanover County, Virginia",metro,march_2020
+51087,40060,"Richmond, VA","Henrico County, Virginia",metro,march_2020
+51097,40060,"Richmond, VA","King and Queen County, Virginia",metro,march_2020
+51101,40060,"Richmond, VA","King William County, Virginia",metro,march_2020
+51127,40060,"Richmond, VA","New Kent County, Virginia",metro,march_2020
+51145,40060,"Richmond, VA","Powhatan County, Virginia",metro,march_2020
+51149,40060,"Richmond, VA","Prince George County, Virginia",metro,march_2020
+51183,40060,"Richmond, VA","Sussex County, Virginia",metro,march_2020
+51570,40060,"Richmond, VA","Colonial Heights city, Virginia",metro,march_2020
+51670,40060,"Richmond, VA","Hopewell city, Virginia",metro,march_2020
+51730,40060,"Richmond, VA","Petersburg city, Virginia",metro,march_2020
+51760,40060,"Richmond, VA","Richmond city, Virginia",metro,march_2020
+21065,40080,"Richmond-Berea, KY","Estill County, Kentucky",micro,march_2020
+21151,40080,"Richmond-Berea, KY","Madison County, Kentucky",micro,march_2020
+48427,40100,"Rio Grande City-Roma, TX","Starr County, Texas",micro,march_2020
+06065,40140,"Riverside-San Bernardino-Ontario, CA","Riverside County, California",metro,march_2020
+06071,40140,"Riverside-San Bernardino-Ontario, CA","San Bernardino County, California",metro,march_2020
+56013,40180,"Riverton, WY","Fremont County, Wyoming",micro,march_2020
+51023,40220,"Roanoke, VA","Botetourt County, Virginia",metro,march_2020
+51045,40220,"Roanoke, VA","Craig County, Virginia",metro,march_2020
+51067,40220,"Roanoke, VA","Franklin County, Virginia",metro,march_2020
+51161,40220,"Roanoke, VA","Roanoke County, Virginia",metro,march_2020
+51770,40220,"Roanoke, VA","Roanoke city, Virginia",metro,march_2020
+51775,40220,"Roanoke, VA","Salem city, Virginia",metro,march_2020
+37083,40260,"Roanoke Rapids, NC","Halifax County, North Carolina",micro,march_2020
+37131,40260,"Roanoke Rapids, NC","Northampton County, North Carolina",micro,march_2020
+17141,40300,"Rochelle, IL","Ogle County, Illinois",micro,march_2020
+27039,40340,"Rochester, MN","Dodge County, Minnesota",metro,march_2020
+27045,40340,"Rochester, MN","Fillmore County, Minnesota",metro,march_2020
+27109,40340,"Rochester, MN","Olmsted County, Minnesota",metro,march_2020
+27157,40340,"Rochester, MN","Wabasha County, Minnesota",metro,march_2020
+36051,40380,"Rochester, NY","Livingston County, New York",metro,march_2020
+36055,40380,"Rochester, NY","Monroe County, New York",metro,march_2020
+36069,40380,"Rochester, NY","Ontario County, New York",metro,march_2020
+36073,40380,"Rochester, NY","Orleans County, New York",metro,march_2020
+36117,40380,"Rochester, NY","Wayne County, New York",metro,march_2020
+36123,40380,"Rochester, NY","Yates County, New York",metro,march_2020
+17007,40420,"Rockford, IL","Boone County, Illinois",metro,march_2020
+17201,40420,"Rockford, IL","Winnebago County, Illinois",metro,march_2020
+37153,40460,"Rockingham, NC","Richmond County, North Carolina",micro,march_2020
+48007,40530,"Rockport, TX","Aransas County, Texas",micro,march_2020
+56037,40540,"Rock Springs, WY","Sweetwater County, Wyoming",micro,march_2020
+37065,40580,"Rocky Mount, NC","Edgecombe County, North Carolina",metro,march_2020
+37127,40580,"Rocky Mount, NC","Nash County, North Carolina",metro,march_2020
+29161,40620,"Rolla, MO","Phelps County, Missouri",micro,march_2020
+13115,40660,"Rome, GA","Floyd County, Georgia",metro,march_2020
+41019,40700,"Roseburg, OR","Douglas County, Oregon",micro,march_2020
+35005,40740,"Roswell, NM","Chaves County, New Mexico",micro,march_2020
+35027,40760,"Ruidoso, NM","Lincoln County, New Mexico",micro,march_2020
+05115,40780,"Russellville, AR","Pope County, Arkansas",micro,march_2020
+05149,40780,"Russellville, AR","Yell County, Arkansas",micro,march_2020
+22061,40820,"Ruston, LA","Lincoln Parish, Louisiana",micro,march_2020
+50021,40860,"Rutland, VT","Rutland County, Vermont",micro,march_2020
+06017,40900,"Sacramento-Roseville-Folsom, CA","El Dorado County, California",metro,march_2020
+06061,40900,"Sacramento-Roseville-Folsom, CA","Placer County, California",metro,march_2020
+06067,40900,"Sacramento-Roseville-Folsom, CA","Sacramento County, California",metro,march_2020
+06113,40900,"Sacramento-Roseville-Folsom, CA","Yolo County, California",metro,march_2020
+04009,40940,"Safford, AZ","Graham County, Arizona",micro,march_2020
+26145,40980,"Saginaw, MI","Saginaw County, Michigan",metro,march_2020
+27009,41060,"St. Cloud, MN","Benton County, Minnesota",metro,march_2020
+27145,41060,"St. Cloud, MN","Stearns County, Minnesota",metro,march_2020
+49053,41100,"St. George, UT","Washington County, Utah",metro,march_2020
+20043,41140,"St. Joseph, MO-KS","Doniphan County, Kansas",metro,march_2020
+29003,41140,"St. Joseph, MO-KS","Andrew County, Missouri",metro,march_2020
+29021,41140,"St. Joseph, MO-KS","Buchanan County, Missouri",metro,march_2020
+29063,41140,"St. Joseph, MO-KS","DeKalb County, Missouri",metro,march_2020
+17005,41180,"St. Louis, MO-IL","Bond County, Illinois",metro,march_2020
+17013,41180,"St. Louis, MO-IL","Calhoun County, Illinois",metro,march_2020
+17027,41180,"St. Louis, MO-IL","Clinton County, Illinois",metro,march_2020
+17083,41180,"St. Louis, MO-IL","Jersey County, Illinois",metro,march_2020
+17117,41180,"St. Louis, MO-IL","Macoupin County, Illinois",metro,march_2020
+17119,41180,"St. Louis, MO-IL","Madison County, Illinois",metro,march_2020
+17133,41180,"St. Louis, MO-IL","Monroe County, Illinois",metro,march_2020
+17163,41180,"St. Louis, MO-IL","St. Clair County, Illinois",metro,march_2020
+29071,41180,"St. Louis, MO-IL","Franklin County, Missouri",metro,march_2020
+29099,41180,"St. Louis, MO-IL","Jefferson County, Missouri",metro,march_2020
+29113,41180,"St. Louis, MO-IL","Lincoln County, Missouri",metro,march_2020
+29183,41180,"St. Louis, MO-IL","St. Charles County, Missouri",metro,march_2020
+29189,41180,"St. Louis, MO-IL","St. Louis County, Missouri",metro,march_2020
+29219,41180,"St. Louis, MO-IL","Warren County, Missouri",metro,march_2020
+29510,41180,"St. Louis, MO-IL","St. Louis city, Missouri",metro,march_2020
+13039,41220,"St. Marys, GA","Camden County, Georgia",micro,march_2020
+42047,41260,"St. Marys, PA","Elk County, Pennsylvania",micro,march_2020
+39029,41400,"Salem, OH","Columbiana County, Ohio",micro,march_2020
+41047,41420,"Salem, OR","Marion County, Oregon",metro,march_2020
+41053,41420,"Salem, OR","Polk County, Oregon",metro,march_2020
+20143,41460,"Salina, KS","Ottawa County, Kansas",micro,march_2020
+20169,41460,"Salina, KS","Saline County, Kansas",micro,march_2020
+06053,41500,"Salinas, CA","Monterey County, California",metro,march_2020
+10005,41540,"Salisbury, MD-DE","Sussex County, Delaware",metro,march_2020
+24039,41540,"Salisbury, MD-DE","Somerset County, Maryland",metro,march_2020
+24045,41540,"Salisbury, MD-DE","Wicomico County, Maryland",metro,march_2020
+24047,41540,"Salisbury, MD-DE","Worcester County, Maryland",metro,march_2020
+49035,41620,"Salt Lake City, UT","Salt Lake County, Utah",metro,march_2020
+49045,41620,"Salt Lake City, UT","Tooele County, Utah",metro,march_2020
+48235,41660,"San Angelo, TX","Irion County, Texas",metro,march_2020
+48431,41660,"San Angelo, TX","Sterling County, Texas",metro,march_2020
+48451,41660,"San Angelo, TX","Tom Green County, Texas",metro,march_2020
+48013,41700,"San Antonio-New Braunfels, TX","Atascosa County, Texas",metro,march_2020
+48019,41700,"San Antonio-New Braunfels, TX","Bandera County, Texas",metro,march_2020
+48029,41700,"San Antonio-New Braunfels, TX","Bexar County, Texas",metro,march_2020
+48091,41700,"San Antonio-New Braunfels, TX","Comal County, Texas",metro,march_2020
+48187,41700,"San Antonio-New Braunfels, TX","Guadalupe County, Texas",metro,march_2020
+48259,41700,"San Antonio-New Braunfels, TX","Kendall County, Texas",metro,march_2020
+48325,41700,"San Antonio-New Braunfels, TX","Medina County, Texas",metro,march_2020
+48493,41700,"San Antonio-New Braunfels, TX","Wilson County, Texas",metro,march_2020
+06073,41740,"San Diego-Chula Vista-Carlsbad, CA","San Diego County, California",metro,march_2020
+16017,41760,"Sandpoint, ID","Bonner County, Idaho",micro,march_2020
+39043,41780,"Sandusky, OH","Erie County, Ohio",micro,march_2020
+37105,41820,"Sanford, NC","Lee County, North Carolina",micro,march_2020
+06001,41860,"San Francisco-Oakland-Berkeley, CA","Alameda County, California",metro,march_2020
+06013,41860,"San Francisco-Oakland-Berkeley, CA","Contra Costa County, California",metro,march_2020
+06075,41860,"San Francisco-Oakland-Berkeley, CA","San Francisco County, California",metro,march_2020
+06081,41860,"San Francisco-Oakland-Berkeley, CA","San Mateo County, California",metro,march_2020
+06041,41860,"San Francisco-Oakland-Berkeley, CA","Marin County, California",metro,march_2020
+06069,41940,"San Jose-Sunnyvale-Santa Clara, CA","San Benito County, California",metro,march_2020
+06085,41940,"San Jose-Sunnyvale-Santa Clara, CA","Santa Clara County, California",metro,march_2020
+06079,42020,"San Luis Obispo-Paso Robles, CA","San Luis Obispo County, California",metro,march_2020
+06087,42100,"Santa Cruz-Watsonville, CA","Santa Cruz County, California",metro,march_2020
+35049,42140,"Santa Fe, NM","Santa Fe County, New Mexico",metro,march_2020
+06083,42200,"Santa Maria-Santa Barbara, CA","Santa Barbara County, California",metro,march_2020
+06097,42220,"Santa Rosa-Petaluma, CA","Sonoma County, California",metro,march_2020
+26033,42300,"Sault Ste. Marie, MI","Chippewa County, Michigan",micro,march_2020
+13029,42340,"Savannah, GA","Bryan County, Georgia",metro,march_2020
+13051,42340,"Savannah, GA","Chatham County, Georgia",metro,march_2020
+13103,42340,"Savannah, GA","Effingham County, Georgia",metro,march_2020
+42015,42380,"Sayre, PA","Bradford County, Pennsylvania",micro,march_2020
+31007,42420,"Scottsbluff, NE","Banner County, Nebraska",micro,march_2020
+31157,42420,"Scottsbluff, NE","Scotts Bluff County, Nebraska",micro,march_2020
+31165,42420,"Scottsbluff, NE","Sioux County, Nebraska",micro,march_2020
+01071,42460,"Scottsboro, AL","Jackson County, Alabama",micro,march_2020
+18143,42500,"Scottsburg, IN","Scott County, Indiana",micro,march_2020
+42069,42540,"Scranton--Wilkes-Barre, PA","Lackawanna County, Pennsylvania",metro,march_2020
+42079,42540,"Scranton--Wilkes-Barre, PA","Luzerne County, Pennsylvania",metro,march_2020
+42131,42540,"Scranton--Wilkes-Barre, PA","Wyoming County, Pennsylvania",metro,march_2020
+05145,42620,"Searcy, AR","White County, Arkansas",micro,march_2020
+53033,42660,"Seattle-Tacoma-Bellevue, WA","King County, Washington",metro,march_2020
+53061,42660,"Seattle-Tacoma-Bellevue, WA","Snohomish County, Washington",metro,march_2020
+53053,42660,"Seattle-Tacoma-Bellevue, WA","Pierce County, Washington",metro,march_2020
+12061,42680,"Sebastian-Vero Beach, FL","Indian River County, Florida",metro,march_2020
+12055,42700,"Sebring-Avon Park, FL","Highlands County, Florida",metro,march_2020
+29159,42740,"Sedalia, MO","Pettis County, Missouri",micro,march_2020
+42109,42780,"Selinsgrove, PA","Snyder County, Pennsylvania",micro,march_2020
+01047,42820,"Selma, AL","Dallas County, Alabama",micro,march_2020
+45073,42860,"Seneca, SC","Oconee County, South Carolina",micro,march_2020
+36099,42900,"Seneca Falls, NY","Seneca County, New York",micro,march_2020
+47155,42940,"Sevierville, TN","Sevier County, Tennessee",micro,march_2020
+18071,42980,"Seymour, IN","Jackson County, Indiana",micro,march_2020
+55078,43020,"Shawano, WI","Menominee County, Wisconsin",micro,march_2020
+55115,43020,"Shawano, WI","Shawano County, Wisconsin",micro,march_2020
+40125,43060,"Shawnee, OK","Pottawatomie County, Oklahoma",micro,march_2020
+55117,43100,"Sheboygan, WI","Sheboygan County, Wisconsin",metro,march_2020
+37045,43140,"Shelby, NC","Cleveland County, North Carolina",micro,march_2020
+47003,43180,"Shelbyville, TN","Bedford County, Tennessee",micro,march_2020
+53045,43220,"Shelton, WA","Mason County, Washington",micro,march_2020
+56033,43260,"Sheridan, WY","Sheridan County, Wyoming",micro,march_2020
+48181,43300,"Sherman-Denison, TX","Grayson County, Texas",metro,march_2020
+04017,43320,"Show Low, AZ","Navajo County, Arizona",micro,march_2020
+22015,43340,"Shreveport-Bossier City, LA","Bossier Parish, Louisiana",metro,march_2020
+22017,43340,"Shreveport-Bossier City, LA","Caddo Parish, Louisiana",metro,march_2020
+22031,43340,"Shreveport-Bossier City, LA","De Soto Parish, Louisiana",metro,march_2020
+39149,43380,"Sidney, OH","Shelby County, Ohio",micro,march_2020
+04003,43420,"Sierra Vista-Douglas, AZ","Cochise County, Arizona",metro,march_2020
+29201,43460,"Sikeston, MO","Scott County, Missouri",micro,march_2020
+35017,43500,"Silver City, NM","Grant County, New Mexico",micro,march_2020
+19193,43580,"Sioux City, IA-NE-SD","Woodbury County, Iowa",metro,march_2020
+31043,43580,"Sioux City, IA-NE-SD","Dakota County, Nebraska",metro,march_2020
+31051,43580,"Sioux City, IA-NE-SD","Dixon County, Nebraska",metro,march_2020
+46127,43580,"Sioux City, IA-NE-SD","Union County, South Dakota",metro,march_2020
+46083,43620,"Sioux Falls, SD","Lincoln County, South Dakota",metro,march_2020
+46087,43620,"Sioux Falls, SD","McCook County, South Dakota",metro,march_2020
+46099,43620,"Sioux Falls, SD","Minnehaha County, South Dakota",metro,march_2020
+46125,43620,"Sioux Falls, SD","Turner County, South Dakota",metro,march_2020
+48415,43660,"Snyder, TX","Scurry County, Texas",micro,march_2020
+21199,43700,"Somerset, KY","Pulaski County, Kentucky",micro,march_2020
+42111,43740,"Somerset, PA","Somerset County, Pennsylvania",micro,march_2020
+06109,43760,"Sonora, CA","Tuolumne County, California",micro,march_2020
+18141,43780,"South Bend-Mishawaka, IN-MI","St. Joseph County, Indiana",metro,march_2020
+26027,43780,"South Bend-Mishawaka, IN-MI","Cass County, Michigan",metro,march_2020
+45083,43900,"Spartanburg, SC","Spartanburg County, South Carolina",metro,march_2020
+46081,43940,"Spearfish, SD","Lawrence County, South Dakota",micro,march_2020
+19041,43980,"Spencer, IA","Clay County, Iowa",micro,march_2020
+19059,44020,"Spirit Lake, IA","Dickinson County, Iowa",micro,march_2020
+53063,44060,"Spokane-Spokane Valley, WA","Spokane County, Washington",metro,march_2020
+53065,44060,"Spokane-Spokane Valley, WA","Stevens County, Washington",metro,march_2020
+17129,44100,"Springfield, IL","Menard County, Illinois",metro,march_2020
+17167,44100,"Springfield, IL","Sangamon County, Illinois",metro,march_2020
+25011,44140,"Springfield, MA","Franklin County, Massachusetts",metro,march_2020
+25013,44140,"Springfield, MA","Hampden County, Massachusetts",metro,march_2020
+25015,44140,"Springfield, MA","Hampshire County, Massachusetts",metro,march_2020
+29043,44180,"Springfield, MO","Christian County, Missouri",metro,march_2020
+29059,44180,"Springfield, MO","Dallas County, Missouri",metro,march_2020
+29077,44180,"Springfield, MO","Greene County, Missouri",metro,march_2020
+29167,44180,"Springfield, MO","Polk County, Missouri",metro,march_2020
+29225,44180,"Springfield, MO","Webster County, Missouri",metro,march_2020
+39023,44220,"Springfield, OH","Clark County, Ohio",metro,march_2020
+28105,44260,"Starkville, MS","Oktibbeha County, Mississippi",micro,march_2020
+28155,44260,"Starkville, MS","Webster County, Mississippi",micro,march_2020
+42027,44300,"State College, PA","Centre County, Pennsylvania",metro,march_2020
+13031,44340,"Statesboro, GA","Bulloch County, Georgia",micro,march_2020
+51015,44420,"Staunton, VA","Augusta County, Virginia",metro,march_2020
+51790,44420,"Staunton, VA","Staunton city, Virginia",metro,march_2020
+51820,44420,"Staunton, VA","Waynesboro city, Virginia",metro,march_2020
+08107,44460,"Steamboat Springs, CO","Routt County, Colorado",micro,march_2020
+48143,44500,"Stephenville, TX","Erath County, Texas",micro,march_2020
+08075,44540,"Sterling, CO","Logan County, Colorado",micro,march_2020
+17195,44580,"Sterling, IL","Whiteside County, Illinois",micro,march_2020
+55097,44620,"Stevens Point, WI","Portage County, Wisconsin",micro,march_2020
+40119,44660,"Stillwater, OK","Payne County, Oklahoma",micro,march_2020
+06077,44700,"Stockton, CA","San Joaquin County, California",metro,march_2020
+19021,44740,"Storm Lake, IA","Buena Vista County, Iowa",micro,march_2020
+26149,44780,"Sturgis, MI","St. Joseph County, Michigan",micro,march_2020
+48223,44860,"Sulphur Springs, TX","Hopkins County, Texas",micro,march_2020
+13055,44900,"Summerville, GA","Chattooga County, Georgia",micro,march_2020
+45027,44940,"Sumter, SC","Clarendon County, South Carolina",metro,march_2020
+45085,44940,"Sumter, SC","Sumter County, South Carolina",metro,march_2020
+42097,44980,"Sunbury, PA","Northumberland County, Pennsylvania",micro,march_2020
+06035,45000,"Susanville, CA","Lassen County, California",micro,march_2020
+48353,45020,"Sweetwater, TX","Nolan County, Texas",micro,march_2020
+36053,45060,"Syracuse, NY","Madison County, New York",metro,march_2020
+36067,45060,"Syracuse, NY","Onondaga County, New York",metro,march_2020
+36075,45060,"Syracuse, NY","Oswego County, New York",metro,march_2020
+40021,45140,"Tahlequah, OK","Cherokee County, Oklahoma",micro,march_2020
+01121,45180,"Talladega-Sylacauga, AL","Talladega County, Alabama",micro,march_2020
+12039,45220,"Tallahassee, FL","Gadsden County, Florida",metro,march_2020
+12065,45220,"Tallahassee, FL","Jefferson County, Florida",metro,march_2020
+12073,45220,"Tallahassee, FL","Leon County, Florida",metro,march_2020
+12129,45220,"Tallahassee, FL","Wakulla County, Florida",metro,march_2020
+12053,45300,"Tampa-St. Petersburg-Clearwater, FL","Hernando County, Florida",metro,march_2020
+12057,45300,"Tampa-St. Petersburg-Clearwater, FL","Hillsborough County, Florida",metro,march_2020
+12101,45300,"Tampa-St. Petersburg-Clearwater, FL","Pasco County, Florida",metro,march_2020
+12103,45300,"Tampa-St. Petersburg-Clearwater, FL","Pinellas County, Florida",metro,march_2020
+35055,45340,"Taos, NM","Taos County, New Mexico",micro,march_2020
+17021,45380,"Taylorville, IL","Christian County, Illinois",micro,march_2020
+18021,45460,"Terre Haute, IN","Clay County, Indiana",metro,march_2020
+18121,45460,"Terre Haute, IN","Parke County, Indiana",metro,march_2020
+18153,45460,"Terre Haute, IN","Sullivan County, Indiana",metro,march_2020
+18165,45460,"Terre Haute, IN","Vermillion County, Indiana",metro,march_2020
+18167,45460,"Terre Haute, IN","Vigo County, Indiana",metro,march_2020
+05081,45500,"Texarkana, TX-AR","Little River County, Arkansas",metro,march_2020
+05091,45500,"Texarkana, TX-AR","Miller County, Arkansas",metro,march_2020
+48037,45500,"Texarkana, TX-AR","Bowie County, Texas",metro,march_2020
+41065,45520,"The Dalles, OR","Wasco County, Oregon",micro,march_2020
+12119,45540,"The Villages, FL","Sumter County, Florida",metro,march_2020
+13293,45580,"Thomaston, GA","Upson County, Georgia",micro,march_2020
+13275,45620,"Thomasville, GA","Thomas County, Georgia",micro,march_2020
+39147,45660,"Tiffin, OH","Seneca County, Ohio",micro,march_2020
+13277,45700,"Tifton, GA","Tift County, Georgia",micro,march_2020
+13257,45740,"Toccoa, GA","Stephens County, Georgia",micro,march_2020
+39051,45780,"Toledo, OH","Fulton County, Ohio",metro,march_2020
+39095,45780,"Toledo, OH","Lucas County, Ohio",metro,march_2020
+39123,45780,"Toledo, OH","Ottawa County, Ohio",metro,march_2020
+39173,45780,"Toledo, OH","Wood County, Ohio",metro,march_2020
+20085,45820,"Topeka, KS","Jackson County, Kansas",metro,march_2020
+20087,45820,"Topeka, KS","Jefferson County, Kansas",metro,march_2020
+20139,45820,"Topeka, KS","Osage County, Kansas",metro,march_2020
+20177,45820,"Topeka, KS","Shawnee County, Kansas",metro,march_2020
+20197,45820,"Topeka, KS","Wabaunsee County, Kansas",metro,march_2020
+09005,45860,"Torrington, CT","Litchfield County, Connecticut",micro,march_2020
+26019,45900,"Traverse City, MI","Benzie County, Michigan",micro,march_2020
+26055,45900,"Traverse City, MI","Grand Traverse County, Michigan",micro,march_2020
+26079,45900,"Traverse City, MI","Kalkaska County, Michigan",micro,march_2020
+26089,45900,"Traverse City, MI","Leelanau County, Michigan",micro,march_2020
+34021,45940,"Trenton-Princeton, NJ","Mercer County, New Jersey",metro,march_2020
+01109,45980,"Troy, AL","Pike County, Alabama",micro,march_2020
+06057,46020,"Truckee-Grass Valley, CA","Nevada County, California",micro,march_2020
+04019,46060,"Tucson, AZ","Pima County, Arizona",metro,march_2020
+47031,46100,"Tullahoma-Manchester, TN","Coffee County, Tennessee",micro,march_2020
+47051,46100,"Tullahoma-Manchester, TN","Franklin County, Tennessee",micro,march_2020
+47127,46100,"Tullahoma-Manchester, TN","Moore County, Tennessee",micro,march_2020
+40037,46140,"Tulsa, OK","Creek County, Oklahoma",metro,march_2020
+40111,46140,"Tulsa, OK","Okmulgee County, Oklahoma",metro,march_2020
+40113,46140,"Tulsa, OK","Osage County, Oklahoma",metro,march_2020
+40117,46140,"Tulsa, OK","Pawnee County, Oklahoma",metro,march_2020
+40131,46140,"Tulsa, OK","Rogers County, Oklahoma",metro,march_2020
+40143,46140,"Tulsa, OK","Tulsa County, Oklahoma",metro,march_2020
+40145,46140,"Tulsa, OK","Wagoner County, Oklahoma",metro,march_2020
+28057,46180,"Tupelo, MS","Itawamba County, Mississippi",micro,march_2020
+28081,46180,"Tupelo, MS","Lee County, Mississippi",micro,march_2020
+28115,46180,"Tupelo, MS","Pontotoc County, Mississippi",micro,march_2020
+28117,46180,"Tupelo, MS","Prentiss County, Mississippi",micro,march_2020
+01063,46220,"Tuscaloosa, AL","Greene County, Alabama",metro,march_2020
+01065,46220,"Tuscaloosa, AL","Hale County, Alabama",metro,march_2020
+01107,46220,"Tuscaloosa, AL","Pickens County, Alabama",metro,march_2020
+01125,46220,"Tuscaloosa, AL","Tuscaloosa County, Alabama",metro,march_2020
+16053,46300,"Twin Falls, ID","Jerome County, Idaho",metro,march_2020
+16083,46300,"Twin Falls, ID","Twin Falls County, Idaho",metro,march_2020
+48423,46340,"Tyler, TX","Smith County, Texas",metro,march_2020
+06045,46380,"Ukiah, CA","Mendocino County, California",micro,march_2020
+45087,46420,"Union, SC","Union County, South Carolina",micro,march_2020
+47131,46460,"Union City, TN","Obion County, Tennessee",micro,march_2020
+39021,46500,"Urbana, OH","Champaign County, Ohio",micro,march_2020
+36043,46540,"Utica-Rome, NY","Herkimer County, New York",metro,march_2020
+36065,46540,"Utica-Rome, NY","Oneida County, New York",metro,march_2020
+48463,46620,"Uvalde, TX","Uvalde County, Texas",micro,march_2020
+13027,46660,"Valdosta, GA","Brooks County, Georgia",metro,march_2020
+13101,46660,"Valdosta, GA","Echols County, Georgia",metro,march_2020
+13173,46660,"Valdosta, GA","Lanier County, Georgia",metro,march_2020
+13185,46660,"Valdosta, GA","Lowndes County, Georgia",metro,march_2020
+06095,46700,"Vallejo, CA","Solano County, California",metro,march_2020
+39161,46780,"Van Wert, OH","Van Wert County, Ohio",micro,march_2020
+46027,46820,"Vermillion, SD","Clay County, South Dakota",micro,march_2020
+49047,46860,"Vernal, UT","Uintah County, Utah",micro,march_2020
+48487,46900,"Vernon, TX","Wilbarger County, Texas",micro,march_2020
+28149,46980,"Vicksburg, MS","Warren County, Mississippi",micro,march_2020
+48175,47020,"Victoria, TX","Goliad County, Texas",metro,march_2020
+48469,47020,"Victoria, TX","Victoria County, Texas",metro,march_2020
+13209,47080,"Vidalia, GA","Montgomery County, Georgia",micro,march_2020
+13279,47080,"Vidalia, GA","Toombs County, Georgia",micro,march_2020
+18083,47180,"Vincennes, IN","Knox County, Indiana",micro,march_2020
+34011,47220,"Vineland-Bridgeton, NJ","Cumberland County, New Jersey",metro,march_2020
+25007,47240,"Vineyard Haven, MA","Dukes County, Massachusetts",micro,march_2020
+37029,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","Camden County, North Carolina",metro,march_2020
+37053,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","Currituck County, North Carolina",metro,march_2020
+37073,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","Gates County, North Carolina",metro,march_2020
+51073,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","Gloucester County, Virginia",metro,march_2020
+51093,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","Isle of Wight County, Virginia",metro,march_2020
+51095,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","James City County, Virginia",metro,march_2020
+51115,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","Mathews County, Virginia",metro,march_2020
+51175,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","Southampton County, Virginia",metro,march_2020
+51199,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","York County, Virginia",metro,march_2020
+51550,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","Chesapeake city, Virginia",metro,march_2020
+51620,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","Franklin city, Virginia",metro,march_2020
+51650,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","Hampton city, Virginia",metro,march_2020
+51700,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","Newport News city, Virginia",metro,march_2020
+51710,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","Norfolk city, Virginia",metro,march_2020
+51735,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","Poquoson city, Virginia",metro,march_2020
+51740,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","Portsmouth city, Virginia",metro,march_2020
+51800,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","Suffolk city, Virginia",metro,march_2020
+51810,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","Virginia Beach city, Virginia",metro,march_2020
+51830,47260,"Virginia Beach-Norfolk-Newport News, VA-NC","Williamsburg city, Virginia",metro,march_2020
+06107,47300,"Visalia, CA","Tulare County, California",metro,march_2020
+18169,47340,"Wabash, IN","Wabash County, Indiana",micro,march_2020
+48145,47380,"Waco, TX","Falls County, Texas",metro,march_2020
+48309,47380,"Waco, TX","McLennan County, Texas",metro,march_2020
+27167,47420,"Wahpeton, ND-MN","Wilkin County, Minnesota",micro,march_2020
+38077,47420,"Wahpeton, ND-MN","Richland County, North Dakota",micro,march_2020
+53071,47460,"Walla Walla, WA","Walla Walla County, Washington",metro,march_2020
+39011,47540,"Wapakoneta, OH","Auglaize County, Ohio",micro,march_2020
+13153,47580,"Warner Robins, GA","Houston County, Georgia",metro,march_2020
+13225,47580,"Warner Robins, GA","Peach County, Georgia",metro,march_2020
+42123,47620,"Warren, PA","Warren County, Pennsylvania",micro,march_2020
+29101,47660,"Warrensburg, MO","Johnson County, Missouri",micro,march_2020
+18085,47700,"Warsaw, IN","Kosciusko County, Indiana",micro,march_2020
+18027,47780,"Washington, IN","Daviess County, Indiana",micro,march_2020
+37013,47820,"Washington, NC","Beaufort County, North Carolina",micro,march_2020
+24021,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Frederick County, Maryland",metro,march_2020
+24031,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Montgomery County, Maryland",metro,march_2020
+11001,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","District of Columbia, District of Columbia",metro,march_2020
+24009,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Calvert County, Maryland",metro,march_2020
+24017,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Charles County, Maryland",metro,march_2020
+24033,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Prince George's County, Maryland",metro,march_2020
+51013,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Arlington County, Virginia",metro,march_2020
+51043,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Clarke County, Virginia",metro,march_2020
+51047,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Culpeper County, Virginia",metro,march_2020
+51059,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Fairfax County, Virginia",metro,march_2020
+51061,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Fauquier County, Virginia",metro,march_2020
+51107,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Loudoun County, Virginia",metro,march_2020
+51113,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Madison County, Virginia",metro,march_2020
+51153,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Prince William County, Virginia",metro,march_2020
+51157,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Rappahannock County, Virginia",metro,march_2020
+51177,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Spotsylvania County, Virginia",metro,march_2020
+51179,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Stafford County, Virginia",metro,march_2020
+51187,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Warren County, Virginia",metro,march_2020
+51510,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Alexandria city, Virginia",metro,march_2020
+51600,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Fairfax city, Virginia",metro,march_2020
+51610,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Falls Church city, Virginia",metro,march_2020
+51630,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Fredericksburg city, Virginia",metro,march_2020
+51683,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Manassas city, Virginia",metro,march_2020
+51685,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Manassas Park city, Virginia",metro,march_2020
+54037,47900,"Washington-Arlington-Alexandria, DC-VA-MD-WV","Jefferson County, West Virginia",metro,march_2020
+39047,47920,"Washington Court House, OH","Fayette County, Ohio",micro,march_2020
+19013,47940,"Waterloo-Cedar Falls, IA","Black Hawk County, Iowa",metro,march_2020
+19017,47940,"Waterloo-Cedar Falls, IA","Bremer County, Iowa",metro,march_2020
+19075,47940,"Waterloo-Cedar Falls, IA","Grundy County, Iowa",metro,march_2020
+46029,47980,"Watertown, SD","Codington County, South Dakota",micro,march_2020
+46057,47980,"Watertown, SD","Hamlin County, South Dakota",micro,march_2020
+55055,48020,"Watertown-Fort Atkinson, WI","Jefferson County, Wisconsin",micro,march_2020
+36045,48060,"Watertown-Fort Drum, NY","Jefferson County, New York",metro,march_2020
+12049,48100,"Wauchula, FL","Hardee County, Florida",micro,march_2020
+55069,48140,"Wausau-Weston, WI","Lincoln County, Wisconsin",metro,march_2020
+55073,48140,"Wausau-Weston, WI","Marathon County, Wisconsin",metro,march_2020
+13229,48180,"Waycross, GA","Pierce County, Georgia",micro,march_2020
+13299,48180,"Waycross, GA","Ware County, Georgia",micro,march_2020
+40039,48220,"Weatherford, OK","Custer County, Oklahoma",micro,march_2020
+39081,48260,"Weirton-Steubenville, WV-OH","Jefferson County, Ohio",metro,march_2020
+54009,48260,"Weirton-Steubenville, WV-OH","Brooke County, West Virginia",metro,march_2020
+54029,48260,"Weirton-Steubenville, WV-OH","Hancock County, West Virginia",metro,march_2020
+53007,48300,"Wenatchee, WA","Chelan County, Washington",metro,march_2020
+53017,48300,"Wenatchee, WA","Douglas County, Washington",metro,march_2020
+29091,48460,"West Plains, MO","Howell County, Missouri",micro,march_2020
+28025,48500,"West Point, MS","Clay County, Mississippi",micro,march_2020
+39013,48540,"Wheeling, WV-OH","Belmont County, Ohio",metro,march_2020
+54051,48540,"Wheeling, WV-OH","Marshall County, West Virginia",metro,march_2020
+54069,48540,"Wheeling, WV-OH","Ohio County, West Virginia",metro,march_2020
+55127,48580,"Whitewater, WI","Walworth County, Wisconsin",micro,march_2020
+20015,48620,"Wichita, KS","Butler County, Kansas",metro,march_2020
+20079,48620,"Wichita, KS","Harvey County, Kansas",metro,march_2020
+20173,48620,"Wichita, KS","Sedgwick County, Kansas",metro,march_2020
+20191,48620,"Wichita, KS","Sumner County, Kansas",metro,march_2020
+48009,48660,"Wichita Falls, TX","Archer County, Texas",metro,march_2020
+48077,48660,"Wichita Falls, TX","Clay County, Texas",metro,march_2020
+48485,48660,"Wichita Falls, TX","Wichita County, Texas",metro,march_2020
+42081,48700,"Williamsport, PA","Lycoming County, Pennsylvania",metro,march_2020
+38105,48780,"Williston, ND","Williams County, North Dakota",micro,march_2020
+27067,48820,"Willmar, MN","Kandiyohi County, Minnesota",micro,march_2020
+37129,48900,"Wilmington, NC","New Hanover County, North Carolina",metro,march_2020
+37141,48900,"Wilmington, NC","Pender County, North Carolina",metro,march_2020
+39027,48940,"Wilmington, OH","Clinton County, Ohio",micro,march_2020
+37195,48980,"Wilson, NC","Wilson County, North Carolina",micro,march_2020
+51069,49020,"Winchester, VA-WV","Frederick County, Virginia",metro,march_2020
+51840,49020,"Winchester, VA-WV","Winchester city, Virginia",metro,march_2020
+54027,49020,"Winchester, VA-WV","Hampshire County, West Virginia",metro,march_2020
+20035,49060,"Winfield, KS","Cowley County, Kansas",micro,march_2020
+32013,49080,"Winnemucca, NV","Humboldt County, Nevada",micro,march_2020
+27169,49100,"Winona, MN","Winona County, Minnesota",micro,march_2020
+37057,49180,"Winston-Salem, NC","Davidson County, North Carolina",metro,march_2020
+37059,49180,"Winston-Salem, NC","Davie County, North Carolina",metro,march_2020
+37067,49180,"Winston-Salem, NC","Forsyth County, North Carolina",metro,march_2020
+37169,49180,"Winston-Salem, NC","Stokes County, North Carolina",metro,march_2020
+37197,49180,"Winston-Salem, NC","Yadkin County, North Carolina",metro,march_2020
+55141,49220,"Wisconsin Rapids-Marshfield, WI","Wood County, Wisconsin",micro,march_2020
+40045,49260,"Woodward, OK","Ellis County, Oklahoma",micro,march_2020
+40153,49260,"Woodward, OK","Woodward County, Oklahoma",micro,march_2020
+39169,49300,"Wooster, OH","Wayne County, Ohio",micro,march_2020
+09015,49340,"Worcester, MA-CT","Windham County, Connecticut",metro,march_2020
+25027,49340,"Worcester, MA-CT","Worcester County, Massachusetts",metro,march_2020
+27105,49380,"Worthington, MN","Nobles County, Minnesota",micro,march_2020
+53077,49420,"Yakima, WA","Yakima County, Washington",metro,march_2020
+46135,49460,"Yankton, SD","Yankton County, South Dakota",micro,march_2020
+42133,49620,"York-Hanover, PA","York County, Pennsylvania",metro,march_2020
+39099,49660,"Youngstown-Warren-Boardman, OH-PA","Mahoning County, Ohio",metro,march_2020
+39155,49660,"Youngstown-Warren-Boardman, OH-PA","Trumbull County, Ohio",metro,march_2020
+42085,49660,"Youngstown-Warren-Boardman, OH-PA","Mercer County, Pennsylvania",metro,march_2020
+06101,49700,"Yuba City, CA","Sutter County, California",metro,march_2020
+06115,49700,"Yuba City, CA","Yuba County, California",metro,march_2020
+04027,49740,"Yuma, AZ","Yuma County, Arizona",metro,march_2020
+39119,49780,"Zanesville, OH","Muskingum County, Ohio",micro,march_2020
+48505,49820,"Zapata, TX","Zapata County, Texas",micro,march_2020

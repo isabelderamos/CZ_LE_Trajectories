@@ -321,7 +321,7 @@ df_canada <- ne_countries(country='canada', scale=50, returnclass = "sf") %>% se
 
 # LE CALCULATIONS ----
 
-# IMPORTANT NOTE: ALL RESULTS BELOW HAVE ALREADY BEEN STORED IN LE_CBSA_RESULTS.RDATA
+# IMPORTANT NOTE: ALL RESULTS BELOW HAVE ALREADY BEEN STORED IN LE_CBSA_RESULTS.RDATA (SKIP TO LINE 395)
 run_LE<-F
 if (run_LE){
   ## cz, 3 yr pooled ----
@@ -795,6 +795,73 @@ women_cz_5yr_map <- all_results_bivariate[[4]]
 ggsave("../Tables & Figures/women_cz_5yr_map.pdf", women_cz_5yr_map, width=15, height=10)
 
 
+
+# SUMMARY STATISTICS OF LE ACROSS CZ OVER TIME ----
+# What were the summary statistics for life expectancy over time within commuting zones: 
+# mean, standard deviation, minimum, maximum? 
+
+## overall CZ over time----
+results_czyr5 %>% ungroup() %>% 
+  select(year5, le) %>% 
+  group_by(year5) %>% 
+  summarise(mean_le=mean(le),
+            sd_le=sd(le),
+            min=min(le),
+            max=max(le),
+            median=median(le),
+            q1=quantile(le, probs=0.25),
+            q3=quantile(le, probs=0.75))
+## overall CZ by gender over time-----
+sumstat_yr_gender <- results_czyr5 %>% ungroup() %>% 
+  select(year5, gender, le) %>% 
+  group_by(year5, gender) %>% 
+  summarise(mean_le=mean(le),
+            sd_le=sd(le),
+            min=min(le),
+            max=max(le),
+            q1=quantile(le, probs=0.25),
+            q3=quantile(le, probs=0.75))
+
+
+sumstat_table <- sumstat_yr_gender %>%  mutate(le_ci=paste0(mean_le=format(mean_le, digits=1, nsmall=1), 
+                                           " ± (",
+                                           format(sd_le, digits=1, nsmall=1),
+                                           ")")) %>% # LE (95% CI) column 
+  select(year5, gender, le_ci) %>% 
+  spread(year5, le_ci) %>% full_join(
+sumstat_yr_gender %>%  mutate(min_max=paste0("(",
+                                             format(min, digits=1, nsmall=1), 
+                                            ", ",
+                                             format(max, digits=1, nsmall=1),
+                                           ")")) %>%
+  select(year5, gender, min_max) %>% 
+  spread(year5, min_max) %>% 
+  rename(col1=`1990-1994`,
+         col2=`1995-1999`,
+         col3=`2000-2004`,
+         col4=`2005-2009`,
+         col5=`2010-2014`,
+         col6=`2015-2019`)) %>% 
+  select(gender,
+         `1990-1994`, col1,
+         `1995-1999`, col2,
+         `2000-2004`, col3,
+         `2005-2009`, col4,
+         `2010-2014`, col5,
+         `2015-2019`, col6)
+write.csv(sumstat_table, "../Tables & Figures/sumstat_table.csv", row.names=FALSE)
+
+sumstat_table2 <- sumstat_yr_gender %>%  
+  mutate(le_ci=paste0(median_le=format(mean_le, digits=1, nsmall=1), 
+                                                            " [",
+                                                            format(q1, digits=1, nsmall=1), "-",
+                      format(q3, digits=1, nsmall=1),
+                                                            "]")) %>% # LE (95% CI) column 
+  select(year5, gender, le_ci) %>% 
+  spread(year5, le_ci) 
+write.csv(sumstat_table2, "../Tables & Figures/sumstat_table_v2.csv", row.names=FALSE)
+
+
 # VARIBILITY IN LE ACROSS CBSA'S OVER TIME ----
 
 # NOTE: MAKE SURE TO RUN STEPS (1) - (5) IN PREP WORK PRIOR TO THIS 
@@ -834,6 +901,7 @@ coeffvar_trends <-
   scale_y_continuous(labels=percent_format(accuracy=1),
                      limits=c(0,NA)) +
   #facet_wrap(~gender) +
+  geom_text(aes(label=format(coeff_var, digits=2, nsmall=2)), vjust=-1.5) +
   labs(x="Year (5-year periods)",
        y="Coefficient of Variation (%)",
        title="Coefficient of Variation (SD/mean)",
@@ -842,11 +910,13 @@ coeffvar_trends <-
   isabel_theme+
   theme(legend.position = c(0.2, 0.2),
         legend.background = element_blank())
+
 range_trends <- 
   ggplot(results_coeffvar, aes(x=year5, y=range, group=gender))+
   geom_line(aes(linetype=gender))+
   scale_y_continuous(limits=c(0,NA)) +
   #facet_wrap(~gender) +
+  geom_text(aes(label=format(range, digits=1, nsmall=1)), vjust=-1.5) +
   labs(x="Year (5-year periods)",
        title="Range (maximum-minimum)",
        y="Range (years)",
@@ -927,20 +997,20 @@ write.csv(cz_le_trends_women, "../Tables & Figures/cz_le_trends_women.csv", row.
 
 czyr5_trends <- 
   ggplot(df %>% filter(type%in%"cz", year_type%in%"year5") %>% mutate(cols=ifelse(id%in%"overall", "2", "1")), 
-       aes(x=year, y=le, color=cols, group=id))+
-  geom_line(aes(color=cols, size=cols))+
+         aes(x=year, y=le, color=cols, group=id))+
+  geom_line(aes(color=cols, alpha=cols, size=cols))+
   facet_wrap(~gender) +
-  scale_color_manual(labels=c("CZ", "Overall"), values=c("black", "#cf3636"))+
-  scale_linetype_manual(values=c(2,1))+
-  scale_size_manual(values = c(0.5,1))+
+  scale_alpha_manual(values=c(0.25, 1))+
+  scale_size_manual(values = c(0.5, 1))+
+  scale_color_manual(labels=c("CZ", "Overall"), values=c("grey55", "black"))+
   labs(x="Year (5-year periods)",
        y="Life Expectancy",
        color="", fill="")+
   scale_x_discrete(labels=label_wrap(10))+
   isabel_theme+
-  guides(size=FALSE) +
-    theme(legend.position = c(0.8, 0.2),
-          legend.background = element_blank())
+  guides(size=FALSE, alpha=FALSE) +
+  theme(legend.position = c(0.8, 0.2),
+        legend.background = element_blank())
 
 ggsave("../Tables & Figures/figure1.pdf", czyr5_trends, width=15, height=10)
 
@@ -967,7 +1037,7 @@ results_cbsa_cz <-
     results_czyr5 %>% ungroup() %>% mutate(type="cz", year_type="year5", year=year5, id=cz) %>% 
       select(-year5, -cz) 
   ) %>% 
-  #filter(!id%in%c("14720", "20780", "587")) %>% # QUARANTINING ROGUE CBSA/CZS FOR NOW -- only 587 down the line 
+  #filter(!id%in%c("14720", "20780", "587")) %>% # QUARANTINING ROGUE CBSA/CZS FOR NOW 
   filter(!id%in%c(cz_ak, cz_hi)) # DROPPING CZ'S IN ALASKA AND HAWAII
 
 
@@ -1097,6 +1167,8 @@ shp_clusters <- right_join(shp_cz, results_cbsa_cz %>%
                                     gender%in%"Men"),
                            by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
 
+shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
+
 queen_w <- queen_weights(shp_clusters)
 gstar <- local_gstar(queen_w,shp_clusters %>% select(le))
 shp_clusters$gstar_cluster <- lisa_clusters(gstar)
@@ -1113,7 +1185,7 @@ getisord_baselineLE_men <- ggplot()+
   geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
   geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
   geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=shp_clusters %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
   geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
   geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
   annotate("text", x=st_bbox(shp_clusters)$xmin, 
@@ -1137,6 +1209,7 @@ getisord_baselineLE_men<-getisord_baselineLE_men+guides(fill="none")
 
 ### change in LE ----
 shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Men", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id")) 
+shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
 
 queen_w <- queen_weights(shp_clusters)
 gstar <- local_gstar(queen_w,shp_clusters %>% select(abs_dif))
@@ -1155,7 +1228,7 @@ getisord_diffLE_men <- ggplot()+
   geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
   geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
   geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=shp_clusters %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
   geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
   geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
   annotate("text", x=st_bbox(shp_clusters)$xmin, 
@@ -1183,6 +1256,7 @@ shp_clusters <- right_join(shp_cz, results_cbsa_cz %>%
                                     year%in%"1990-1994",
                                     gender%in%"Men"),
                            by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
+shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
 
 queen_w <- queen_weights(shp_clusters)
 gstar <- local_gstar(queen_w,shp_clusters %>% select(le))
@@ -1197,6 +1271,7 @@ baseline_clusters <- shp_clusters %>%
 
 # change in LE df 
 shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Men", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id")) 
+shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
 
 queen_w <- queen_weights(shp_clusters)
 gstar <- local_gstar(queen_w,shp_clusters %>% select(abs_dif))
@@ -1265,7 +1340,7 @@ biscale_men_map <- ggplot()+
   geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
   geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
   geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=biscale_men_df %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
   geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
   geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
   annotate("text", x=st_bbox(biscale_men_df)$xmin, 
@@ -1295,6 +1370,7 @@ shp_clusters <- right_join(shp_cz, results_cbsa_cz %>%
                                     year%in%"1990-1994",
                                     gender%in%"Women"),
                            by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
+shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
 
 queen_w <- queen_weights(shp_clusters)
 gstar <- local_gstar(queen_w,shp_clusters %>% select(le))
@@ -1312,7 +1388,7 @@ getisord_baselineLE_women <- ggplot()+
   geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
   geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
   geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=shp_clusters %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
   geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
   geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
   annotate("text", x=st_bbox(shp_clusters)$xmin, 
@@ -1334,6 +1410,7 @@ getisord_baselineLE_women <- ggplot()+
 ### change in LE ----
 
 shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Women", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id"))
+shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
 
 queen_w <- queen_weights(shp_clusters)
 gstar <- local_gstar(queen_w,shp_clusters %>% select(abs_dif))
@@ -1351,7 +1428,7 @@ getisord_diffLE_women <- ggplot()+
   geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
   geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
   geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=shp_clusters %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
   geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
   geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
   annotate("text", x=st_bbox(shp_clusters)$xmin, 
@@ -1378,6 +1455,7 @@ shp_clusters <- right_join(shp_cz, results_cbsa_cz %>%
                                     year%in%"1990-1994",
                                     gender%in%"Women"),
                            by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
+shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
 
 queen_w <- queen_weights(shp_clusters)
 gstar <- local_gstar(queen_w,shp_clusters %>% select(le))
@@ -1392,6 +1470,7 @@ baseline_clusters <- shp_clusters %>%
 
 # change in LE df 
 shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Women", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id")) 
+shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
 
 queen_w <- queen_weights(shp_clusters)
 gstar <- local_gstar(queen_w,shp_clusters %>% select(abs_dif))
@@ -1460,7 +1539,7 @@ biscale_women_map <- ggplot()+
   geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
   geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
   geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=biscale_women_df %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
   geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
   geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
   annotate("text", x=st_bbox(biscale_men_df)$xmin, 

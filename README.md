@@ -1,6 +1,6 @@
 ## Trajectories of Life Expectancy by Commuting Zone in the US: 1990-2019.
 
-Under Review at American Journal of Public Health.
+Under Review.
 
 **NCHS MORTALITY DATA folder contains:**
 
