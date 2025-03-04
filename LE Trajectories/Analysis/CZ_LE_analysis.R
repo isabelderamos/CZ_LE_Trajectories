@@ -495,148 +495,6 @@ results_cbsa_cz <-
   filter(!id%in%c(cz_ak, cz_hi)) # DROPPING CZ'S IN ALASKA AND HAWAII
 
 
-
-## generating maps ----
-
-
-
-# USING BIVARITE MAPPING
-options<-expand.grid(gender=c("Men", "Women"), yr=c("year3", "year5"), unit=c("cz", "cbsa")) %>% as_tibble()
-all_results_bivariate<-map(1:nrow(options), function(i){
-  #i<-3
-  opt_temp<-options %>% slice(i)
-  # title<-paste0("LE among ", opt_temp$gender, ", ", opt_temp$unit, ", ", opt_temp$yr)
-  
-  if (opt_temp$unit=="cbsa") {
-    temp <- right_join(shp_cbsa, results_cbsa_cz %>% get_bivarite(., gender_mw=opt_temp$gender, yr_35=opt_temp$yr, cbsa_cz=opt_temp$unit), by=c("GEOID"="id"))
-    tmp_plot <- ggplot(temp, aes(geometry=geometry)) +
-      geom_sf(mapping=aes(fill=bi_class), 
-              color="white",
-              size=0.1,
-              show.legend=FALSE) + 
-      bi_scale_fill(pal="DkViolet", dim=3) +
-      geom_sf(data=st_transform(df_state, crs = st_crs(shp_cbsa)), size=0.1, color="black", fill=NA)+
-      geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cbsa)), size=0.1, color="black", fill="darkgrey")+
-      geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cbsa)), size=0.1, color="black", fill="darkgrey")+
-      geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cbsa)), size=1.5, color="black", fill=NA)+
-      geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cbsa)), size=0.75, color="black", fill=NA)+
-      coord_sf(xlim=st_bbox(temp)[c("xmin", "xmax")],
-               ylim=st_bbox(temp)[c("ymin", "ymax")])+
-      # labs(title=title)+
-      map_theme
-    tmp_legend <- bi_legend(pal = "DkViolet",
-                            dim = 3,
-                            xlab = "Higher LE",
-                            ylab = "Most Increase Since 1990",
-                            size = 8)+
-      theme(panel.background = element_rect(fill = "lightblue1"),
-            panel.border=element_blank(),
-            plot.background = element_rect(fill = "lightblue1"),
-            axis.ticks=element_blank(),
-            panel.grid.major=element_blank(),
-            panel.grid.minor=element_blank())
-    tmp_map <- ggdraw() +
-      draw_plot(tmp_plot, 0, 0, 1, 1) +
-      draw_plot(tmp_legend, 0.82, 0.2, 0.2, 0.2)
-    tmp_map
-    
-  } else if (opt_temp$unit=="cz") {
-    temp <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw=opt_temp$gender, yr_35=opt_temp$yr, cbsa_cz=opt_temp$unit), by=c("LM_Code"="id"))
-    tmp_plot <- ggplot(temp, aes(geometry=geometry)) +
-      geom_sf(mapping=aes(fill=bi_class), 
-              color="white",
-              size=0.1,
-              show.legend=FALSE) + 
-      bi_scale_fill(pal="DkViolet", dim=3) +
-      geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
-      geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
-      geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
-      geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-      geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-      geom_sf(data=temp %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="darkgrey")+
-      coord_sf(xlim=st_bbox(temp)[c("xmin", "xmax")],
-               ylim=st_bbox(temp)[c("ymin", "ymax")])+
-      # labs(title=title)+
-      map_theme
-    tmp_legend <- bi_legend(pal = "DkViolet",
-                            dim = 3,
-                            xlab = "Higher LE",
-                            ylab = "Most Increase Since 1990",
-                            size = 8)+
-      theme(panel.background = element_rect(fill = "lightblue1"),
-            panel.border=element_blank(),
-            plot.background = element_rect(fill = "lightblue1"),
-            axis.ticks=element_blank(),
-            panel.grid.major=element_blank(),
-            panel.grid.minor=element_blank())
-    tmp_map <- ggdraw() +
-      draw_plot(tmp_plot, 0, 0, 1, 1) +
-      draw_plot(tmp_legend, 0.82, 0.2, 0.2, 0.2)
-    tmp_map
-  }
-})
-
-
-# USING BREWER PALETTE FOR MAPPING
-options<-expand.grid(gender=c("Men", "Women"), yr=c("year3", "year5"), unit=c("cz", "cbsa")) %>% as_tibble()
-all_results_brewer<-map(1:nrow(options), function(i){
-  #i<-2
-  opt_temp<-options %>% slice(i)
-  # title<-paste0("LE among ", opt_temp$gender, ", ", opt_temp$unit, ", ", opt_temp$yr)
-  
-  if (opt_temp$unit=="cbsa") {
-    temp <- right_join(shp_cbsa, results_cbsa_cz %>% get_bivarite(., gender_mw=opt_temp$gender, yr_35=opt_temp$yr, cbsa_cz=opt_temp$unit), by=c("GEOID"="id"))
-    tmp_plot <- ggplot(temp, aes(geometry=geometry)) +
-      geom_sf(mapping=aes(fill=bi_class), 
-              color="white",
-              size=0.1,
-              show.legend=TRUE) + 
-      geom_sf(data=st_transform(df_state, crs = st_crs(shp_cbsa)), size=0.1, color="black", fill=NA)+
-      geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cbsa)), size=0.1, color="black", fill="darkgrey")+
-      geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cbsa)), size=0.1, color="black", fill="darkgrey")+
-      coord_sf(xlim=st_bbox(temp)[c("xmin", "xmax")],
-               ylim=st_bbox(temp)[c("ymin", "ymax")])+
-      scale_fill_brewer(palette="BrBG")+
-      # labs(title=title)+
-      guides(color=guide_legend(reverse=TRUE))+
-      map_theme + 
-      theme(panel.background = element_rect(fill = "blue"),
-            plot.background = element_rect(fill = "blue"))
-    tmp_plot
-    
-  } else if (opt_temp$unit=="cz") {
-    temp <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw=opt_temp$gender, yr_35=opt_temp$yr, cbsa_cz=opt_temp$unit), by=c("LM_Code"="id"))
-    tmp_plot <- ggplot(temp, aes(geometry=geometry)) +
-      geom_sf(mapping=aes(fill=bi_class), 
-              color="white",
-              size=0.1,
-              show.legend=TRUE) + 
-      geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
-      geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-      geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-      coord_sf(xlim=st_bbox(temp)[c("xmin", "xmax")],
-               ylim=st_bbox(temp)[c("ymin", "ymax")])+
-      scale_fill_brewer(palette="BrBG")+
-      # labs(title=title)+
-      guides(color=guide_legend(reverse=TRUE))+
-      map_theme
-    tmp_plot
-  }
-})
-
-
-
-
-## saving desired maps as PDF images ----
-
-men_cz_5yr_map <- all_results_bivariate[[3]]
-ggsave("../Tables & Figures/men_cz_5yr_map.pdf", men_cz_5yr_map, width=15, height=10)
-
-women_cz_5yr_map <- all_results_bivariate[[4]]
-ggsave("../Tables & Figures/women_cz_5yr_map.pdf", women_cz_5yr_map, width=15, height=10)
-
-
-
 # SUMMARY STATISTICS OF LE ACROSS CZ OVER TIME ----
 # What were the summary statistics for life expectancy over time within commuting zones: 
 # mean, standard deviation, minimum, maximum? 
@@ -1014,33 +872,83 @@ ggsave("../Tables & Figures/AppendixFigure2_rawle.pdf", pall, width=27.75, heigh
 
 # GETIS ORD ----
 
-# USING GETIS ORD METHOD
+# creating a function to do getis-ord (simplified for now, year5 and cz)
+getis_ord_fun<-function(gender_select, significance){
+  shp_clusters <- right_join(shp_cz, 
+                             results_cbsa_cz %>% 
+                               get_bivarite(., gender_mw=gender_select, 
+                                            yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id")) 
+  shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
+  queen_w <- queen_weights(shp_clusters)
+  gstar_baseline <- local_gstar(queen_w,shp_clusters %>% select(le), significance_cutoff = significance)
+  gstar_change <- local_gstar(queen_w,shp_clusters %>% select(abs_dif), significance_cutoff = significance)
+  shp_clusters$baseline_gstar_cluster <- lisa_clusters(gstar_baseline)
+  shp_clusters$baseline_gstar_cluster_pval<-lisa_pvalues(gstar_baseline)
+  shp_clusters$diffLE_gstar_cluster <- lisa_clusters(gstar_change)
+  shp_clusters$diffLE_gstar_cluster_pval<-lisa_pvalues(gstar_change)
+  shp_clusters <- shp_clusters %>%
+    mutate(baseline_gstar_cluster=factor(baseline_gstar_cluster, levels=0:4, labels=lisa_labels(gstar_baseline)),
+           diffLE_gstar_cluster=factor(diffLE_gstar_cluster, levels=0:4, labels=lisa_labels(gstar_change)),
+           gender=gender_select,
+           significance=significance)
+  print(table(shp_clusters$baseline_gstar_cluster, shp_clusters$diffLE_gstar_cluster))
+  
+  # combining both df's and droplevel unused factor levels (Undefined, Isolated)
+  df <- shp_clusters %>% st_drop_geometry %>% 
+    select(LM_Code, baseline_gstar_cluster, diffLE_gstar_cluster) %>% 
+    filter(!baseline_gstar_cluster%in%c("Undefined", "Isolated")) %>% 
+    filter(!diffLE_gstar_cluster%in%c("Undefined", "Isolated"))
+  df$baseline_gstar_cluster <- droplevels(df$baseline_gstar_cluster)
+  df$diffLE_gstar_cluster <- droplevels(df$diffLE_gstar_cluster)
+  df <- df %>% mutate(baseline_gstar_cluster=case_when(baseline_gstar_cluster%in%"Low-Low" ~ "Low",
+                                                       baseline_gstar_cluster%in%"High-High"~ "High",
+                                                       baseline_gstar_cluster%in%"Not significant" ~ "Not significant"),
+                      diffLE_gstar_cluster=case_when(diffLE_gstar_cluster%in%"Low-Low" ~ "Low",
+                                                     diffLE_gstar_cluster%in%"High-High"~ "High",
+                                                     diffLE_gstar_cluster%in%"Not significant" ~ "Not significant"))
+  
+  
+  df <- df %>% mutate(type=case_when(
+    baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="Low" ~ "Low Baseline - Decreased",
+    baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="Not significant" ~ "Low Baseline - NS Change",
+    baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="High" ~ "Low Baseline - Increased",
+    baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="Low" ~ "NS Baseline - Decreased",
+    baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="Not significant" ~ "NS Baseline - NS Change",
+    baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="High" ~ "NS Baseline - Increased",
+    baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="Low" ~ "High Baseline - Decreased",
+    baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="Not significant" ~ "High Baseline - NS Change",
+    baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="High" ~ "High Baseline - Increased"))
+  
+  df <- df %>% mutate(type=factor(type,
+                                  levels=c("Low Baseline - Decreased",
+                                           "Low Baseline - NS Change",
+                                           "Low Baseline - Increased",
+                                           "NS Baseline - Decreased",
+                                           "NS Baseline - NS Change",
+                                           "NS Baseline - Increased", 
+                                           "High Baseline - Decreased",
+                                           "High Baseline - NS Change",
+                                           "High Baseline - Increased"))) %>% 
+    arrange(type)
+  print(df %>% count(type))
+  
+  # now that everyhting is checked, merge back into the original one
+  shp_clusters<-full_join(shp_clusters, df %>% select(LM_Code, type))
+  
+  return(shp_clusters)
+}
+all_men<-getis_ord_fun(gender_select="Men", significance=0.05)
+all_women<-getis_ord_fun(gender_select="Women", significance=0.05)
 
 ## MEN ----
 
 ### baseline LE ----
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>%
-                             filter(type%in%"cz",
-                                    year_type%in%"year5",
-                                    year%in%"1990-1994",
-                                    gender%in%"Men"),
-                           by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
-
-shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
-
-queen_w <- queen_weights(shp_clusters)
-gstar <- local_gstar(queen_w,shp_clusters %>% select(le))
-shp_clusters$gstar_cluster <- lisa_clusters(gstar)
-shp_clusters$gstar_cluster_pval<-lisa_pvalues(gstar)
-shp_clusters <- shp_clusters %>%
-  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
-table(shp_clusters$gstar_cluster)
 
 # CREATING MAP FOR GETIS ORD: BASELINE LE FOR MEN
 getisord_baselineLE_men <- ggplot()+
-  geom_sf(data=shp_clusters %>% filter(!is.na(gstar_cluster)), size=0,color=NA,
-          aes(geometry=geometry, fill=(gstar_cluster)))+
-  geom_sf(data=shp_clusters, size=.1,fill=NA,color="black",
+  geom_sf(data=all_men %>% filter(!is.na(baseline_gstar_cluster)), size=0,color=NA,
+          aes(geometry=geometry, fill=(baseline_gstar_cluster)))+
+  geom_sf(data=all_men, size=.1,fill=NA,color="black",
           aes(geometry=geometry))+
   geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
   geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
@@ -1048,15 +956,15 @@ getisord_baselineLE_men <- ggplot()+
   geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
   geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
   geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
-  annotate("text", x=st_bbox(shp_clusters)$xmin, 
-           y=st_bbox(shp_clusters)$ymax, 
+  annotate("text", x=st_bbox(all_men)$xmin, 
+           y=st_bbox(all_men)$ymax, 
            hjust=0, vjust=0,
            size=10,
            label="A")+
   scale_fill_manual(values=moran_colors, name="",
                     labels=c("Not Significant", "High or Increase", "Low or Decrease", "N/A"))+
-  coord_sf(xlim=st_bbox(shp_clusters)[c("xmin", "xmax")],
-           ylim=st_bbox(shp_clusters)[c("ymin", "ymax")])+
+  coord_sf(xlim=st_bbox(all_men)[c("xmin", "xmax")],
+           ylim=st_bbox(all_men)[c("ymin", "ymax")])+
   guides(size=F, alpha=F,
          fill=guide_legend(nrow=1)) +
   #labs(title="", tag="A")+
@@ -1065,185 +973,16 @@ getisord_baselineLE_men <- ggplot()+
         legend.box.background = element_blank())
 legend_sep<-get_legend(getisord_baselineLE_men);plot(legend_sep)
 getisord_baselineLE_men<-getisord_baselineLE_men+guides(fill="none")
-#ggsave("test.pdf", getisord_baselineLE_men, width=15, height=7.5)
 
-### change in LE ----
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Men", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id")) 
-shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
-
-queen_w <- queen_weights(shp_clusters)
-gstar <- local_gstar(queen_w,shp_clusters %>% select(abs_dif))
-shp_clusters$gstar_cluster <- lisa_clusters(gstar)
-shp_clusters <- shp_clusters %>%
-  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
-table(shp_clusters$gstar_cluster)
-
-
-# CREATING MAP FOR GETIS ORD: DIFFERENCE IN LIFE EXPECTANCY B/W 2015-2019 AND 1990-1994 FOR MEN 
-getisord_diffLE_men <- ggplot()+
-  geom_sf(data=shp_clusters %>% filter(!is.na(gstar_cluster)), size=0,color=NA,
-          aes(geometry=geometry, fill=(gstar_cluster)))+
-  geom_sf(data=shp_clusters, size=.1,fill=NA,color="black",
-          aes(geometry=geometry))+
-  geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
-  geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
-  geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
-  geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
-  annotate("text", x=st_bbox(shp_clusters)$xmin, 
-           y=st_bbox(shp_clusters)$ymax, 
-           hjust=0, vjust=0,
-           size=10,
-           label="C")+
-  scale_fill_manual(values=moran_colors, name="")+
-  coord_sf(xlim=st_bbox(shp_clusters)[c("xmin", "xmax")],
-           ylim=st_bbox(shp_clusters)[c("ymin", "ymax")])+
-  guides(size=F, alpha=F, fill = guide_legend(override.aes = list(alpha=0))) +
-  #labs(title=title) +
-  #labs(title="", tag="C")+
-  map_theme + 
-  theme(legend.text=element_blank()) +
-  theme(legend.position="none")
-
-
-### biscale 3x3 plot: baseline LE & change in LE ----
-
-# baseline df
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>%
-                             filter(type%in%"cz",
-                                    year_type%in%"year5",
-                                    year%in%"1990-1994",
-                                    gender%in%"Men"),
-                           by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
-shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
-
-queen_w <- queen_weights(shp_clusters)
-gstar <- local_gstar(queen_w,shp_clusters %>% select(le))
-shp_clusters$gstar_cluster <- lisa_clusters(gstar)
-shp_clusters <- shp_clusters %>%
-  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
-table(shp_clusters$gstar_cluster)
-baseline_clusters <- shp_clusters %>% 
-  mutate(baseline_gstar_cluster=gstar_cluster) %>% 
-  select(-gstar_cluster) %>% 
-  st_drop_geometry()
-
-# change in LE df 
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Men", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id")) 
-shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
-
-queen_w <- queen_weights(shp_clusters)
-gstar <- local_gstar(queen_w,shp_clusters %>% select(abs_dif))
-shp_clusters$gstar_cluster <- lisa_clusters(gstar)
-shp_clusters <- shp_clusters %>%
-  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
-table(shp_clusters$gstar_cluster)
-diffLE_clusters <- shp_clusters %>% 
-  mutate(diffLE_gstar_cluster=gstar_cluster) %>%
-  select(-gstar_cluster) %>% 
-  st_drop_geometry()
-
-# combining both df's and droplevel unused factor levels (Undefined, Isolated)
-df <- baseline_clusters %>% right_join(diffLE_clusters, by="LM_Code") %>% 
-  select(LM_Code, baseline_gstar_cluster, diffLE_gstar_cluster) %>% 
-  filter(!baseline_gstar_cluster%in%c("Undefined", "Isolated")) %>% 
-  filter(!diffLE_gstar_cluster%in%c("Undefined", "Isolated"))
-df$baseline_gstar_cluster <- droplevels(df$baseline_gstar_cluster)
-df$diffLE_gstar_cluster <- droplevels(df$diffLE_gstar_cluster)
-df <- df %>% mutate(baseline_gstar_cluster=case_when(baseline_gstar_cluster%in%"Low-Low" ~ "Low",
-                                                     baseline_gstar_cluster%in%"High-High"~ "High",
-                                                     baseline_gstar_cluster%in%"Not significant" ~ "Not significant"),
-                    diffLE_gstar_cluster=case_when(diffLE_gstar_cluster%in%"Low-Low" ~ "Low",
-                                                   diffLE_gstar_cluster%in%"High-High"~ "High",
-                                                   diffLE_gstar_cluster%in%"Not significant" ~ "Not significant"))
-
-
-# checking unique combos, should be 9
-crossing(df$baseline_gstar_cluster, df$diffLE_gstar_cluster)
-df %>% count(baseline_gstar_cluster, diffLE_gstar_cluster) 
-
-
-df <- df %>% mutate(type=case_when(
-  baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="Low" ~ "Low Baseline - Decreased",
-  baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="Not significant" ~ "Low Baseline - NS Change",
-  baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="High" ~ "Low Baseline - Increased",
-  baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="Low" ~ "NS Baseline - Decreased",
-  baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="Not significant" ~ "NS Baseline - NS Change",
-  baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="High" ~ "NS Baseline - Increased",
-  baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="Low" ~ "High Baseline - Decreased",
-  baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="Not significant" ~ "High Baseline - NS Change",
-  baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="High" ~ "High Baseline - Increased"))
-
-  
-df <- df %>% mutate(type=factor(type,
-                           levels=c("Low Baseline - Decreased",
-                                    "Low Baseline - NS Change",
-                                    "Low Baseline - Increased",
-                                    "NS Baseline - Decreased",
-                                    "NS Baseline - NS Change",
-                                    "NS Baseline - Increased", 
-                                    "High Baseline - Decreased",
-                                    "High Baseline - NS Change",
-                                    "High Baseline - Increased"))) %>% 
-  arrange(type)
-cluster_count <- df %>% count(type)
-
-biscale_men_df <- right_join(shp_cz, df, by="LM_Code") %>% glimpse()
-
-# CREATING MAP FOR BASELINE LE X CHANGE IN LE 
-biscale_men_map <- ggplot()+
-  geom_sf(data=biscale_men_df, size=0,color=NA,
-          aes(geometry=geometry, fill=(type)))+
-  geom_sf(data=biscale_men_df, size=.1,fill=NA,color="black",
-          aes(geometry=geometry))+
-  geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
-  geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
-  geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
-  geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
-  annotate("text", x=st_bbox(biscale_men_df)$xmin, 
-           y=st_bbox(biscale_men_df)$ymax, 
-           hjust=0, vjust=0,
-           size=10,
-           label="A")+
-  scale_fill_manual(values=cols)+
-  coord_sf(xlim=st_bbox(biscale_men_df)[c("xmin", "xmax")],
-           ylim=st_bbox(biscale_men_df)[c("ymin", "ymax")])+
-  guides(color=guide_legend(reverse=TRUE),
-         fill=guide_legend(nrow=3, byrow=TRUE))+
-  #labs(title="Men")+
-  #labs(tag="A")+
-  map_theme+
-  theme(legend.position="bottom", legend.title=element_blank())+
-  theme(legend.background = element_blank(),
-        legend.box.background = element_blank())
 
 
 ## WOMEN ----
 
-### baseline LE ----
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>%
-                             filter(type%in%"cz",
-                                    year_type%in%"year5",
-                                    year%in%"1990-1994",
-                                    gender%in%"Women"),
-                           by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
-shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
-
-queen_w <- queen_weights(shp_clusters)
-gstar <- local_gstar(queen_w,shp_clusters %>% select(le))
-shp_clusters$gstar_cluster <- lisa_clusters(gstar)
-shp_clusters <- shp_clusters %>%
-  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
-table(shp_clusters$gstar_cluster)
-
 # CREATING MAP FOR GETIS ORD: BASELINE LE FOR WOMEN 
 getisord_baselineLE_women <- ggplot()+
-  geom_sf(data=shp_clusters %>% filter(!is.na(gstar_cluster)), size=0,color=NA,
-          aes(geometry=geometry, fill=(gstar_cluster)))+
-  geom_sf(data=shp_clusters, size=.1,fill=NA,color="black",
+  geom_sf(data=all_women %>% filter(!is.na(baseline_gstar_cluster)), size=0,color=NA,
+          aes(geometry=geometry, fill=(baseline_gstar_cluster)))+
+  geom_sf(data=all_women, size=.1,fill=NA,color="black",
           aes(geometry=geometry))+
   geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
   geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
@@ -1251,14 +990,14 @@ getisord_baselineLE_women <- ggplot()+
   geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
   geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
   geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
-  annotate("text", x=st_bbox(shp_clusters)$xmin, 
-           y=st_bbox(shp_clusters)$ymax, 
+  annotate("text", x=st_bbox(all_women)$xmin, 
+           y=st_bbox(all_women)$ymax, 
            hjust=0, vjust=0,
            size=10,
            label="B")+
   scale_fill_manual(values=moran_colors, name="")+
-  coord_sf(xlim=st_bbox(shp_clusters)[c("xmin", "xmax")],
-           ylim=st_bbox(shp_clusters)[c("ymin", "ymax")])+
+  coord_sf(xlim=st_bbox(all_women)[c("xmin", "xmax")],
+           ylim=st_bbox(all_women)[c("ymin", "ymax")])+
   guides(size=F, alpha=F, fill = guide_legend(override.aes = list(alpha=0))) +
   #labs(title=title) +
   #labs(title="", tag="B")+
@@ -1266,24 +1005,11 @@ getisord_baselineLE_women <- ggplot()+
   theme(legend.text=element_blank()) +
   theme(legend.position="none")
 
-
-### change in LE ----
-
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Women", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id"))
-shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
-
-queen_w <- queen_weights(shp_clusters)
-gstar <- local_gstar(queen_w,shp_clusters %>% select(abs_dif))
-shp_clusters$gstar_cluster <- lisa_clusters(gstar)
-shp_clusters <- shp_clusters %>%
-  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
-table(shp_clusters$gstar_cluster)
-
 # CREATING MAP FOR GETIS ORD: DIFFERENCE IN LIFE EXPECTANCY B/W 2015-2019 AND 1990-1994 FOR WOMEN 
 getisord_diffLE_women <- ggplot()+
-  geom_sf(data=shp_clusters %>% filter(!is.na(gstar_cluster)), size=0,color=NA,
-          aes(geometry=geometry, fill=(gstar_cluster)))+
-  geom_sf(data=shp_clusters, size=.1,fill=NA,color="black",
+  geom_sf(data=all_women %>% filter(!is.na(diffLE_gstar_cluster)), size=0,color=NA,
+          aes(geometry=geometry, fill=(diffLE_gstar_cluster)))+
+  geom_sf(data=all_women, size=.1,fill=NA,color="black",
           aes(geometry=geometry))+
   geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
   geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
@@ -1291,14 +1017,14 @@ getisord_diffLE_women <- ggplot()+
   geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
   geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
   geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
-  annotate("text", x=st_bbox(shp_clusters)$xmin, 
-           y=st_bbox(shp_clusters)$ymax, 
+  annotate("text", x=st_bbox(all_women)$xmin, 
+           y=st_bbox(all_women)$ymax, 
            hjust=0, vjust=0,
            size=10,
            label="D")+
   scale_fill_manual(values=moran_colors, name="")+
-  coord_sf(xlim=st_bbox(shp_clusters)[c("xmin", "xmax")],
-           ylim=st_bbox(shp_clusters)[c("ymin", "ymax")])+
+  coord_sf(xlim=st_bbox(all_women)[c("xmin", "xmax")],
+           ylim=st_bbox(all_women)[c("ymin", "ymax")])+
   guides(size=F, alpha=F, fill = guide_legend(override.aes = list(alpha=0))) +
   #labs(title=title) +
   #labs(title="", tag="D")+
@@ -1308,96 +1034,11 @@ getisord_diffLE_women <- ggplot()+
 
 
 ### biscale 3x3 plot: baseline LE & change in LE ----
-
-# baseline df
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>%
-                             filter(type%in%"cz",
-                                    year_type%in%"year5",
-                                    year%in%"1990-1994",
-                                    gender%in%"Women"),
-                           by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
-shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
-
-queen_w <- queen_weights(shp_clusters)
-gstar <- local_gstar(queen_w,shp_clusters %>% select(le))
-shp_clusters$gstar_cluster <- lisa_clusters(gstar)
-shp_clusters <- shp_clusters %>%
-  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
-table(shp_clusters$gstar_cluster)
-baseline_clusters <- shp_clusters %>% 
-  mutate(baseline_gstar_cluster=gstar_cluster) %>% 
-  select(-gstar_cluster) %>% 
-  st_drop_geometry()
-
-# change in LE df 
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Women", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id")) 
-shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
-
-queen_w <- queen_weights(shp_clusters)
-gstar <- local_gstar(queen_w,shp_clusters %>% select(abs_dif))
-shp_clusters$gstar_cluster <- lisa_clusters(gstar)
-shp_clusters <- shp_clusters %>%
-  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
-table(shp_clusters$gstar_cluster)
-diffLE_clusters <- shp_clusters %>% 
-  mutate(diffLE_gstar_cluster=gstar_cluster) %>%
-  select(-gstar_cluster) %>% 
-  st_drop_geometry()
-
-
-
-# combining both df's and droplevel unused factor levels (Undefined, Isolated)
-df <- baseline_clusters %>% right_join(diffLE_clusters, by="LM_Code") %>% 
-  select(LM_Code, baseline_gstar_cluster, diffLE_gstar_cluster) %>% 
-  filter(!baseline_gstar_cluster%in%c("Undefined", "Isolated")) %>% 
-  filter(!diffLE_gstar_cluster%in%c("Undefined", "Isolated"))
-df$baseline_gstar_cluster <- droplevels(df$baseline_gstar_cluster)
-df$diffLE_gstar_cluster <- droplevels(df$diffLE_gstar_cluster)
-df <- df %>% mutate(baseline_gstar_cluster=case_when(baseline_gstar_cluster%in%"Low-Low" ~ "Low",
-                                                     baseline_gstar_cluster%in%"High-High"~ "High",
-                                                     baseline_gstar_cluster%in%"Not significant" ~ "Not significant"),
-                    diffLE_gstar_cluster=case_when(diffLE_gstar_cluster%in%"Low-Low" ~ "Low",
-                                                   diffLE_gstar_cluster%in%"High-High"~ "High",
-                                                   diffLE_gstar_cluster%in%"Not significant" ~ "Not significant"))
-
-
-# checking unique combos, should be 9
-crossing(df$baseline_gstar_cluster, df$diffLE_gstar_cluster)
-df %>% count(baseline_gstar_cluster, diffLE_gstar_cluster) 
-
-
-df <- df %>% mutate(type=case_when(
-  baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="Low" ~ "Low Baseline - Decreased",
-  baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="Not significant" ~ "Low Baseline - NS Change",
-  baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="High" ~ "Low Baseline - Increased",
-  baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="Low" ~ "NS Baseline - Decreased",
-  baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="Not significant" ~ "NS Baseline - NS Change",
-  baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="High" ~ "NS Baseline - Increased",
-  baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="Low" ~ "High Baseline - Decreased",
-  baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="Not significant" ~ "High Baseline - NS Change",
-  baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="High" ~ "High Baseline - Increased"))
-
-
-df <- df %>% mutate(type=factor(type,
-                                levels=c("Low Baseline - Decreased",
-                                         "Low Baseline - NS Change",
-                                         "Low Baseline - Increased",
-                                         "NS Baseline - Decreased",
-                                         "NS Baseline - NS Change",
-                                         "NS Baseline - Increased", 
-                                         "High Baseline - Decreased",
-                                         "High Baseline - NS Change",
-                                         "High Baseline - Increased"))) %>% 
-  arrange(type)
-cluster_count <- df %>% count(type)
-
-biscale_women_df <- right_join(shp_cz, df, by="LM_Code") 
-
-# CREATING MAP FOR BASELINE LE X CHANGE IN LE 
-biscale_women_map <- ggplot()+
-  geom_sf(data=biscale_women_df, size=0,color=NA,
-          aes(geometry=geometry, fill=(type)))+
-  geom_sf(data=biscale_women_df, size=.1,fill=NA,color="black",
+# CREATING MAP FOR GETIS ORD: DIFFERENCE IN LIFE EXPECTANCY B/W 2015-2019 AND 1990-1994 FOR MEN 
+getisord_diffLE_men <- ggplot()+
+  geom_sf(data=all_men %>% filter(!is.na(diffLE_gstar_cluster)), size=0,color=NA,
+          aes(geometry=geometry, fill=(diffLE_gstar_cluster)))+
+  geom_sf(data=all_men, size=.1,fill=NA,color="black",
           aes(geometry=geometry))+
   geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
   geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
@@ -1405,23 +1046,20 @@ biscale_women_map <- ggplot()+
   geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
   geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
   geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
-  annotate("text", x=st_bbox(biscale_men_df)$xmin, 
-           y=st_bbox(biscale_men_df)$ymax, 
+  annotate("text", x=st_bbox(all_men)$xmin, 
+           y=st_bbox(all_men)$ymax, 
            hjust=0, vjust=0,
            size=10,
-           label="B")+
-  scale_fill_manual(values=cols)+
-  coord_sf(xlim=st_bbox(biscale_women_df)[c("xmin", "xmax")],
-           ylim=st_bbox(biscale_women_df)[c("ymin", "ymax")])+
-  guides(color=guide_legend(reverse=TRUE),
-         fill=guide_legend(nrow=3, byrow=TRUE))+
-  #labs(subtitle="Women")+
-  #labs(tag="B")+
-  map_theme+
-  theme(legend.position="bottom", legend.title=element_blank())+
-  theme(legend.background = element_blank(),
-        legend.box.background = element_blank())
-
+           label="C")+
+  scale_fill_manual(values=moran_colors, name="")+
+  coord_sf(xlim=st_bbox(all_men)[c("xmin", "xmax")],
+           ylim=st_bbox(all_men)[c("ymin", "ymax")])+
+  guides(size=F, alpha=F, fill = guide_legend(override.aes = list(alpha=0))) +
+  #labs(title=title) +
+  #labs(title="", tag="C")+
+  map_theme + 
+  theme(legend.text=element_blank()) +
+  theme(legend.position="none")
 
 # regular clusters
 pall<-arrangeGrob(grobs=list(getisord_baselineLE_men, 
@@ -1432,227 +1070,14 @@ pall<-arrangeGrob(grobs=list(getisord_baselineLE_men,
 pall<-arrangeGrob(grobs=list(pall, legend_sep), heights=c(20, 1), ncol=1)
 ggsave("../Tables & Figures/Figure3_sep.pdf", pall, width=29, height=19)
 
-#biscale map
-legend<-get_legend(biscale_men_map)
-biscale_men_map<-biscale_men_map+guides(fill="none") 
-biscale_women_map<-biscale_women_map+guides(fill="none")
-map_all<-arrangeGrob(grobs=list(biscale_men_map, biscale_women_map), ncol=2)
-map_all_forreal<-arrangeGrob(grobs=list(map_all, legend), ncol=1, heights=c(15, 2))
-ggsave("../Tables & Figures/Figure3_combined.pdf", map_all_forreal, width=30, height=11)
-
-
-
-# exploring size of CZs by type of clustering
-# first, create average pop across periods
-pop<-dta %>% group_by(cz, year) %>% 
-  summarize(pop=sum(pop_denom)) %>% 
-  group_by(cz) %>% 
-  summarise(avg_pop=mean(pop)) %>% 
-  rename(LM_Code=cz)
-biscale_pop<-bind_rows(biscale_women_df %>% as_tibble() %>% left_join(pop) %>% 
-            select(LM_Code, type, avg_pop) %>% mutate(gender="Women"),
-          biscale_men_df %>% as_tibble() %>% left_join(pop) %>% 
-            select(LM_Code, type, avg_pop) %>% mutate(gender="Men")) %>% 
-  mutate(type=sub(" - ", " -\n", type))
-ggplot(biscale_pop, aes(x=type, y=avg_pop)) +
-  geom_boxplot()+
-  scale_y_continuous(trans="log10", breaks=10^(4:7),
-                     labels=c("10K", "100K", "1M", "10M")) +
-  facet_wrap(~gender) +
-  labs(x="Year (5-year periods)",
-       #title="Range (maximum-minimum)",
-       y="Relative Standard Error (SE/LE)",
-       color="", fill="", linetype="")+
-  guides(linetype="none")+
-  scale_x_discrete(labels=label_wrap(40))+
-  isabel_theme+
-  theme(legend.position = c(0.2, 0.2),
-        legend.background = element_blank(),
-        axis.text.x=element_text(angle=90))
-  
-
-
-# USING GETIS ORD METHOD WITH P<0.01 and 0.001
-
-## MEN ----
-
-### baseline LE ----
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>%
-                             filter(type%in%"cz",
-                                    year_type%in%"year5",
-                                    year%in%"1990-1994",
-                                    gender%in%"Men"),
-                           by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
-
-shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
-
-queen_w <- queen_weights(shp_clusters)
-gstar <- local_gstar(queen_w,shp_clusters %>% select(le), significance_cutoff = 0.01)
-shp_clusters$gstar_cluster <- lisa_clusters(gstar)
-shp_clusters <- shp_clusters %>%
-  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
-table(shp_clusters$gstar_cluster)
-
-# CREATING MAP FOR GETIS ORD: BASELINE LE FOR MEN
-getisord_baselineLE_men <- ggplot()+
-  geom_sf(data=shp_clusters %>% filter(!is.na(gstar_cluster)), size=0,color=NA,
-          aes(geometry=geometry, fill=(gstar_cluster)))+
-  geom_sf(data=shp_clusters, size=.1,fill=NA,color="black",
-          aes(geometry=geometry))+
-  geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
-  geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
-  geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
-  geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
-  annotate("text", x=st_bbox(shp_clusters)$xmin, 
-           y=st_bbox(shp_clusters)$ymax, 
-           hjust=0, vjust=0,
-           size=10,
-           label="A")+
-  scale_fill_manual(values=moran_colors, name="",
-                    labels=c("Not Significant", "High or Increase", "Low or Decrease", "N/A"))+
-  coord_sf(xlim=st_bbox(shp_clusters)[c("xmin", "xmax")],
-           ylim=st_bbox(shp_clusters)[c("ymin", "ymax")])+
-  guides(size=F, alpha=F,
-         fill=guide_legend(nrow=1)) +
-  #labs(title="", tag="A")+
-  map_theme +
-  theme(legend.background = element_blank(),
-        legend.box.background = element_blank())
-legend_sep<-get_legend(getisord_baselineLE_men);plot(legend_sep)
-getisord_baselineLE_men<-getisord_baselineLE_men+guides(fill="none")
-#ggsave("test.pdf", getisord_baselineLE_men, width=15, height=7.5)
-
-### change in LE ----
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Men", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id")) 
-shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
-
-queen_w <- queen_weights(shp_clusters)
-gstar <- local_gstar(queen_w,shp_clusters %>% select(abs_dif), significance_cutoff = 0.01)
-shp_clusters$gstar_cluster <- lisa_clusters(gstar)
-shp_clusters <- shp_clusters %>%
-  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
-table(shp_clusters$gstar_cluster)
-
-
-# CREATING MAP FOR GETIS ORD: DIFFERENCE IN LIFE EXPECTANCY B/W 2015-2019 AND 1990-1994 FOR MEN 
-getisord_diffLE_men <- ggplot()+
-  geom_sf(data=shp_clusters %>% filter(!is.na(gstar_cluster)), size=0,color=NA,
-          aes(geometry=geometry, fill=(gstar_cluster)))+
-  geom_sf(data=shp_clusters, size=.1,fill=NA,color="black",
-          aes(geometry=geometry))+
-  geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
-  geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
-  geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
-  geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
-  annotate("text", x=st_bbox(shp_clusters)$xmin, 
-           y=st_bbox(shp_clusters)$ymax, 
-           hjust=0, vjust=0,
-           size=10,
-           label="C")+
-  scale_fill_manual(values=moran_colors, name="")+
-  coord_sf(xlim=st_bbox(shp_clusters)[c("xmin", "xmax")],
-           ylim=st_bbox(shp_clusters)[c("ymin", "ymax")])+
-  guides(size=F, alpha=F, fill = guide_legend(override.aes = list(alpha=0))) +
-  #labs(title=title) +
-  #labs(title="", tag="C")+
-  map_theme + 
-  theme(legend.text=element_blank()) +
-  theme(legend.position="none")
 
 
 ### biscale 3x3 plot: baseline LE & change in LE ----
-
-# baseline df
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>%
-                             filter(type%in%"cz",
-                                    year_type%in%"year5",
-                                    year%in%"1990-1994",
-                                    gender%in%"Men"),
-                           by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
-shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
-
-queen_w <- queen_weights(shp_clusters)
-gstar <- local_gstar(queen_w,shp_clusters %>% select(le), significance_cutoff = 0.01)
-shp_clusters$gstar_cluster <- lisa_clusters(gstar)
-shp_clusters <- shp_clusters %>%
-  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
-table(shp_clusters$gstar_cluster)
-baseline_clusters <- shp_clusters %>% 
-  mutate(baseline_gstar_cluster=gstar_cluster) %>% 
-  select(-gstar_cluster) %>% 
-  st_drop_geometry()
-
-# change in LE df 
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Men", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id")) 
-shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
-
-queen_w <- queen_weights(shp_clusters)
-gstar <- local_gstar(queen_w,shp_clusters %>% select(abs_dif), significance_cutoff = 0.01)
-shp_clusters$gstar_cluster <- lisa_clusters(gstar)
-shp_clusters <- shp_clusters %>%
-  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
-table(shp_clusters$gstar_cluster)
-diffLE_clusters <- shp_clusters %>% 
-  mutate(diffLE_gstar_cluster=gstar_cluster) %>%
-  select(-gstar_cluster) %>% 
-  st_drop_geometry()
-
-# combining both df's and droplevel unused factor levels (Undefined, Isolated)
-df <- baseline_clusters %>% right_join(diffLE_clusters, by="LM_Code") %>% 
-  select(LM_Code, baseline_gstar_cluster, diffLE_gstar_cluster) %>% 
-  filter(!baseline_gstar_cluster%in%c("Undefined", "Isolated")) %>% 
-  filter(!diffLE_gstar_cluster%in%c("Undefined", "Isolated"))
-df$baseline_gstar_cluster <- droplevels(df$baseline_gstar_cluster)
-df$diffLE_gstar_cluster <- droplevels(df$diffLE_gstar_cluster)
-df <- df %>% mutate(baseline_gstar_cluster=case_when(baseline_gstar_cluster%in%"Low-Low" ~ "Low",
-                                                     baseline_gstar_cluster%in%"High-High"~ "High",
-                                                     baseline_gstar_cluster%in%"Not significant" ~ "Not significant"),
-                    diffLE_gstar_cluster=case_when(diffLE_gstar_cluster%in%"Low-Low" ~ "Low",
-                                                   diffLE_gstar_cluster%in%"High-High"~ "High",
-                                                   diffLE_gstar_cluster%in%"Not significant" ~ "Not significant"))
-
-
-# checking unique combos, should be 9
-crossing(df$baseline_gstar_cluster, df$diffLE_gstar_cluster)
-df %>% count(baseline_gstar_cluster, diffLE_gstar_cluster) 
-
-
-df <- df %>% mutate(type=case_when(
-  baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="Low" ~ "Low Baseline - Decreased",
-  baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="Not significant" ~ "Low Baseline - NS Change",
-  baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="High" ~ "Low Baseline - Increased",
-  baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="Low" ~ "NS Baseline - Decreased",
-  baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="Not significant" ~ "NS Baseline - NS Change",
-  baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="High" ~ "NS Baseline - Increased",
-  baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="Low" ~ "High Baseline - Decreased",
-  baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="Not significant" ~ "High Baseline - NS Change",
-  baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="High" ~ "High Baseline - Increased"))
-
-
-df <- df %>% mutate(type=factor(type,
-                                levels=c("Low Baseline - Decreased",
-                                         "Low Baseline - NS Change",
-                                         "Low Baseline - Increased",
-                                         "NS Baseline - Decreased",
-                                         "NS Baseline - NS Change",
-                                         "NS Baseline - Increased", 
-                                         "High Baseline - Decreased",
-                                         "High Baseline - NS Change",
-                                         "High Baseline - Increased"))) %>% 
-  arrange(type)
-cluster_count <- df %>% count(type)
-
-biscale_men_df <- right_join(shp_cz, df, by="LM_Code") %>% glimpse()
-
-# CREATING MAP FOR BASELINE LE X CHANGE IN LE 
+## men 
 biscale_men_map <- ggplot()+
-  geom_sf(data=biscale_men_df, size=0,color=NA,
+  geom_sf(data=all_men %>% filter(!is.na(type)), size=0,color=NA,
           aes(geometry=geometry, fill=(type)))+
-  geom_sf(data=biscale_men_df, size=.1,fill=NA,color="black",
+  geom_sf(data=all_men, size=.1,fill=NA,color="black",
           aes(geometry=geometry))+
   geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
   geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
@@ -1660,14 +1085,14 @@ biscale_men_map <- ggplot()+
   geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
   geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
   geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
-  annotate("text", x=st_bbox(biscale_men_df)$xmin, 
-           y=st_bbox(biscale_men_df)$ymax, 
+  annotate("text", x=st_bbox(all_men)$xmin, 
+           y=st_bbox(all_men)$ymax, 
            hjust=0, vjust=0,
            size=10,
            label="A")+
   scale_fill_manual(values=cols)+
-  coord_sf(xlim=st_bbox(biscale_men_df)[c("xmin", "xmax")],
-           ylim=st_bbox(biscale_men_df)[c("ymin", "ymax")])+
+  coord_sf(xlim=st_bbox(all_men)[c("xmin", "xmax")],
+           ylim=st_bbox(all_men)[c("ymin", "ymax")])+
   guides(color=guide_legend(reverse=TRUE),
          fill=guide_legend(nrow=3, byrow=TRUE))+
   #labs(title="Men")+
@@ -1677,181 +1102,11 @@ biscale_men_map <- ggplot()+
   theme(legend.background = element_blank(),
         legend.box.background = element_blank())
 
-
-## WOMEN ----
-
-### baseline LE ----
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>%
-                             filter(type%in%"cz",
-                                    year_type%in%"year5",
-                                    year%in%"1990-1994",
-                                    gender%in%"Women"),
-                           by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
-shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
-
-queen_w <- queen_weights(shp_clusters)
-gstar <- local_gstar(queen_w,shp_clusters %>% select(le), significance_cutoff = 0.01)
-shp_clusters$gstar_cluster <- lisa_clusters(gstar)
-shp_clusters <- shp_clusters %>%
-  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
-table(shp_clusters$gstar_cluster)
-
-# CREATING MAP FOR GETIS ORD: BASELINE LE FOR WOMEN 
-getisord_baselineLE_women <- ggplot()+
-  geom_sf(data=shp_clusters %>% filter(!is.na(gstar_cluster)), size=0,color=NA,
-          aes(geometry=geometry, fill=(gstar_cluster)))+
-  geom_sf(data=shp_clusters, size=.1,fill=NA,color="black",
-          aes(geometry=geometry))+
-  geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
-  geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
-  geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
-  geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
-  annotate("text", x=st_bbox(shp_clusters)$xmin, 
-           y=st_bbox(shp_clusters)$ymax, 
-           hjust=0, vjust=0,
-           size=10,
-           label="B")+
-  scale_fill_manual(values=moran_colors, name="")+
-  coord_sf(xlim=st_bbox(shp_clusters)[c("xmin", "xmax")],
-           ylim=st_bbox(shp_clusters)[c("ymin", "ymax")])+
-  guides(size=F, alpha=F, fill = guide_legend(override.aes = list(alpha=0))) +
-  #labs(title=title) +
-  #labs(title="", tag="B")+
-  map_theme + 
-  theme(legend.text=element_blank()) +
-  theme(legend.position="none")
-
-
-### change in LE ----
-
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Women", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id"))
-shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
-
-queen_w <- queen_weights(shp_clusters)
-gstar <- local_gstar(queen_w,shp_clusters %>% select(abs_dif), significance_cutoff = 0.01)
-shp_clusters$gstar_cluster <- lisa_clusters(gstar)
-shp_clusters <- shp_clusters %>%
-  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
-table(shp_clusters$gstar_cluster)
-
-# CREATING MAP FOR GETIS ORD: DIFFERENCE IN LIFE EXPECTANCY B/W 2015-2019 AND 1990-1994 FOR WOMEN 
-getisord_diffLE_women <- ggplot()+
-  geom_sf(data=shp_clusters %>% filter(!is.na(gstar_cluster)), size=0,color=NA,
-          aes(geometry=geometry, fill=(gstar_cluster)))+
-  geom_sf(data=shp_clusters, size=.1,fill=NA,color="black",
-          aes(geometry=geometry))+
-  geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
-  geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
-  geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
-  geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
-  annotate("text", x=st_bbox(shp_clusters)$xmin, 
-           y=st_bbox(shp_clusters)$ymax, 
-           hjust=0, vjust=0,
-           size=10,
-           label="D")+
-  scale_fill_manual(values=moran_colors, name="")+
-  coord_sf(xlim=st_bbox(shp_clusters)[c("xmin", "xmax")],
-           ylim=st_bbox(shp_clusters)[c("ymin", "ymax")])+
-  guides(size=F, alpha=F, fill = guide_legend(override.aes = list(alpha=0))) +
-  #labs(title=title) +
-  #labs(title="", tag="D")+
-  map_theme + 
-  theme(legend.text=element_blank()) +
-  theme(legend.position="none")
-
-### biscale 3x3 plot: baseline LE & change in LE ----
-
-# baseline df
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>%
-                             filter(type%in%"cz",
-                                    year_type%in%"year5",
-                                    year%in%"1990-1994",
-                                    gender%in%"Women"),
-                           by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
-shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
-
-queen_w <- queen_weights(shp_clusters)
-gstar <- local_gstar(queen_w,shp_clusters %>% select(le), significance_cutoff = 0.01)
-shp_clusters$gstar_cluster <- lisa_clusters(gstar)
-shp_clusters <- shp_clusters %>%
-  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
-table(shp_clusters$gstar_cluster)
-baseline_clusters <- shp_clusters %>% 
-  mutate(baseline_gstar_cluster=gstar_cluster) %>% 
-  select(-gstar_cluster) %>% 
-  st_drop_geometry()
-
-# change in LE df 
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Women", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id")) 
-shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
-
-queen_w <- queen_weights(shp_clusters)
-gstar <- local_gstar(queen_w,shp_clusters %>% select(abs_dif), significance_cutoff = 0.01)
-shp_clusters$gstar_cluster <- lisa_clusters(gstar)
-shp_clusters <- shp_clusters %>%
-  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
-table(shp_clusters$gstar_cluster)
-diffLE_clusters <- shp_clusters %>% 
-  mutate(diffLE_gstar_cluster=gstar_cluster) %>%
-  select(-gstar_cluster) %>% 
-  st_drop_geometry()
-
-# combining both df's and droplevel unused factor levels (Undefined, Isolated)
-df <- baseline_clusters %>% right_join(diffLE_clusters, by="LM_Code") %>% 
-  select(LM_Code, baseline_gstar_cluster, diffLE_gstar_cluster) %>% 
-  filter(!baseline_gstar_cluster%in%c("Undefined", "Isolated")) %>% 
-  filter(!diffLE_gstar_cluster%in%c("Undefined", "Isolated"))
-df$baseline_gstar_cluster <- droplevels(df$baseline_gstar_cluster)
-df$diffLE_gstar_cluster <- droplevels(df$diffLE_gstar_cluster)
-df <- df %>% mutate(baseline_gstar_cluster=case_when(baseline_gstar_cluster%in%"Low-Low" ~ "Low",
-                                                     baseline_gstar_cluster%in%"High-High"~ "High",
-                                                     baseline_gstar_cluster%in%"Not significant" ~ "Not significant"),
-                    diffLE_gstar_cluster=case_when(diffLE_gstar_cluster%in%"Low-Low" ~ "Low",
-                                                   diffLE_gstar_cluster%in%"High-High"~ "High",
-                                                   diffLE_gstar_cluster%in%"Not significant" ~ "Not significant"))
-
-
-# checking unique combos, should be 9
-crossing(df$baseline_gstar_cluster, df$diffLE_gstar_cluster)
-df %>% count(baseline_gstar_cluster, diffLE_gstar_cluster) 
-
-
-df <- df %>% mutate(type=case_when(
-  baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="Low" ~ "Low Baseline - Decreased",
-  baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="Not significant" ~ "Low Baseline - NS Change",
-  baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="High" ~ "Low Baseline - Increased",
-  baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="Low" ~ "NS Baseline - Decreased",
-  baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="Not significant" ~ "NS Baseline - NS Change",
-  baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="High" ~ "NS Baseline - Increased",
-  baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="Low" ~ "High Baseline - Decreased",
-  baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="Not significant" ~ "High Baseline - NS Change",
-  baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="High" ~ "High Baseline - Increased"))
-
-
-df <- df %>% mutate(type=factor(type,
-                                levels=c("Low Baseline - Decreased",
-                                         "Low Baseline - NS Change",
-                                         "Low Baseline - Increased",
-                                         "NS Baseline - Decreased",
-                                         "NS Baseline - NS Change",
-                                         "NS Baseline - Increased", 
-                                         "High Baseline - Decreased",
-                                         "High Baseline - NS Change",
-                                         "High Baseline - Increased"))) %>% 
-  arrange(type)
-cluster_count <- df %>% count(type)
-
-biscale_women_df <- right_join(shp_cz, df, by="LM_Code") 
-
 # CREATING MAP FOR BASELINE LE X CHANGE IN LE 
 biscale_women_map <- ggplot()+
-  geom_sf(data=biscale_women_df, size=0,color=NA,
+  geom_sf(data=all_women %>% filter(!is.na(type)), size=0,color=NA,
           aes(geometry=geometry, fill=(type)))+
-  geom_sf(data=biscale_women_df, size=.1,fill=NA,color="black",
+  geom_sf(data=all_women, size=.1,fill=NA,color="black",
           aes(geometry=geometry))+
   geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
   geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
@@ -1859,14 +1114,14 @@ biscale_women_map <- ggplot()+
   geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
   geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
   geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
-  annotate("text", x=st_bbox(biscale_men_df)$xmin, 
-           y=st_bbox(biscale_men_df)$ymax, 
+  annotate("text", x=st_bbox(all_women)$xmin, 
+           y=st_bbox(all_women)$ymax, 
            hjust=0, vjust=0,
            size=10,
            label="B")+
   scale_fill_manual(values=cols)+
-  coord_sf(xlim=st_bbox(biscale_women_df)[c("xmin", "xmax")],
-           ylim=st_bbox(biscale_women_df)[c("ymin", "ymax")])+
+  coord_sf(xlim=st_bbox(all_women)[c("xmin", "xmax")],
+           ylim=st_bbox(all_women)[c("ymin", "ymax")])+
   guides(color=guide_legend(reverse=TRUE),
          fill=guide_legend(nrow=3, byrow=TRUE))+
   #labs(subtitle="Women")+
@@ -1877,25 +1132,47 @@ biscale_women_map <- ggplot()+
         legend.box.background = element_blank())
 
 
-
-pall<-arrangeGrob(grobs=list(getisord_baselineLE_men, 
-                             getisord_baselineLE_women, 
-                             getisord_diffLE_men, 
-                             getisord_diffLE_women), 
-                  ncol=2)
-pall<-arrangeGrob(grobs=list(pall, legend_sep), heights=c(20, 1), ncol=1)
-ggsave("../Tables & Figures/Figure3_sep_001.pdf", pall, width=29, height=19)
-
-
+#biscale map
 legend<-get_legend(biscale_men_map)
 biscale_men_map<-biscale_men_map+guides(fill="none") 
 biscale_women_map<-biscale_women_map+guides(fill="none")
 map_all<-arrangeGrob(grobs=list(biscale_men_map, biscale_women_map), ncol=2)
 map_all_forreal<-arrangeGrob(grobs=list(map_all, legend), ncol=1, heights=c(15, 2))
-ggsave("../Tables & Figures/Figure3_combined_001.pdf", map_all_forreal, width=30, height=11)
+ggsave("../Tables & Figures/Figure3_combined.pdf", map_all_forreal, width=30, height=11)
 
+# TO DO: Repeat GEtis Ord with 0.1 and 0.01
+# map with diffferences? or all in the same map with shading?
+# remove tertiles from appendix. chekc for other mentions of teritles
 
-
+# exploring size of CZs by type of clustering
+# first, create average pop across periods
+pop<-dta %>% group_by(cz, year) %>% 
+  summarize(pop=sum(pop_denom)) %>% 
+  group_by(cz) %>% 
+  summarise(avg_pop=mean(pop)) %>% 
+  rename(LM_Code=cz)
+biscale_pop<-bind_rows(all_women %>% as_tibble() %>% left_join(pop) %>% 
+            select(LM_Code, type, avg_pop) %>% mutate(gender="Women"),
+          all_men %>% as_tibble() %>% left_join(pop) %>% 
+            select(LM_Code, type, avg_pop) %>% mutate(gender="Men")) %>% 
+  mutate(type=sub(" - ", " -\n", type)) %>% 
+  filter(!is.na(type))
+ggplot(biscale_pop, aes(x=type, y=avg_pop)) +
+  geom_boxplot()+
+  scale_y_continuous(trans="log10", breaks=10^(4:7),
+                     labels=c("10K", "100K", "1M", "10M")) +
+  facet_wrap(~gender) +
+  labs(x="",
+       #title="Range (maximum-minimum)",
+       y="Average population over study period",
+       color="", fill="", linetype="")+
+  guides(linetype="none")+
+  scale_x_discrete(labels=label_wrap(40))+
+  isabel_theme+
+  theme(legend.position = c(0.2, 0.2),
+        legend.background = element_blank(),
+        axis.text.x=element_text(angle=90))
+  ggsave("../Tables & Figures/Appendix_Figure_Size.pdf", width=12, height=7)
 
 
 

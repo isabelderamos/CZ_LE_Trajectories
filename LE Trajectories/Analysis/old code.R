@@ -198,3 +198,141 @@ globalmoran <- data.frame(statistic=temp$statistic[1], pval=temp$p.value) %>%
 globalmoran
 ## DIFFERENCE LE (FROM 1990-1994 TO 2015-2019) FOR WOMEN: 0.355 (<0.001)
 
+
+## generating maps ----
+
+# USING BIVARITE MAPPING
+options<-expand.grid(gender=c("Men", "Women"), yr=c("year3", "year5"), unit=c("cz", "cbsa")) %>% as_tibble()
+all_results_bivariate<-map(1:nrow(options), function(i){
+  #i<-3
+  opt_temp<-options %>% slice(i)
+  # title<-paste0("LE among ", opt_temp$gender, ", ", opt_temp$unit, ", ", opt_temp$yr)
+  
+  if (opt_temp$unit=="cbsa") {
+    temp <- right_join(shp_cbsa, results_cbsa_cz %>% get_bivarite(., gender_mw=opt_temp$gender, yr_35=opt_temp$yr, cbsa_cz=opt_temp$unit), by=c("GEOID"="id"))
+    tmp_plot <- ggplot(temp, aes(geometry=geometry)) +
+      geom_sf(mapping=aes(fill=bi_class), 
+              color="white",
+              size=0.1,
+              show.legend=FALSE) + 
+      bi_scale_fill(pal="DkViolet", dim=3) +
+      geom_sf(data=st_transform(df_state, crs = st_crs(shp_cbsa)), size=0.1, color="black", fill=NA)+
+      geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cbsa)), size=0.1, color="black", fill="darkgrey")+
+      geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cbsa)), size=0.1, color="black", fill="darkgrey")+
+      geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cbsa)), size=1.5, color="black", fill=NA)+
+      geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cbsa)), size=0.75, color="black", fill=NA)+
+      coord_sf(xlim=st_bbox(temp)[c("xmin", "xmax")],
+               ylim=st_bbox(temp)[c("ymin", "ymax")])+
+      # labs(title=title)+
+      map_theme
+    tmp_legend <- bi_legend(pal = "DkViolet",
+                            dim = 3,
+                            xlab = "Higher LE",
+                            ylab = "Most Increase Since 1990",
+                            size = 8)+
+      theme(panel.background = element_rect(fill = "lightblue1"),
+            panel.border=element_blank(),
+            plot.background = element_rect(fill = "lightblue1"),
+            axis.ticks=element_blank(),
+            panel.grid.major=element_blank(),
+            panel.grid.minor=element_blank())
+    tmp_map <- ggdraw() +
+      draw_plot(tmp_plot, 0, 0, 1, 1) +
+      draw_plot(tmp_legend, 0.82, 0.2, 0.2, 0.2)
+    tmp_map
+    
+  } else if (opt_temp$unit=="cz") {
+    temp <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw=opt_temp$gender, yr_35=opt_temp$yr, cbsa_cz=opt_temp$unit), by=c("LM_Code"="id"))
+    tmp_plot <- ggplot(temp, aes(geometry=geometry)) +
+      geom_sf(mapping=aes(fill=bi_class), 
+              color="white",
+              size=0.1,
+              show.legend=FALSE) + 
+      bi_scale_fill(pal="DkViolet", dim=3) +
+      geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
+      geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
+      geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
+      geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+      geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+      geom_sf(data=temp %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="darkgrey")+
+      coord_sf(xlim=st_bbox(temp)[c("xmin", "xmax")],
+               ylim=st_bbox(temp)[c("ymin", "ymax")])+
+      # labs(title=title)+
+      map_theme
+    tmp_legend <- bi_legend(pal = "DkViolet",
+                            dim = 3,
+                            xlab = "Higher LE",
+                            ylab = "Most Increase Since 1990",
+                            size = 8)+
+      theme(panel.background = element_rect(fill = "lightblue1"),
+            panel.border=element_blank(),
+            plot.background = element_rect(fill = "lightblue1"),
+            axis.ticks=element_blank(),
+            panel.grid.major=element_blank(),
+            panel.grid.minor=element_blank())
+    tmp_map <- ggdraw() +
+      draw_plot(tmp_plot, 0, 0, 1, 1) +
+      draw_plot(tmp_legend, 0.82, 0.2, 0.2, 0.2)
+    tmp_map
+  }
+})
+
+
+# USING BREWER PALETTE FOR MAPPING
+options<-expand.grid(gender=c("Men", "Women"), yr=c("year3", "year5"), unit=c("cz", "cbsa")) %>% as_tibble()
+all_results_brewer<-map(1:nrow(options), function(i){
+  #i<-2
+  opt_temp<-options %>% slice(i)
+  # title<-paste0("LE among ", opt_temp$gender, ", ", opt_temp$unit, ", ", opt_temp$yr)
+  
+  if (opt_temp$unit=="cbsa") {
+    temp <- right_join(shp_cbsa, results_cbsa_cz %>% get_bivarite(., gender_mw=opt_temp$gender, yr_35=opt_temp$yr, cbsa_cz=opt_temp$unit), by=c("GEOID"="id"))
+    tmp_plot <- ggplot(temp, aes(geometry=geometry)) +
+      geom_sf(mapping=aes(fill=bi_class), 
+              color="white",
+              size=0.1,
+              show.legend=TRUE) + 
+      geom_sf(data=st_transform(df_state, crs = st_crs(shp_cbsa)), size=0.1, color="black", fill=NA)+
+      geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cbsa)), size=0.1, color="black", fill="darkgrey")+
+      geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cbsa)), size=0.1, color="black", fill="darkgrey")+
+      coord_sf(xlim=st_bbox(temp)[c("xmin", "xmax")],
+               ylim=st_bbox(temp)[c("ymin", "ymax")])+
+      scale_fill_brewer(palette="BrBG")+
+      # labs(title=title)+
+      guides(color=guide_legend(reverse=TRUE))+
+      map_theme + 
+      theme(panel.background = element_rect(fill = "blue"),
+            plot.background = element_rect(fill = "blue"))
+    tmp_plot
+    
+  } else if (opt_temp$unit=="cz") {
+    temp <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw=opt_temp$gender, yr_35=opt_temp$yr, cbsa_cz=opt_temp$unit), by=c("LM_Code"="id"))
+    tmp_plot <- ggplot(temp, aes(geometry=geometry)) +
+      geom_sf(mapping=aes(fill=bi_class), 
+              color="white",
+              size=0.1,
+              show.legend=TRUE) + 
+      geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
+      geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+      geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+      coord_sf(xlim=st_bbox(temp)[c("xmin", "xmax")],
+               ylim=st_bbox(temp)[c("ymin", "ymax")])+
+      scale_fill_brewer(palette="BrBG")+
+      # labs(title=title)+
+      guides(color=guide_legend(reverse=TRUE))+
+      map_theme
+    tmp_plot
+  }
+})
+
+
+
+
+## saving desired maps as PDF images ----
+
+men_cz_5yr_map <- all_results_bivariate[[3]]
+ggsave("../Tables & Figures/men_cz_5yr_map.pdf", men_cz_5yr_map, width=15, height=10)
+
+women_cz_5yr_map <- all_results_bivariate[[4]]
+ggsave("../Tables & Figures/women_cz_5yr_map.pdf", women_cz_5yr_map, width=15, height=10)
+
