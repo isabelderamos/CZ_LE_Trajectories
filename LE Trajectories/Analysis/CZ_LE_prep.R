@@ -5,10 +5,10 @@
 ########################################################
 
 ### loading libraries
-library(dplyr)
+#library(dplyr)
 library(tidyverse)
-library(stringr)
-library(purrr)
+#library(stringr)
+#library(purrr)
 
 ### Get mortality file names
 # NOTE: individual level mortality files obtained from NCHS were cleaned and exported as .rdata's beforehand 

@@ -1,3 +1,7 @@
+## PENDINGS for R1 EPID:
+### think of doing resampling for the significance part?
+
+
 #******************************************************#
 #   Author: Isabel De Ramos                            #
 #   Date Created: 14 April 2022                        #
@@ -10,10 +14,8 @@
                     #******************************************************************************#
 
 # INSTALL LIBRARIES ----
-library(dplyr)
 library(tidyverse)
-library(stringr)
-library(purrr)
+library(classInt)
 library(grid)
 library(gridExtra)
 library(scales)
@@ -533,76 +535,6 @@ ggplot(df, aes(x=men_le, y=women_le)) +
   theme(legend.position="none", legend.title=element_blank())
 
 
-## then, creating LV scatterplot
-# spreading LV by gender 
-df <- results_cbsayr5 %>% select(year5, cbsa, gender, lv_cv) %>% 
-  spread(gender,lv_cv) %>% 
-  rename(men_lv=`Men`,
-         women_lv=`Women`)
-# generating scatterplot
-ggplot(df, aes(x=men_lv, y=women_lv)) +
-  geom_abline(intercept = 0, slope=1, lty=1)+
-  geom_point(aes(fill=cbsa), size=1) +
-  labs(x="Lifespan Variation for Men",
-       y="Lifespan Variation for Women",
-       color="", fill="", shape="")+
-  #guides(color=F)+
-  facet_wrap(~year5)+
-  isabel_theme+
-  theme(legend.position="none", legend.title=element_blank())
-
-
-# 1990-2019 3yr men v women, le & lv #
-
-## first, creating LE scatterplot
-# spreading LE and 95% CIs by gender 
-df <- results_cbsayr3 %>% select(cbsa, gender, le) %>% 
-  spread(gender,le) %>% 
-  rename(men_le=`Men`,
-         women_le=`Women`) %>% 
-  full_join(
-    results_cbsayr3 %>% select(cbsa, gender, lci) %>% 
-      spread(gender,lci) %>% 
-      rename(men_lci=`Men`,
-             women_lci=`Women`)) %>% 
-  full_join(
-    results_cbsayr3 %>% select(cbsa, gender, uci) %>% 
-      spread(gender, uci) %>% 
-      rename(men_uci=`Men`,
-             women_uci=`Women`))
-# generating scatterplot
-ggplot(df, aes(x=men_le, y=women_le)) +
-  geom_abline(intercept = 0, slope=1, lty=1)+
-  geom_linerange(aes(ymin=women_lci, ymax=women_uci))+
-  geom_linerange(aes(xmin=men_lci, xmax=men_uci))+
-  geom_point(aes(fill=cbsa), size=1) +
-  labs(x="Life Expectancy for Men (95% CI)",
-       y="Life Expectancy for Women (95% CI)",
-       color="", fill="", shape="")+
-  #guides(color=F)+
-  facet_wrap(~year3)+
-  isabel_theme+
-  theme(legend.position="none", legend.title=element_blank())
-
-
-## then, creating LV scatterplot
-# spreading LV by gender 
-df <- results_cbsayr3 %>% select(year3, cbsa, gender, lv) %>% 
-  spread(gender,lv) %>% 
-  rename(men_lv=`Men`,
-         women_lv=`Women`)
-# generating scatterplot
-ggplot(df, aes(x=men_lv, y=women_lv)) +
-  geom_abline(intercept = 0, slope=1, lty=1)+
-  geom_point(aes(fill=cbsa), size=1) +
-  labs(x="Lifespan Variation for Men",
-       y="Lifespan Variation for Women",
-       color="", fill="", shape="")+
-  #guides(color=F)+
-  facet_wrap(~year3)+
-  isabel_theme+
-  theme(legend.position="none", legend.title=element_blank())
-
 # computing RSE
 results_czyr5 %>% 
   # back calculating SE (could do it in function above)
@@ -815,7 +747,7 @@ results_czyr5 %>% ungroup() %>%
 sumstat_yr_gender <- results_czyr5 %>% ungroup() %>% 
   select(year5, gender, le) %>% 
   group_by(year5, gender) %>% 
-  summarise(mean_le=mean(le),
+  summarise(median_le=median(le),
             sd_le=sd(le),
             min=min(le),
             max=max(le),
@@ -823,7 +755,7 @@ sumstat_yr_gender <- results_czyr5 %>% ungroup() %>%
             q3=quantile(le, probs=0.75))
 
 
-sumstat_table <- sumstat_yr_gender %>%  mutate(le_ci=paste0(mean_le=format(mean_le, digits=1, nsmall=1), 
+sumstat_table <- sumstat_yr_gender %>%  mutate(le_ci=paste0(median_le=format(median_le, digits=1, nsmall=1), 
                                            " ± (",
                                            format(sd_le, digits=1, nsmall=1),
                                            ")")) %>% # LE (95% CI) column 
@@ -852,15 +784,34 @@ sumstat_yr_gender %>%  mutate(min_max=paste0("(",
 write.csv(sumstat_table, "../Tables & Figures/sumstat_table.csv", row.names=FALSE)
 
 sumstat_table2 <- sumstat_yr_gender %>%  
-  mutate(le_ci=paste0(median_le=format(mean_le, digits=1, nsmall=1), 
+  mutate(le_ci=paste0(median_le=format(median_le, digits=1, nsmall=1), 
                                                             " [",
                                                             format(q1, digits=1, nsmall=1), "-",
                       format(q3, digits=1, nsmall=1),
-                                                            "]")) %>% # LE (95% CI) column 
+                                                            "]")) %>% 
   select(year5, gender, le_ci) %>% 
-  spread(year5, le_ci) 
+  pivot_wider(id_cols=year5, values_from=le_ci, names_from=gender)
 write.csv(sumstat_table2, "../Tables & Figures/sumstat_table_v2.csv", row.names=FALSE)
 
+# adding change statistics
+sumstat_change<-results_czyr5 %>% ungroup() %>% 
+  select(cz, year5, gender, le) %>% 
+  pivot_wider(id_cols=c(gender, cz), values_from=le, names_from=year5) %>% 
+  mutate(change=`2015-2019`-`1990-1994`) %>% 
+  group_by(gender) %>% 
+  summarise(median=median(change),
+            q1=quantile(change, probs=0.25),
+            q3=quantile(change, probs=0.75)) %>% 
+  mutate(le_ci=paste0(median=format(median, digits=1, nsmall=1), 
+                      " [",
+                      format(q1, digits=1, nsmall=1), "-",
+                      format(q3, digits=1, nsmall=1),
+                      "]")) %>% 
+  select(gender, le_ci) %>% 
+  mutate(year5="Change") %>% 
+  pivot_wider(id_cols=year5, names_from=gender, values_from=le_ci)
+sumstat_table3<-sumstat_table2 %>% bind_rows(sumstat_change)
+write.csv(sumstat_table3, "../Tables & Figures/sumstat_table_v3.csv", row.names=FALSE)
 
 # VARIBILITY IN LE ACROSS CBSA'S OVER TIME ----
 
@@ -902,8 +853,8 @@ coeffvar_trends <-
                      limits=c(0,NA)) +
   #facet_wrap(~gender) +
   geom_text(aes(label=format(coeff_var, digits=2, nsmall=2)), vjust=-1.5) +
-  labs(x="Year (5-year periods)",
-       y="Coefficient of Variation (%)",
+  labs(x="5-year period",
+       y="Coefficient of variation (%)",
        title="Coefficient of Variation (SD/mean)",
        color="", fill="", linetype="")+
   scale_x_discrete(labels=label_wrap(10))+
@@ -917,7 +868,7 @@ range_trends <-
   scale_y_continuous(limits=c(0,NA)) +
   #facet_wrap(~gender) +
   geom_text(aes(label=format(range, digits=1, nsmall=1)), vjust=-1.5) +
-  labs(x="Year (5-year periods)",
+  labs(x="5-year period",
        title="Range (maximum-minimum)",
        y="Range (years)",
        color="", fill="", linetype="")+
@@ -1003,8 +954,8 @@ czyr5_trends <-
   scale_alpha_manual(values=c(0.25, 1))+
   scale_size_manual(values = c(0.5, 1))+
   scale_color_manual(labels=c("CZ", "Overall"), values=c("grey55", "black"))+
-  labs(x="Year (5-year periods)",
-       y="Life Expectancy",
+  labs(x="5-year period",
+       y="Life expectancy (years)",
        color="", fill="")+
   scale_x_discrete(labels=label_wrap(10))+
   isabel_theme+
@@ -1017,7 +968,6 @@ ggsave("../Tables & Figures/figure1.pdf", czyr5_trends, width=15, height=10)
 
 # GLOBAL MORAN'S I ----
 # gives us a p-value and tells us if there's clustering / spatial autocorrelation
-
 load('le_cbsa_results.rdata')
 shp_cz <- read_sf("Shapefiles/CZ shapefile/ERS10.shp") %>% mutate(LM_Code=as.character(LM_Code))
 
@@ -1037,119 +987,119 @@ results_cbsa_cz <-
     results_czyr5 %>% ungroup() %>% mutate(type="cz", year_type="year5", year=year5, id=cz) %>% 
       select(-year5, -cz) 
   ) %>% 
-  #filter(!id%in%c("14720", "20780", "587")) %>% # QUARANTINING ROGUE CBSA/CZS FOR NOW 
   filter(!id%in%c(cz_ak, cz_hi)) # DROPPING CZ'S IN ALASKA AND HAWAII
 
 
-## MEN ----
+## Looping to do all periods/sexes
+# add change first
+results_cbsa_cz_moran<-results_cbsa_cz %>% bind_rows(
+  bind_rows(results_cbsa_cz %>% get_bivarite(., gender_mw="Women", yr_35="year5", cbsa_cz="cz") %>% 
+            mutate(year="Change") %>% 
+            select(id, gender, year, le=abs_dif), 
+          results_cbsa_cz %>% get_bivarite(., gender_mw="Men", yr_35="year5", cbsa_cz="cz") %>% 
+            mutate(year="Change") %>% 
+            select(id,gender, year, le=abs_dif)) %>% 
+    mutate(type="cz", year_type="year5")) 
 
-### baseline LE ----
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% 
+shp_clusters <- right_join(shp_cz, results_cbsa_cz_moran %>% 
                              filter(type%in%"cz",
-                                    year_type%in%"year5", 
-                                    year%in%"1990-1994", 
-                                    gender%in%"Men"), 
+                                    year_type%in%"year5"), 
                            by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
+globalmoran_table<-shp_clusters %>% 
+  group_by(gender, year) %>% 
+  group_modify(~{
+    #.x<-shp_clusters %>% filter(gender=="Men", year=="1990-1994")
+    print(.y)
+    neighbors <- poly2nb(.x %>% group_by(LM_Code))
+    # fixing San Juan County, WA, CZ 604 (island, but manually input King County CZ 602 as neighbor)
+    neighbors[[which(.x$LM_Code==604)]] <- which(.x$LM_Code%in%c(602))
+    neighbors[[which(.x$LM_Code==602)]] <- c(neighbors[[which(.x$LM_Code==602)]], which(.x$LM_Code%in%c(604)))
+    
+    # it goes by indice in .x dataframe! for example: 
+    # neighbors[[601]] is .x[601,] == CZ 92 (Philadelphia County, PA) 
+    # neighbors of CZ 92 (Philly County) are 
+    # 182 == .x[182,] == CZ 275 (Baltimore County, MD)
+    # 307 == .x[307,] == CZ 390 (Camden County, NJ)
+    # 308 == .x[308,] == CZ 391 (Bergen County, NJ)
+    # 415 == .x[415,] == CZ 488 (Lancaster County, PA)
+    # 418 == .x[418,] == CZ 490 (Berks County, PA)
+    # 600 == .x[600,] == CZ 91  (Sussex County, DE)
+    
+    # use the moran.mc function
+    temp <- moran.mc(x = .x %>% pull(le), 
+                     # listw = list of neighbors, obtained from the nb adjacency matrix by using the nb2listw spdep function
+                     listw = nb2listw(neighbors, style = "B"), 
+                     # last, number of permutations for the permutation-based moran test
+                     nsim = 9999)
+    # extract moran statistic and p value
+    globalmoran <- data.frame(statistic=temp$statistic[1], pval=temp$p.value) %>% 
+      mutate(out=paste0(round(statistic, digits=3), " (", ifelse(pval<0.001, "<0.001", round(pval, digits=3)), ")")) 
+    globalmoran
+  })
+# now create table
+globalmoran_table_formatted<-globalmoran_table %>% select(year, gender, out) %>% 
+  pivot_wider(id_cols=year, values_from=out, names_from=gender) %>% 
+  rename(year5=year, men_moran=Men, women_moran=Women)
+table1_new<-full_join(sumstat_table3, globalmoran_table_formatted) %>% 
+  select(year5, Men, men_moran, Women, women_moran)
+write.csv(table1_new, "../Tables & Figures/Table1_new.csv", row.names=FALSE)
 
-neighbors <- poly2nb(shp_clusters %>% group_by(LM_Code))
-# fixing San Juan County, WA, CZ 604 (island, but manually input King County CZ 602 as neighbor)
-neighbors[[which(shp_clusters$LM_Code==604)]] <- which(shp_clusters$LM_Code%in%c(602))
-neighbors[[which(shp_clusters$LM_Code==602)]] <- c(neighbors[[which(shp_clusters$LM_Code==602)]], which(shp_clusters$LM_Code%in%c(604)))
+# Map with Baseline and change in LEs
+## Men
+### Baseline
 
-# it goes by indice in shp_clusters dataframe! for example: 
-# neighbors[[601]] is shp_clusters[601,] == CZ 92 (Philadelphia County, PA) 
-# neighbors of CZ 92 (Philly County) are 
-# 182 == shp_clusters[182,] == CZ 275 (Baltimore County, MD)
-# 307 == shp_clusters[307,] == CZ 390 (Camden County, NJ)
-# 308 == shp_clusters[308,] == CZ 391 (Bergen County, NJ)
-# 415 == shp_clusters[415,] == CZ 488 (Lancaster County, PA)
-# 418 == shp_clusters[418,] == CZ 490 (Berks County, PA)
-# 600 == shp_clusters[600,] == CZ 91  (Sussex County, DE)
-
-# use the moran.mc function
-temp <- moran.mc(x = shp_clusters %>% pull(le), 
-                 # listw = list of neighbors, obtained from the nb adjacency matrix by using the nb2listw spdep function
-                 listw = nb2listw(neighbors, style = "B"), 
-                 # last, number of permutations for the permutation-based moran test
-                 nsim = 9999)
-# extract moran statistic and p value
-globalmoran <- data.frame(statistic=temp$statistic[1], pval=temp$p.value) %>% 
-  mutate(out=paste0(round(statistic, digits=3), " (", ifelse(pval<0.001, "<0.001", round(pval, digits=3)), ")")) 
-globalmoran
-## BASELINE LE FOR MEN: 0.622 (<0.001)
-
-
-### change in LE ----
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Men", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id"))
-
-neighbors <- poly2nb(shp_clusters %>% group_by(LM_Code))
-# fixing San Juan County, WA, CZ 604 (island, but manually input King County CZ 602 as neighbor)
-neighbors[[which(shp_clusters$LM_Code==604)]] <- which(shp_clusters$LM_Code%in%c(602))
-neighbors[[which(shp_clusters$LM_Code==602)]] <- c(neighbors[[which(shp_clusters$LM_Code==602)]], which(shp_clusters$LM_Code%in%c(604)))
-
-# use the moran.mc function
-temp <- moran.mc(x = shp_clusters %>% pull(abs_dif), 
-                 # listw = list of neighbors, obtained from the nb adjacency matrix by using the nb2listw spdep function
-                 listw = nb2listw(neighbors, style = "B"), 
-                 # last, number of permutations for the permutation-based moran test
-                 nsim = 9999)
-# extract moran statistic and p value
-globalmoran <- data.frame(statistic=temp$statistic[1], pval=temp$p.value) %>% 
-  mutate(out=paste0(round(statistic, digits=3), " (", ifelse(pval<0.001, "<0.001", round(pval, digits=3)), ")")) 
-globalmoran
-## DIFFERENCE LE (FROM 1990-1994 TO 2015-2019) FOR MEN: 0.313 (<0.001)
-
-
-## WOMEN ----
-
-### baseline LE ----
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% 
+shp_rawle <- right_join(shp_cz, results_cbsa_cz_moran %>%
                              filter(type%in%"cz",
-                                    year_type%in%"year5", 
-                                    year%in%"1990-1994", 
-                                    gender%in%"Women"), 
-                           by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
-
-neighbors <- poly2nb(shp_clusters %>% group_by(LM_Code))
-# fixing San Juan County, WA, CZ 604 (island, but manually input King County CZ 602 as neighbor)
-neighbors[[which(shp_clusters$LM_Code==604)]] <- which(shp_clusters$LM_Code%in%c(602))
-neighbors[[which(shp_clusters$LM_Code==602)]] <- c(neighbors[[which(shp_clusters$LM_Code==602)]], which(shp_clusters$LM_Code%in%c(604)))
-
-# use the moran.mc function
-temp <- moran.mc(x = shp_clusters %>% pull(le), 
-                 # listw = list of neighbors, obtained from the nb adjacency matrix by using the nb2listw spdep function
-                 listw = nb2listw(neighbors, style = "B"), 
-                 # last, number of permutations for the permutation-based moran test
-                 nsim = 9999)
-# extract moran statistic and p value
-globalmoran <- data.frame(statistic=temp$statistic[1], pval=temp$p.value) %>% 
-  mutate(out=paste0(round(statistic, digits=3), " (", ifelse(pval<0.001, "<0.001", round(pval, digits=3)), ")")) 
-globalmoran
-## BASELINE LE FOR WOMEN: 0.614 (<0.001)
-
-
-
-### change in LE ----
-shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Women", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id"))
-
-neighbors <- poly2nb(shp_clusters %>% group_by(LM_Code))
-# fixing San Juan County, WA, CZ 604 (island, but manually input King County CZ 602 as neighbor)
-neighbors[[which(shp_clusters$LM_Code==604)]] <- which(shp_clusters$LM_Code%in%c(602))
-neighbors[[which(shp_clusters$LM_Code==602)]] <- c(neighbors[[which(shp_clusters$LM_Code==602)]], which(shp_clusters$LM_Code%in%c(604)))
-
-# use the moran.mc function
-temp <- moran.mc(x = shp_clusters %>% pull(abs_dif), 
-                 # listw = list of neighbors, obtained from the nb adjacency matrix by using the nb2listw spdep function
-                 listw = nb2listw(neighbors, style = "B"), 
-                 # last, number of permutations for the permutation-based moran test
-                 nsim = 9999)
-# extract moran statistic and p value
-globalmoran <- data.frame(statistic=temp$statistic[1], pval=temp$p.value) %>% 
-  mutate(out=paste0(round(statistic, digits=3), " (", ifelse(pval<0.001, "<0.001", round(pval, digits=3)), ")")) 
-globalmoran
-## DIFFERENCE LE (FROM 1990-1994 TO 2015-2019) FOR WOMEN: 0.355 (<0.001)
-
-
+                                    year_type%in%"year5",
+                                    year%in%c("1990-1994","Change"),
+                                    gender%in%c("Men", "Women")),
+                           by=c("LM_Code"="id")) %>% arrange(gender, LM_Code) %>% 
+  filter(!LM_Code%in%"587") %>% 
+  group_by(year, gender) %>% 
+  mutate(jenks=cut(le, breaks=classIntervals(le,n=10,style="jenks")$brks, include.lowest = T))
+  
+le_colors<-rev(colorRampPalette(c("green","yellow", "orange","red"))(10))
+maps_rawle<-shp_rawle %>% group_by(year, gender) %>% 
+  group_map(~{
+    #.x<-shp_rawle %>% filter(gender=="Men", year=="1990-1994")
+    tag<-case_when(
+      .y$gender=="Men" & .y$year=="1990-1994" ~ "A",
+      .y$gender=="Men" & .y$year=="Change" ~ "C",
+      .y$gender=="Women" & .y$year=="1990-1994" ~ "B",
+      .y$gender=="Women" & .y$year=="Change" ~ "D",
+    )
+    ggplot()+
+      geom_sf(data=.x, size=0,color=NA,
+              aes(geometry=geometry, fill=(jenks)))+
+      geom_sf(data=.x, size=.1,fill=NA,color="black",
+              aes(geometry=geometry))+
+      geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
+      geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+      geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+      geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+      geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
+      geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
+      annotate("text", x=st_bbox(shp_rawle)$xmin, 
+               y=st_bbox(shp_rawle)$ymax, 
+               hjust=0, vjust=0,
+               size=10,
+               label=tag)+
+      scale_fill_manual(values=le_colors, name="")+
+      coord_sf(xlim=st_bbox(shp_rawle)[c("xmin", "xmax")],
+               ylim=st_bbox(shp_rawle)[c("ymin", "ymax")])+
+      guides(size=F, alpha=F,
+             fill=guide_legend(nrow=2)) +
+      #labs(title="", tag="A")+
+      map_theme +
+      theme(legend.background = element_rect(fill='white'),
+            legend.box.background = element_blank(),
+            legend.text = element_text(size=19),
+            legend.position="bottom")
+    
+  })
+pall<-arrangeGrob(grobs=maps_rawle, 
+                  ncol=2)
+ggsave("../Tables & Figures/AppendixFigure2_rawle.pdf", pall, width=27.75, height=19)
 
 
 
@@ -1577,4 +1527,570 @@ map_all<-arrangeGrob(grobs=list(biscale_men_map, biscale_women_map), ncol=2)
 map_all_forreal<-arrangeGrob(grobs=list(map_all, legend), ncol=1, heights=c(15, 2))
 ggsave("../Tables & Figures/Figure3_combined.pdf", map_all_forreal, width=30, height=11)
 
+
+# exploring size of CZs by type of clustering
+# first, create average pop across periods
+pop<-dta %>% group_by(cz, year) %>% 
+  summarize(pop=sum(pop_denom)) %>% 
+  group_by(cz) %>% 
+  summarise(avg_pop=mean(pop)) %>% 
+  rename(LM_Code=cz)
+biscale_pop<-bind_rows(biscale_women_df %>% as_tibble() %>% left_join(pop) %>% 
+            select(LM_Code, type, avg_pop) %>% mutate(gender="Women"),
+          biscale_men_df %>% as_tibble() %>% left_join(pop) %>% 
+            select(LM_Code, type, avg_pop) %>% mutate(gender="Men")) %>% 
+  mutate(type=sub(" - ", " -\n", type))
+ggplot(biscale_pop, aes(x=type, y=avg_pop)) +
+  geom_boxplot()+
+  scale_y_continuous(trans="log10", breaks=10^(4:7),
+                     labels=c("10K", "100K", "1M", "10M")) +
+  facet_wrap(~gender) +
+  labs(x="Year (5-year periods)",
+       #title="Range (maximum-minimum)",
+       y="Relative Standard Error (SE/LE)",
+       color="", fill="", linetype="")+
+  guides(linetype="none")+
+  scale_x_discrete(labels=label_wrap(40))+
+  isabel_theme+
+  theme(legend.position = c(0.2, 0.2),
+        legend.background = element_blank(),
+        axis.text.x=element_text(angle=90))
+  
+  
+
+
+# USING GETIS ORD METHOD WITH P<0.01 (OR TRY RESAMPLING LE?? AND THEN SHOW CLUSTERS WITH >95% prob of being there?)
+
+## MEN ----
+
+### baseline LE ----
+shp_clusters <- right_join(shp_cz, results_cbsa_cz %>%
+                             filter(type%in%"cz",
+                                    year_type%in%"year5",
+                                    year%in%"1990-1994",
+                                    gender%in%"Men"),
+                           by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
+
+shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
+
+queen_w <- queen_weights(shp_clusters)
+gstar <- local_gstar(queen_w,shp_clusters %>% select(le), significance_cutoff = 0.01)
+shp_clusters$gstar_cluster <- lisa_clusters(gstar)
+shp_clusters <- shp_clusters %>%
+  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
+table(shp_clusters$gstar_cluster)
+
+# CREATING MAP FOR GETIS ORD: BASELINE LE FOR MEN
+getisord_baselineLE_men <- ggplot()+
+  geom_sf(data=shp_clusters %>% filter(!is.na(gstar_cluster)), size=0,color=NA,
+          aes(geometry=geometry, fill=(gstar_cluster)))+
+  geom_sf(data=shp_clusters, size=.1,fill=NA,color="black",
+          aes(geometry=geometry))+
+  geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
+  geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+  geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+  geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
+  geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
+  annotate("text", x=st_bbox(shp_clusters)$xmin, 
+           y=st_bbox(shp_clusters)$ymax, 
+           hjust=0, vjust=0,
+           size=10,
+           label="A")+
+  scale_fill_manual(values=moran_colors, name="",
+                    labels=c("Not Significant", "High or Increase", "Low or Decrease", "N/A"))+
+  coord_sf(xlim=st_bbox(shp_clusters)[c("xmin", "xmax")],
+           ylim=st_bbox(shp_clusters)[c("ymin", "ymax")])+
+  guides(size=F, alpha=F,
+         fill=guide_legend(nrow=1)) +
+  #labs(title="", tag="A")+
+  map_theme +
+  theme(legend.background = element_blank(),
+        legend.box.background = element_blank())
+legend_sep<-get_legend(getisord_baselineLE_men);plot(legend_sep)
+getisord_baselineLE_men<-getisord_baselineLE_men+guides(fill="none")
+#ggsave("test.pdf", getisord_baselineLE_men, width=15, height=7.5)
+
+### change in LE ----
+shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Men", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id")) 
+shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
+
+queen_w <- queen_weights(shp_clusters)
+gstar <- local_gstar(queen_w,shp_clusters %>% select(abs_dif))
+shp_clusters$gstar_cluster <- lisa_clusters(gstar)
+shp_clusters <- shp_clusters %>%
+  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
+table(shp_clusters$gstar_cluster)
+
+
+# CREATING MAP FOR GETIS ORD: DIFFERENCE IN LIFE EXPECTANCY B/W 2015-2019 AND 1990-1994 FOR MEN 
+getisord_diffLE_men <- ggplot()+
+  geom_sf(data=shp_clusters %>% filter(!is.na(gstar_cluster)), size=0,color=NA,
+          aes(geometry=geometry, fill=(gstar_cluster)))+
+  geom_sf(data=shp_clusters, size=.1,fill=NA,color="black",
+          aes(geometry=geometry))+
+  geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
+  geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+  geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+  geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
+  geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
+  annotate("text", x=st_bbox(shp_clusters)$xmin, 
+           y=st_bbox(shp_clusters)$ymax, 
+           hjust=0, vjust=0,
+           size=10,
+           label="C")+
+  scale_fill_manual(values=moran_colors, name="")+
+  coord_sf(xlim=st_bbox(shp_clusters)[c("xmin", "xmax")],
+           ylim=st_bbox(shp_clusters)[c("ymin", "ymax")])+
+  guides(size=F, alpha=F, fill = guide_legend(override.aes = list(alpha=0))) +
+  #labs(title=title) +
+  #labs(title="", tag="C")+
+  map_theme + 
+  theme(legend.text=element_blank()) +
+  theme(legend.position="none")
+
+
+### biscale 3x3 plot: baseline LE & change in LE ----
+
+# baseline df
+shp_clusters <- right_join(shp_cz, results_cbsa_cz %>%
+                             filter(type%in%"cz",
+                                    year_type%in%"year5",
+                                    year%in%"1990-1994",
+                                    gender%in%"Men"),
+                           by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
+shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
+
+queen_w <- queen_weights(shp_clusters)
+gstar <- local_gstar(queen_w,shp_clusters %>% select(le))
+shp_clusters$gstar_cluster <- lisa_clusters(gstar)
+shp_clusters <- shp_clusters %>%
+  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
+table(shp_clusters$gstar_cluster)
+baseline_clusters <- shp_clusters %>% 
+  mutate(baseline_gstar_cluster=gstar_cluster) %>% 
+  select(-gstar_cluster) %>% 
+  st_drop_geometry()
+
+# change in LE df 
+shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Men", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id")) 
+shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
+
+queen_w <- queen_weights(shp_clusters)
+gstar <- local_gstar(queen_w,shp_clusters %>% select(abs_dif))
+shp_clusters$gstar_cluster <- lisa_clusters(gstar)
+shp_clusters <- shp_clusters %>%
+  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
+table(shp_clusters$gstar_cluster)
+diffLE_clusters <- shp_clusters %>% 
+  mutate(diffLE_gstar_cluster=gstar_cluster) %>%
+  select(-gstar_cluster) %>% 
+  st_drop_geometry()
+
+# combining both df's and droplevel unused factor levels (Undefined, Isolated)
+df <- baseline_clusters %>% right_join(diffLE_clusters, by="LM_Code") %>% 
+  select(LM_Code, baseline_gstar_cluster, diffLE_gstar_cluster) %>% 
+  filter(!baseline_gstar_cluster%in%c("Undefined", "Isolated")) %>% 
+  filter(!diffLE_gstar_cluster%in%c("Undefined", "Isolated"))
+df$baseline_gstar_cluster <- droplevels(df$baseline_gstar_cluster)
+df$diffLE_gstar_cluster <- droplevels(df$diffLE_gstar_cluster)
+df <- df %>% mutate(baseline_gstar_cluster=case_when(baseline_gstar_cluster%in%"Low-Low" ~ "Low",
+                                                     baseline_gstar_cluster%in%"High-High"~ "High",
+                                                     baseline_gstar_cluster%in%"Not significant" ~ "Not significant"),
+                    diffLE_gstar_cluster=case_when(diffLE_gstar_cluster%in%"Low-Low" ~ "Low",
+                                                   diffLE_gstar_cluster%in%"High-High"~ "High",
+                                                   diffLE_gstar_cluster%in%"Not significant" ~ "Not significant"))
+
+
+# checking unique combos, should be 9
+crossing(df$baseline_gstar_cluster, df$diffLE_gstar_cluster)
+df %>% count(baseline_gstar_cluster, diffLE_gstar_cluster) 
+
+
+df <- df %>% mutate(type=case_when(
+  baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="Low" ~ "Low Baseline - Decreased",
+  baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="Not significant" ~ "Low Baseline - NS Change",
+  baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="High" ~ "Low Baseline - Increased",
+  baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="Low" ~ "NS Baseline - Decreased",
+  baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="Not significant" ~ "NS Baseline - NS Change",
+  baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="High" ~ "NS Baseline - Increased",
+  baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="Low" ~ "High Baseline - Decreased",
+  baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="Not significant" ~ "High Baseline - NS Change",
+  baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="High" ~ "High Baseline - Increased"))
+
+
+df <- df %>% mutate(type=factor(type,
+                                levels=c("Low Baseline - Decreased",
+                                         "Low Baseline - NS Change",
+                                         "Low Baseline - Increased",
+                                         "NS Baseline - Decreased",
+                                         "NS Baseline - NS Change",
+                                         "NS Baseline - Increased", 
+                                         "High Baseline - Decreased",
+                                         "High Baseline - NS Change",
+                                         "High Baseline - Increased"))) %>% 
+  arrange(type)
+cluster_count <- df %>% count(type)
+
+biscale_men_df <- right_join(shp_cz, df, by="LM_Code") %>% glimpse()
+
+# CREATING MAP FOR BASELINE LE X CHANGE IN LE 
+biscale_men_map <- ggplot()+
+  geom_sf(data=biscale_men_df, size=0,color=NA,
+          aes(geometry=geometry, fill=(type)))+
+  geom_sf(data=biscale_men_df, size=.1,fill=NA,color="black",
+          aes(geometry=geometry))+
+  geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
+  geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+  geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+  geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
+  geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
+  annotate("text", x=st_bbox(biscale_men_df)$xmin, 
+           y=st_bbox(biscale_men_df)$ymax, 
+           hjust=0, vjust=0,
+           size=10,
+           label="A")+
+  scale_fill_manual(values=cols)+
+  coord_sf(xlim=st_bbox(biscale_men_df)[c("xmin", "xmax")],
+           ylim=st_bbox(biscale_men_df)[c("ymin", "ymax")])+
+  guides(color=guide_legend(reverse=TRUE),
+         fill=guide_legend(nrow=3, byrow=TRUE))+
+  #labs(title="Men")+
+  #labs(tag="A")+
+  map_theme+
+  theme(legend.position="bottom", legend.title=element_blank())+
+  theme(legend.background = element_blank(),
+        legend.box.background = element_blank())
+
+
+## WOMEN ----
+
+### baseline LE ----
+shp_clusters <- right_join(shp_cz, results_cbsa_cz %>%
+                             filter(type%in%"cz",
+                                    year_type%in%"year5",
+                                    year%in%"1990-1994",
+                                    gender%in%"Women"),
+                           by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
+shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
+
+queen_w <- queen_weights(shp_clusters)
+gstar <- local_gstar(queen_w,shp_clusters %>% select(le))
+shp_clusters$gstar_cluster <- lisa_clusters(gstar)
+shp_clusters <- shp_clusters %>%
+  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
+table(shp_clusters$gstar_cluster)
+
+# CREATING MAP FOR GETIS ORD: BASELINE LE FOR WOMEN 
+getisord_baselineLE_women <- ggplot()+
+  geom_sf(data=shp_clusters %>% filter(!is.na(gstar_cluster)), size=0,color=NA,
+          aes(geometry=geometry, fill=(gstar_cluster)))+
+  geom_sf(data=shp_clusters, size=.1,fill=NA,color="black",
+          aes(geometry=geometry))+
+  geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
+  geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+  geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+  geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
+  geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
+  annotate("text", x=st_bbox(shp_clusters)$xmin, 
+           y=st_bbox(shp_clusters)$ymax, 
+           hjust=0, vjust=0,
+           size=10,
+           label="B")+
+  scale_fill_manual(values=moran_colors, name="")+
+  coord_sf(xlim=st_bbox(shp_clusters)[c("xmin", "xmax")],
+           ylim=st_bbox(shp_clusters)[c("ymin", "ymax")])+
+  guides(size=F, alpha=F, fill = guide_legend(override.aes = list(alpha=0))) +
+  #labs(title=title) +
+  #labs(title="", tag="B")+
+  map_theme + 
+  theme(legend.text=element_blank()) +
+  theme(legend.position="none")
+
+
+### change in LE ----
+
+shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Women", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id"))
+shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
+
+queen_w <- queen_weights(shp_clusters)
+gstar <- local_gstar(queen_w,shp_clusters %>% select(abs_dif))
+shp_clusters$gstar_cluster <- lisa_clusters(gstar)
+shp_clusters <- shp_clusters %>%
+  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
+table(shp_clusters$gstar_cluster)
+
+# CREATING MAP FOR GETIS ORD: DIFFERENCE IN LIFE EXPECTANCY B/W 2015-2019 AND 1990-1994 FOR WOMEN 
+getisord_diffLE_women <- ggplot()+
+  geom_sf(data=shp_clusters %>% filter(!is.na(gstar_cluster)), size=0,color=NA,
+          aes(geometry=geometry, fill=(gstar_cluster)))+
+  geom_sf(data=shp_clusters, size=.1,fill=NA,color="black",
+          aes(geometry=geometry))+
+  geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
+  geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+  geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+  geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
+  geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
+  annotate("text", x=st_bbox(shp_clusters)$xmin, 
+           y=st_bbox(shp_clusters)$ymax, 
+           hjust=0, vjust=0,
+           size=10,
+           label="D")+
+  scale_fill_manual(values=moran_colors, name="")+
+  coord_sf(xlim=st_bbox(shp_clusters)[c("xmin", "xmax")],
+           ylim=st_bbox(shp_clusters)[c("ymin", "ymax")])+
+  guides(size=F, alpha=F, fill = guide_legend(override.aes = list(alpha=0))) +
+  #labs(title=title) +
+  #labs(title="", tag="D")+
+  map_theme + 
+  theme(legend.text=element_blank()) +
+  theme(legend.position="none")
+
+### biscale 3x3 plot: baseline LE & change in LE ----
+
+# baseline df
+shp_clusters <- right_join(shp_cz, results_cbsa_cz %>%
+                             filter(type%in%"cz",
+                                    year_type%in%"year5",
+                                    year%in%"1990-1994",
+                                    gender%in%"Women"),
+                           by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
+shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
+
+queen_w <- queen_weights(shp_clusters)
+gstar <- local_gstar(queen_w,shp_clusters %>% select(le))
+shp_clusters$gstar_cluster <- lisa_clusters(gstar)
+shp_clusters <- shp_clusters %>%
+  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
+table(shp_clusters$gstar_cluster)
+baseline_clusters <- shp_clusters %>% 
+  mutate(baseline_gstar_cluster=gstar_cluster) %>% 
+  select(-gstar_cluster) %>% 
+  st_drop_geometry()
+
+# change in LE df 
+shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Women", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id")) 
+shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
+
+queen_w <- queen_weights(shp_clusters)
+gstar <- local_gstar(queen_w,shp_clusters %>% select(abs_dif))
+shp_clusters$gstar_cluster <- lisa_clusters(gstar)
+shp_clusters <- shp_clusters %>%
+  mutate(gstar_cluster=factor(gstar_cluster, levels=0:4, labels=lisa_labels(gstar)))
+table(shp_clusters$gstar_cluster)
+diffLE_clusters <- shp_clusters %>% 
+  mutate(diffLE_gstar_cluster=gstar_cluster) %>%
+  select(-gstar_cluster) %>% 
+  st_drop_geometry()
+
+# combining both df's and droplevel unused factor levels (Undefined, Isolated)
+df <- baseline_clusters %>% right_join(diffLE_clusters, by="LM_Code") %>% 
+  select(LM_Code, baseline_gstar_cluster, diffLE_gstar_cluster) %>% 
+  filter(!baseline_gstar_cluster%in%c("Undefined", "Isolated")) %>% 
+  filter(!diffLE_gstar_cluster%in%c("Undefined", "Isolated"))
+df$baseline_gstar_cluster <- droplevels(df$baseline_gstar_cluster)
+df$diffLE_gstar_cluster <- droplevels(df$diffLE_gstar_cluster)
+df <- df %>% mutate(baseline_gstar_cluster=case_when(baseline_gstar_cluster%in%"Low-Low" ~ "Low",
+                                                     baseline_gstar_cluster%in%"High-High"~ "High",
+                                                     baseline_gstar_cluster%in%"Not significant" ~ "Not significant"),
+                    diffLE_gstar_cluster=case_when(diffLE_gstar_cluster%in%"Low-Low" ~ "Low",
+                                                   diffLE_gstar_cluster%in%"High-High"~ "High",
+                                                   diffLE_gstar_cluster%in%"Not significant" ~ "Not significant"))
+
+
+# checking unique combos, should be 9
+crossing(df$baseline_gstar_cluster, df$diffLE_gstar_cluster)
+df %>% count(baseline_gstar_cluster, diffLE_gstar_cluster) 
+
+
+df <- df %>% mutate(type=case_when(
+  baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="Low" ~ "Low Baseline - Decreased",
+  baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="Not significant" ~ "Low Baseline - NS Change",
+  baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="High" ~ "Low Baseline - Increased",
+  baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="Low" ~ "NS Baseline - Decreased",
+  baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="Not significant" ~ "NS Baseline - NS Change",
+  baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="High" ~ "NS Baseline - Increased",
+  baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="Low" ~ "High Baseline - Decreased",
+  baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="Not significant" ~ "High Baseline - NS Change",
+  baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="High" ~ "High Baseline - Increased"))
+
+
+df <- df %>% mutate(type=factor(type,
+                                levels=c("Low Baseline - Decreased",
+                                         "Low Baseline - NS Change",
+                                         "Low Baseline - Increased",
+                                         "NS Baseline - Decreased",
+                                         "NS Baseline - NS Change",
+                                         "NS Baseline - Increased", 
+                                         "High Baseline - Decreased",
+                                         "High Baseline - NS Change",
+                                         "High Baseline - Increased"))) %>% 
+  arrange(type)
+cluster_count <- df %>% count(type)
+
+biscale_women_df <- right_join(shp_cz, df, by="LM_Code") 
+
+# CREATING MAP FOR BASELINE LE X CHANGE IN LE 
+biscale_women_map <- ggplot()+
+  geom_sf(data=biscale_women_df, size=0,color=NA,
+          aes(geometry=geometry, fill=(type)))+
+  geom_sf(data=biscale_women_df, size=.1,fill=NA,color="black",
+          aes(geometry=geometry))+
+  geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
+  geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+  geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+  geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
+  geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
+  annotate("text", x=st_bbox(biscale_men_df)$xmin, 
+           y=st_bbox(biscale_men_df)$ymax, 
+           hjust=0, vjust=0,
+           size=10,
+           label="B")+
+  scale_fill_manual(values=cols)+
+  coord_sf(xlim=st_bbox(biscale_women_df)[c("xmin", "xmax")],
+           ylim=st_bbox(biscale_women_df)[c("ymin", "ymax")])+
+  guides(color=guide_legend(reverse=TRUE),
+         fill=guide_legend(nrow=3, byrow=TRUE))+
+  #labs(subtitle="Women")+
+  #labs(tag="B")+
+  map_theme+
+  theme(legend.position="bottom", legend.title=element_blank())+
+  theme(legend.background = element_blank(),
+        legend.box.background = element_blank())
+
+
+
+pall<-arrangeGrob(grobs=list(getisord_baselineLE_men, 
+                             getisord_baselineLE_women, 
+                             getisord_diffLE_men, 
+                             getisord_diffLE_women), 
+                  ncol=2)
+pall<-arrangeGrob(grobs=list(pall, legend_sep), heights=c(20, 1), ncol=1)
+ggsave("../Tables & Figures/Figure3_sep.pdf", pall, width=29, height=19)
+
+
+legend<-get_legend(biscale_men_map)
+biscale_men_map<-biscale_men_map+guides(fill="none") 
+biscale_women_map<-biscale_women_map+guides(fill="none")
+map_all<-arrangeGrob(grobs=list(biscale_men_map, biscale_women_map), ncol=2)
+map_all_forreal<-arrangeGrob(grobs=list(map_all, legend), ncol=1, heights=c(15, 2))
+ggsave("../Tables & Figures/Figure3_combined.pdf", map_all_forreal, width=30, height=11)
+
+
+## OLD CODE:
+
+
+
+## MEN ----
+
+### baseline LE ----
+shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% 
+                             filter(type%in%"cz",
+                                    year_type%in%"year5", 
+                                    year%in%"1990-1994", 
+                                    gender%in%"Men"), 
+                           by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
+
+neighbors <- poly2nb(shp_clusters %>% group_by(LM_Code))
+# fixing San Juan County, WA, CZ 604 (island, but manually input King County CZ 602 as neighbor)
+neighbors[[which(shp_clusters$LM_Code==604)]] <- which(shp_clusters$LM_Code%in%c(602))
+neighbors[[which(shp_clusters$LM_Code==602)]] <- c(neighbors[[which(shp_clusters$LM_Code==602)]], which(shp_clusters$LM_Code%in%c(604)))
+
+# it goes by indice in shp_clusters dataframe! for example: 
+# neighbors[[601]] is shp_clusters[601,] == CZ 92 (Philadelphia County, PA) 
+# neighbors of CZ 92 (Philly County) are 
+# 182 == shp_clusters[182,] == CZ 275 (Baltimore County, MD)
+# 307 == shp_clusters[307,] == CZ 390 (Camden County, NJ)
+# 308 == shp_clusters[308,] == CZ 391 (Bergen County, NJ)
+# 415 == shp_clusters[415,] == CZ 488 (Lancaster County, PA)
+# 418 == shp_clusters[418,] == CZ 490 (Berks County, PA)
+# 600 == shp_clusters[600,] == CZ 91  (Sussex County, DE)
+
+# use the moran.mc function
+temp <- moran.mc(x = shp_clusters %>% pull(le), 
+                 # listw = list of neighbors, obtained from the nb adjacency matrix by using the nb2listw spdep function
+                 listw = nb2listw(neighbors, style = "B"), 
+                 # last, number of permutations for the permutation-based moran test
+                 nsim = 9999)
+# extract moran statistic and p value
+globalmoran <- data.frame(statistic=temp$statistic[1], pval=temp$p.value) %>% 
+  mutate(out=paste0(round(statistic, digits=3), " (", ifelse(pval<0.001, "<0.001", round(pval, digits=3)), ")")) 
+globalmoran
+## BASELINE LE FOR MEN: 0.622 (<0.001)
+
+
+### change in LE ----
+shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Men", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id"))
+
+neighbors <- poly2nb(shp_clusters %>% group_by(LM_Code))
+# fixing San Juan County, WA, CZ 604 (island, but manually input King County CZ 602 as neighbor)
+neighbors[[which(shp_clusters$LM_Code==604)]] <- which(shp_clusters$LM_Code%in%c(602))
+neighbors[[which(shp_clusters$LM_Code==602)]] <- c(neighbors[[which(shp_clusters$LM_Code==602)]], which(shp_clusters$LM_Code%in%c(604)))
+
+# use the moran.mc function
+temp <- moran.mc(x = shp_clusters %>% pull(abs_dif), 
+                 # listw = list of neighbors, obtained from the nb adjacency matrix by using the nb2listw spdep function
+                 listw = nb2listw(neighbors, style = "B"), 
+                 # last, number of permutations for the permutation-based moran test
+                 nsim = 9999)
+# extract moran statistic and p value
+globalmoran <- data.frame(statistic=temp$statistic[1], pval=temp$p.value) %>% 
+  mutate(out=paste0(round(statistic, digits=3), " (", ifelse(pval<0.001, "<0.001", round(pval, digits=3)), ")")) 
+globalmoran
+## DIFFERENCE LE (FROM 1990-1994 TO 2015-2019) FOR MEN: 0.313 (<0.001)
+
+
+## WOMEN ----
+
+### baseline LE ----
+shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% 
+                             filter(type%in%"cz",
+                                    year_type%in%"year5", 
+                                    year%in%"1990-1994", 
+                                    gender%in%"Women"), 
+                           by=c("LM_Code"="id")) %>% arrange(gender, LM_Code)
+
+neighbors <- poly2nb(shp_clusters %>% group_by(LM_Code))
+# fixing San Juan County, WA, CZ 604 (island, but manually input King County CZ 602 as neighbor)
+neighbors[[which(shp_clusters$LM_Code==604)]] <- which(shp_clusters$LM_Code%in%c(602))
+neighbors[[which(shp_clusters$LM_Code==602)]] <- c(neighbors[[which(shp_clusters$LM_Code==602)]], which(shp_clusters$LM_Code%in%c(604)))
+
+# use the moran.mc function
+temp <- moran.mc(x = shp_clusters %>% pull(le), 
+                 # listw = list of neighbors, obtained from the nb adjacency matrix by using the nb2listw spdep function
+                 listw = nb2listw(neighbors, style = "B"), 
+                 # last, number of permutations for the permutation-based moran test
+                 nsim = 9999)
+# extract moran statistic and p value
+globalmoran <- data.frame(statistic=temp$statistic[1], pval=temp$p.value) %>% 
+  mutate(out=paste0(round(statistic, digits=3), " (", ifelse(pval<0.001, "<0.001", round(pval, digits=3)), ")")) 
+globalmoran
+## BASELINE LE FOR WOMEN: 0.614 (<0.001)
+
+
+
+### change in LE ----
+shp_clusters <- right_join(shp_cz, results_cbsa_cz %>% get_bivarite(., gender_mw="Women", yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id"))
+
+neighbors <- poly2nb(shp_clusters %>% group_by(LM_Code))
+# fixing San Juan County, WA, CZ 604 (island, but manually input King County CZ 602 as neighbor)
+neighbors[[which(shp_clusters$LM_Code==604)]] <- which(shp_clusters$LM_Code%in%c(602))
+neighbors[[which(shp_clusters$LM_Code==602)]] <- c(neighbors[[which(shp_clusters$LM_Code==602)]], which(shp_clusters$LM_Code%in%c(604)))
+
+# use the moran.mc function
+temp <- moran.mc(x = shp_clusters %>% pull(abs_dif), 
+                 # listw = list of neighbors, obtained from the nb adjacency matrix by using the nb2listw spdep function
+                 listw = nb2listw(neighbors, style = "B"), 
+                 # last, number of permutations for the permutation-based moran test
+                 nsim = 9999)
+# extract moran statistic and p value
+globalmoran <- data.frame(statistic=temp$statistic[1], pval=temp$p.value) %>% 
+  mutate(out=paste0(round(statistic, digits=3), " (", ifelse(pval<0.001, "<0.001", round(pval, digits=3)), ")")) 
+globalmoran
+## DIFFERENCE LE (FROM 1990-1994 TO 2015-2019) FOR WOMEN: 0.355 (<0.001)
 
