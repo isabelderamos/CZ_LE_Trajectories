@@ -400,7 +400,7 @@ if (run_LE){
     arrange(year5, cz, iter, age_5yr_group, gender) %>%
     group_by(year5, cz, gender, iter) %>%
     group_modify(~le_lv(., age_num=0, sex=ifelse(.y$gender=="Men", "M", "W")))
-
+  # CHECK https://stackoverflow.com/questions/56241404/how-to-parallelize-a-grouped-mutate-summarise-in-r
   ## cbsa, 3 yr pooled ----
   # results_cbsayr3 <-
   #   dta %>% filter(!cbsa%in%"") %>% filter(!is.na(cbsa)==TRUE) %>% 
