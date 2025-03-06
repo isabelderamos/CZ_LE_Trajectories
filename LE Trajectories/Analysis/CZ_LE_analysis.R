@@ -1,9 +1,8 @@
-## PENDING: STREAMLINE GETIS ORD PART SO IT'S EASIER TO CHANGE SIGNIFICANCE. POTENTIALLY JUST FUNCTIONALZIE IT??
 
 #******************************************************#
-#   Author: Isabel De Ramos                            #
+#   Author: Isabel De Ramos. Edited by Usama Bilal     #
 #   Date Created: 14 April 2022                        #
-#   Function: Life Expectancy CBSA Data Preparation    #
+#   Function: Life Expectancy CBSA/CZ Data Preparation #
 #******************************************************#
 
                     #******************************************************************************#
@@ -321,35 +320,37 @@ df_canada <- ne_countries(country='canada', scale=50, returnclass = "sf") %>% se
 
 # LE CALCULATIONS ----
 
-# IMPORTANT NOTE: ALL RESULTS BELOW HAVE ALREADY BEEN STORED IN LE_CBSA_RESULTS.RDATA (SKIP TO LINE 395)
+# IMPORTANT NOTE: ALL RESULTS BELOW HAVE ALREADY BEEN STORED IN LE_CBSA_RESULTS.RDATA
+## now just doing 5-year and CZ only to save time
 run_LE<-F
+n_iter<-1000
 if (run_LE){
-  ## cz, 3 yr pooled ----
-  results_czyr3 <-
-    dta %>% group_by(year3, cz, age_5yr_group, gender) %>%  
-    summarise(count=sum(count, na.rm=T),
-              pop_denom=sum(pop_denom, na.rm=T)) %>%
-    ungroup() %>%
-    filter(gender=="Men") %>%
-    # creating age-specific death rates variable, Mx
-    mutate(mx=count/pop_denom,
-           age_5yr_group=as.numeric(age_5yr_group)) %>%
-    arrange(year3, cz, age_5yr_group, gender) %>%
-    group_by(year3, cz, gender) %>%
-    group_modify(~le_lv(., age_num=0, sex="M")) %>%
-    bind_rows(
-      dta %>% group_by(year3, cz, age_5yr_group, gender) %>%
-        summarise(count=sum(count, na.rm=T),
-                  pop_denom=sum(pop_denom, na.rm=T)) %>%
-        ungroup() %>%
-        filter(gender=="Women") %>%
-        # creating age-specific death rates variable, Mx
-        mutate(mx=count/pop_denom,
-               age_5yr_group=as.numeric(age_5yr_group)) %>%
-        arrange(year3, cz, age_5yr_group, gender) %>%
-        group_by(year3, cz, gender) %>%
-        group_modify(~le_lv(., age_num=0, sex="W"))
-    )
+  # ## cz, 3 yr pooled ----
+  # results_czyr3 <-
+  #   dta %>% group_by(year3, cz, age_5yr_group, gender) %>%  
+  #   summarise(count=sum(count, na.rm=T),
+  #             pop_denom=sum(pop_denom, na.rm=T)) %>%
+  #   ungroup() %>%
+  #   filter(gender=="Men") %>%
+  #   # creating age-specific death rates variable, Mx
+  #   mutate(mx=count/pop_denom,
+  #          age_5yr_group=as.numeric(age_5yr_group)) %>%
+  #   arrange(year3, cz, age_5yr_group, gender) %>%
+  #   group_by(year3, cz, gender) %>%
+  #   group_modify(~le_lv(., age_num=0, sex="M")) %>%
+  #   bind_rows(
+  #     dta %>% group_by(year3, cz, age_5yr_group, gender) %>%
+  #       summarise(count=sum(count, na.rm=T),
+  #                 pop_denom=sum(pop_denom, na.rm=T)) %>%
+  #       ungroup() %>%
+  #       filter(gender=="Women") %>%
+  #       # creating age-specific death rates variable, Mx
+  #       mutate(mx=count/pop_denom,
+  #              age_5yr_group=as.numeric(age_5yr_group)) %>%
+  #       arrange(year3, cz, age_5yr_group, gender) %>%
+  #       group_by(year3, cz, gender) %>%
+  #       group_modify(~le_lv(., age_num=0, sex="W"))
+  #   )
   
   ## cz, 5 yr pooled ---- 
   results_czyr5 <-
@@ -377,68 +378,92 @@ if (run_LE){
         group_by(year5, cz, gender) %>%
         group_modify(~le_lv(., age_num=0, sex="W"))
     )
-  
+  ## cz, 5-year pooled, resampled, in case it's needed
+  results_czyr5_iter <-
+    dta %>%
+    #filter(cz%in%c("10", "11", "12")) %>% for testing purposes
+    group_by(year5, cz, age_5yr_group, gender) %>%
+    summarise(count=sum(count, na.rm=T),
+              pop_denom=sum(pop_denom, na.rm=T)) %>%
+    group_by(year5, cz, gender) %>%
+    group_modify(~{
+      # .x<-iter %>% filter(cz==1, year5=="1990-1994", gender=="Men")
+      .x %>% group_by(age_5yr_group) %>%
+        group_modify(~{
+          data.frame(count=rpois(n=n_iter, lambda=.x$count), iter=1:n_iter,
+                     pop_denom=.x$pop_denom)
+        })
+    }) %>%
+    # creating age-specific death rates variable, Mx
+    mutate(mx=count/pop_denom,
+           age_5yr_group=as.numeric(age_5yr_group)) %>%
+    arrange(year5, cz, iter, age_5yr_group, gender) %>%
+    group_by(year5, cz, gender, iter) %>%
+    group_modify(~le_lv(., age_num=0, sex=ifelse(.y$gender=="Men", "M", "W")))
+
   ## cbsa, 3 yr pooled ----
-  results_cbsayr3 <-
-    dta %>% filter(!cbsa%in%"") %>% filter(!is.na(cbsa)==TRUE) %>% 
-    group_by(year3, cbsa, age_5yr_group, gender) %>%
-    summarise(count=sum(count, na.rm=T),
-              pop_denom=sum(pop_denom, na.rm=T)) %>%
-    ungroup() %>%
-    filter(gender=="Men") %>%
-    # creating age-specific death rates variable, Mx
-    mutate(mx=count/pop_denom,
-           age_5yr_group=as.numeric(age_5yr_group)) %>%
-    arrange(year3, cbsa, age_5yr_group, gender) %>%
-    group_by(year3, cbsa, gender) %>%
-    group_modify(~le_lv(., age_num=0, sex="M")) %>%
-    bind_rows(
-      dta %>% filter(!cbsa%in%"") %>% filter(!is.na(cbsa)==TRUE) %>% 
-        group_by(year3, cbsa, age_5yr_group, gender) %>%
-        summarise(count=sum(count, na.rm=T),
-                  pop_denom=sum(pop_denom, na.rm=T)) %>%
-        ungroup() %>%
-        filter(gender=="Women") %>%
-        # creating age-specific death rates variable, Mx
-        mutate(mx=count/pop_denom,
-               age_5yr_group=as.numeric(age_5yr_group)) %>%
-        arrange(year3, cbsa, age_5yr_group, gender) %>%
-        group_by(year3, cbsa, gender) %>%
-        group_modify(~le_lv(., age_num=0, sex="W"))
-    )
-  
-  
-  ## cbsa, 5 yr pooled ----
-  # FINDING LE FOR EACH CBSA BY SEX, 1990-2019
-  results_cbsayr5 <-
-    dta %>% filter(!cbsa%in%"") %>% filter(!is.na(cbsa)==TRUE) %>% 
-    group_by(year5, cbsa, age_5yr_group, gender) %>%  
-    summarise(count=sum(count, na.rm=T),
-              pop_denom=sum(pop_denom, na.rm=T)) %>%
-    ungroup() %>%
-    filter(gender=="Men") %>%
-    # creating age-specific death rates variable, Mx
-    mutate(mx=count/pop_denom,
-           age_5yr_group=as.numeric(age_5yr_group)) %>%
-    arrange(year5, cbsa, age_5yr_group, gender) %>%
-    group_by(year5, cbsa, gender) %>%
-    group_modify(~le_lv(., age_num=0, sex="M")) %>%
-    bind_rows(
-      dta %>% filter(!cbsa%in%"") %>% filter(!is.na(cbsa)==TRUE) %>% 
-        group_by(year5, cbsa, age_5yr_group, gender) %>%
-        summarise(count=sum(count, na.rm=T),
-                  pop_denom=sum(pop_denom, na.rm=T)) %>%
-        ungroup() %>%
-        filter(gender=="Women") %>%
-        # creating age-specific death rates variable, Mx
-        mutate(mx=count/pop_denom,
-               age_5yr_group=as.numeric(age_5yr_group)) %>%
-        arrange(year5, cbsa, age_5yr_group, gender) %>%
-        group_by(year5, cbsa, gender) %>%
-        group_modify(~le_lv(., age_num=0, sex="W"))
-    )
-  
-  save(results_czyr3, results_czyr5, results_cbsayr3, results_cbsayr5, file='le_cbsa_results.rdata')
+  # results_cbsayr3 <-
+  #   dta %>% filter(!cbsa%in%"") %>% filter(!is.na(cbsa)==TRUE) %>% 
+  #   group_by(year3, cbsa, age_5yr_group, gender) %>%
+  #   summarise(count=sum(count, na.rm=T),
+  #             pop_denom=sum(pop_denom, na.rm=T)) %>%
+  #   ungroup() %>%
+  #   filter(gender=="Men") %>%
+  #   # creating age-specific death rates variable, Mx
+  #   mutate(mx=count/pop_denom,
+  #          age_5yr_group=as.numeric(age_5yr_group)) %>%
+  #   arrange(year3, cbsa, age_5yr_group, gender) %>%
+  #   group_by(year3, cbsa, gender) %>%
+  #   group_modify(~le_lv(., age_num=0, sex="M")) %>%
+  #   bind_rows(
+  #     dta %>% filter(!cbsa%in%"") %>% filter(!is.na(cbsa)==TRUE) %>% 
+  #       group_by(year3, cbsa, age_5yr_group, gender) %>%
+  #       summarise(count=sum(count, na.rm=T),
+  #                 pop_denom=sum(pop_denom, na.rm=T)) %>%
+  #       ungroup() %>%
+  #       filter(gender=="Women") %>%
+  #       # creating age-specific death rates variable, Mx
+  #       mutate(mx=count/pop_denom,
+  #              age_5yr_group=as.numeric(age_5yr_group)) %>%
+  #       arrange(year3, cbsa, age_5yr_group, gender) %>%
+  #       group_by(year3, cbsa, gender) %>%
+  #       group_modify(~le_lv(., age_num=0, sex="W"))
+  #   )
+  # 
+  # 
+  # ## cbsa, 5 yr pooled ----
+  # # FINDING LE FOR EACH CBSA BY SEX, 1990-2019
+  # results_cbsayr5 <-
+  #   dta %>% filter(!cbsa%in%"") %>% filter(!is.na(cbsa)==TRUE) %>% 
+  #   group_by(year5, cbsa, age_5yr_group, gender) %>%  
+  #   summarise(count=sum(count, na.rm=T),
+  #             pop_denom=sum(pop_denom, na.rm=T)) %>%
+  #   ungroup() %>%
+  #   filter(gender=="Men") %>%
+  #   # creating age-specific death rates variable, Mx
+  #   mutate(mx=count/pop_denom,
+  #          age_5yr_group=as.numeric(age_5yr_group)) %>%
+  #   arrange(year5, cbsa, age_5yr_group, gender) %>%
+  #   group_by(year5, cbsa, gender) %>%
+  #   group_modify(~le_lv(., age_num=0, sex="M")) %>%
+  #   bind_rows(
+  #     dta %>% filter(!cbsa%in%"") %>% filter(!is.na(cbsa)==TRUE) %>% 
+  #       group_by(year5, cbsa, age_5yr_group, gender) %>%
+  #       summarise(count=sum(count, na.rm=T),
+  #                 pop_denom=sum(pop_denom, na.rm=T)) %>%
+  #       ungroup() %>%
+  #       filter(gender=="Women") %>%
+  #       # creating age-specific death rates variable, Mx
+  #       mutate(mx=count/pop_denom,
+  #              age_5yr_group=as.numeric(age_5yr_group)) %>%
+  #       arrange(year5, cbsa, age_5yr_group, gender) %>%
+  #       group_by(year5, cbsa, gender) %>%
+  #       group_modify(~le_lv(., age_num=0, sex="W"))
+  #   )
+  # 
+  save(results_czyr5, 
+       results_czyr5_iter,
+       file='le_cbsa_results.rdata')
   
 } else {
   load('le_cbsa_results.rdata')
@@ -797,7 +822,7 @@ globalmoran_table<-shp_clusters %>%
                      # listw = list of neighbors, obtained from the nb adjacency matrix by using the nb2listw spdep function
                      listw = nb2listw(neighbors, style = "B"), 
                      # last, number of permutations for the permutation-based moran test
-                     nsim = 9999)
+                     nsim = 99999)
     # extract moran statistic and p value
     globalmoran <- data.frame(statistic=temp$statistic[1], pval=temp$p.value) %>% 
       mutate(out=paste0(round(statistic, digits=3), " (", ifelse(pval<0.001, "<0.001", round(pval, digits=3)), ")")) 
@@ -872,20 +897,36 @@ ggsave("../Tables & Figures/AppendixFigure2_rawle.pdf", pall, width=27.75, heigh
 
 # GETIS ORD ----
 
-# creating a function to do getis-ord (simplified for now, year5 and cz)
-getis_ord_fun<-function(gender_select, significance){
-  #gender_select<-"Men";significance<-0.05
+##  creating a function to do getis-ord (simplified for now, year5 and cz)
+
+getis_ord_fun<-function(gender_select, significance, correct="none"){
+  #gender_select<-"Men";significance<-0.05; fdr=T
   shp_clusters <- right_join(shp_cz, 
                              results_cbsa_cz %>% 
                                get_bivarite(., gender_mw=gender_select, 
                                             yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id")) 
   shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
   queen_w <- queen_weights(shp_clusters)
-  gstar_baseline <- local_gstar(queen_w,shp_clusters %>% select(le), significance_cutoff = significance)
-  shp_clusters$baseline_gstar_cluster <- lisa_clusters(gstar_baseline)
-  shp_clusters$baseline_gstar_cluster_pval<-lisa_pvalues(gstar_baseline)
-  shp_clusters$diffLE_gstar_cluster <- lisa_clusters(gstar_change)
+  gstar_baseline <- local_gstar(queen_w,shp_clusters %>% select(le), 
+                                significance_cutoff = significance, permutations = 99999)
+  gstar_change <- local_gstar(queen_w,shp_clusters %>% select(abs_dif), 
+                                significance_cutoff = significance, permutations = 99999)
   shp_clusters$diffLE_gstar_cluster_pval<-lisa_pvalues(gstar_change)
+  shp_clusters$baseline_gstar_cluster_pval<-lisa_pvalues(gstar_baseline)
+  if (correct=="none"){
+    shp_clusters$baseline_gstar_cluster <- lisa_clusters(gstar_baseline)
+    shp_clusters$diffLE_gstar_cluster <- lisa_clusters(gstar_change)
+  } else if (correct=="fdr"){
+    fdr_baseline<-lisa_fdr(gstar_baseline, current_p = significance)
+    fdr_change<-lisa_fdr(gstar_change, current_p = significance)
+    shp_clusters$baseline_gstar_cluster <- lisa_clusters(gstar_baseline, cutoff = fdr_baseline)
+    shp_clusters$diffLE_gstar_cluster <- lisa_clusters(gstar_change, cutoff=fdr_change)
+  } else if (correct=="bonf"){
+    bonf_baseline<-lisa_bo(gstar_baseline, current_p = significance)
+    bonf_change<-lisa_fdr(gstar_change, current_p = significance)
+    shp_clusters$baseline_gstar_cluster <- lisa_clusters(gstar_baseline, cutoff = bonf_baseline)
+    shp_clusters$diffLE_gstar_cluster <- lisa_clusters(gstar_change, cutoff=bonf_change)
+  }
   shp_clusters <- shp_clusters %>%
     mutate(baseline_gstar_cluster=factor(baseline_gstar_cluster, levels=0:4, labels=lisa_labels(gstar_baseline)),
            diffLE_gstar_cluster=factor(diffLE_gstar_cluster, levels=0:4, labels=lisa_labels(gstar_change)),
@@ -937,12 +978,12 @@ getis_ord_fun<-function(gender_select, significance){
   
   return(shp_clusters)
 }
-all_men<-getis_ord_fun(gender_select="Men", significance=0.05)
-all_women<-getis_ord_fun(gender_select="Women", significance=0.05)
+all_men<-getis_ord_fun(gender_select="Men", significance=0.05, correct = "none")
+all_women<-getis_ord_fun(gender_select="Women", significance=0.05, correct = "none")
 
-## MEN ----
+## MEN 
 
-### baseline LE ----
+# baseline LE
 
 # CREATING MAP FOR GETIS ORD: BASELINE LE FOR MEN
 getisord_baselineLE_men <- ggplot()+
@@ -974,9 +1015,34 @@ getisord_baselineLE_men <- ggplot()+
 legend_sep<-get_legend(getisord_baselineLE_men);plot(legend_sep)
 getisord_baselineLE_men<-getisord_baselineLE_men+guides(fill="none")
 
+# CREATING MAP FOR GETIS ORD: DIFFERENCE IN LIFE EXPECTANCY B/W 2015-2019 AND 1990-1994 FOR MEN 
+getisord_diffLE_men <- ggplot()+
+  geom_sf(data=all_men %>% filter(!is.na(diffLE_gstar_cluster)), size=0,color=NA,
+          aes(geometry=geometry, fill=(diffLE_gstar_cluster)))+
+  geom_sf(data=all_men, size=.1,fill=NA,color="black",
+          aes(geometry=geometry))+
+  geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
+  geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+  geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+  geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
+  geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
+  annotate("text", x=st_bbox(all_men)$xmin, 
+           y=st_bbox(all_men)$ymax, 
+           hjust=0, vjust=0,
+           size=10,
+           label="C")+
+  scale_fill_manual(values=moran_colors, name="")+
+  coord_sf(xlim=st_bbox(all_men)[c("xmin", "xmax")],
+           ylim=st_bbox(all_men)[c("ymin", "ymax")])+
+  guides(size=F, alpha=F, fill = guide_legend(override.aes = list(alpha=0))) +
+  #labs(title=title) +
+  #labs(title="", tag="C")+
+  map_theme + 
+  theme(legend.text=element_blank()) +
+  theme(legend.position="none")
 
-
-## WOMEN ----
+## WOMEN 
 
 # CREATING MAP FOR GETIS ORD: BASELINE LE FOR WOMEN 
 getisord_baselineLE_women <- ggplot()+
@@ -1033,35 +1099,9 @@ getisord_diffLE_women <- ggplot()+
   theme(legend.position="none")
 
 
-### biscale 3x3 plot: baseline LE & change in LE ----
-# CREATING MAP FOR GETIS ORD: DIFFERENCE IN LIFE EXPECTANCY B/W 2015-2019 AND 1990-1994 FOR MEN 
-getisord_diffLE_men <- ggplot()+
-  geom_sf(data=all_men %>% filter(!is.na(diffLE_gstar_cluster)), size=0,color=NA,
-          aes(geometry=geometry, fill=(diffLE_gstar_cluster)))+
-  geom_sf(data=all_men, size=.1,fill=NA,color="black",
-          aes(geometry=geometry))+
-  geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
-  geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-  geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
-  geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
-  geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
-  annotate("text", x=st_bbox(all_men)$xmin, 
-           y=st_bbox(all_men)$ymax, 
-           hjust=0, vjust=0,
-           size=10,
-           label="C")+
-  scale_fill_manual(values=moran_colors, name="")+
-  coord_sf(xlim=st_bbox(all_men)[c("xmin", "xmax")],
-           ylim=st_bbox(all_men)[c("ymin", "ymax")])+
-  guides(size=F, alpha=F, fill = guide_legend(override.aes = list(alpha=0))) +
-  #labs(title=title) +
-  #labs(title="", tag="C")+
-  map_theme + 
-  theme(legend.text=element_blank()) +
-  theme(legend.position="none")
 
-# regular clusters
+
+# save regular clusters
 pall<-arrangeGrob(grobs=list(getisord_baselineLE_men, 
                              getisord_baselineLE_women, 
                              getisord_diffLE_men, 
@@ -1071,8 +1111,7 @@ pall<-arrangeGrob(grobs=list(pall, legend_sep), heights=c(20, 1), ncol=1)
 ggsave("../Tables & Figures/Figure3_sep.pdf", pall, width=29, height=19)
 
 
-
-### biscale 3x3 plot: baseline LE & change in LE ----
+## biscale 3x3 plot for both ----
 ## men 
 biscale_men_map <- ggplot()+
   geom_sf(data=all_men %>% filter(!is.na(type)), size=0,color=NA,
@@ -1138,9 +1177,75 @@ biscale_men_map<-biscale_men_map+guides(fill="none")
 biscale_women_map<-biscale_women_map+guides(fill="none")
 map_all<-arrangeGrob(grobs=list(biscale_men_map, biscale_women_map), ncol=2)
 map_all_forreal<-arrangeGrob(grobs=list(map_all, legend), ncol=1, heights=c(15, 2))
-ggsave("../Tables & Figures/Figure3_combined.pdf", map_all_forreal, width=30, height=11)
+ggsave("../Tables & Figures/Figure3_combinedb.pdf", map_all_forreal, width=30, height=11)
 
-# Repeat GEtis Ord with 0.1 and 0.01
+# New Sensitivity analyses ----
+
+# exploring: features and size of CZs by type of clustering
+# first, create average pop and other variables across periods
+pop<-dta %>% group_by(cz, year) %>% 
+  summarize(pop=sum(pop_denom)) %>% 
+  group_by(cz) %>% 
+  summarise(avg_pop=mean(pop)) %>% 
+  rename(LM_Code=cz)
+biscale_pop<-bind_rows(all_women %>% as_tibble() %>% left_join(pop) %>% 
+                         select(LM_Code, type, le, abs_dif,avg_pop, baseline_gstar_cluster, diffLE_gstar_cluster) %>% mutate(gender="Women"),
+                       all_men %>% as_tibble() %>% left_join(pop) %>% 
+                         select(LM_Code, type, le, abs_dif, avg_pop, baseline_gstar_cluster, diffLE_gstar_cluster) %>% mutate(gender="Men")) %>% 
+  mutate(type=sub(" - ", " -\n", type)) %>% 
+  filter(!is.na(type))
+# table with LE and changes in LE by cluster
+bind_rows(biscale_pop %>% group_by(baseline_gstar_cluster) %>% 
+            summarise(median=median(le),
+                      q1=quantile(le, probs=0.25),
+                      q3=quantile(le, probs=0.75)) %>% 
+            mutate(type="Baseline",
+                   cluster=factor(baseline_gstar_cluster, 
+                                  levels=c("Low-Low", "Not significant", "High-High"),
+                                  labels=c("Low", "Not Significant", "High")),
+                   le_ci=paste0(median=format(median, digits=1, nsmall=1), 
+                                " [",
+                                format(q1, digits=1, nsmall=1), " to ",
+                                format(q3, digits=1, nsmall=1),
+                                "]")) %>% 
+            select(type, cluster, le_ci) %>% 
+            arrange(cluster),
+          biscale_pop %>% group_by(diffLE_gstar_cluster) %>% 
+            summarise(median=median(abs_dif),
+                      q1=quantile(abs_dif, probs=0.25),
+                      q3=quantile(abs_dif, probs=0.75)) %>% 
+            mutate(type="Change",
+                   cluster=factor(diffLE_gstar_cluster, 
+                                  levels=c("Low-Low", "Not significant", "High-High"),
+                                  labels=c("Low", "Not Significant", "High")),
+                   le_ci=paste0(median=format(median, digits=1, nsmall=1), 
+                                " [",
+                                format(q1, digits=1, nsmall=1), " to ",
+                                format(q3, digits=1, nsmall=1),
+                                "]")) %>% 
+            select(type, cluster, le_ci) %>% 
+            arrange(cluster)) %>% 
+  pivot_wider(id_cols=cluster, names_from=type, values_from=le_ci) %>% 
+  write_csv("../Tables & Figures/APpendix_Table_1.csv")
+# pop size by cluster type
+ggplot(biscale_pop, aes(x=type, y=avg_pop)) +
+  geom_boxplot()+
+  scale_y_continuous(trans="log10", breaks=10^(4:7),
+                     labels=c("10K", "100K", "1M", "10M")) +
+  facet_wrap(~gender) +
+  labs(x="",
+       #title="Range (maximum-minimum)",
+       y="Average population over study period",
+       color="", fill="", linetype="")+
+  guides(linetype="none")+
+  scale_x_discrete(labels=label_wrap(40))+
+  isabel_theme+
+  theme(legend.position = c(0.2, 0.2),
+        legend.background = element_blank(),
+        axis.text.x=element_text(angle=90))
+ggsave("../Tables & Figures/Appendix_Figure_Size.pdf", width=12, height=7)
+
+## Getis Ord with difference significance levels ----
 
 allpval<-bind_rows(getis_ord_fun(gender_select="Men", significance=0.1),
                 getis_ord_fun(gender_select="Men", significance=0.01),
@@ -1187,6 +1292,7 @@ baseline_pval<-allpval %>% group_by(gender, significance) %>%
   })
 
 legend_sep<-get_legend(baseline_pval[[1]])
+legend_sep_baseline<-legend_sep
 baseline_pval<-map(baseline_pval, function(x) x+guides(fill="none"))
 pall<-arrangeGrob(grobs=baseline_pval, 
                   ncol=3)
@@ -1273,6 +1379,7 @@ biscale_pval<-allpval %>% group_by(gender, significance) %>%
   })
 
 legend_sep<-get_legend(biscale_pval[[1]])
+legend_sep_biscale<-legend_sep
 biscale_pval<-map(biscale_pval, function(x) x+guides(fill="none"))
 pall<-arrangeGrob(grobs=biscale_pval, 
                   ncol=3)
@@ -1280,67 +1387,93 @@ pall<-arrangeGrob(grobs=list(pall, legend_sep), heights=c(15, 1), ncol=1)
 ggsave("../Tables & Figures/Appendix_Figure_Pval_Biscale.pdf", pall, width=43, height=19)
 
 
+# map with shades for different significance levels
+# start with the highest type 1 error
+#simplifting
+allpval01<-allpval %>% filter(significance==0.1) %>% 
+  mutate(baseline_gstar_cluster_pval_cat=cut(baseline_gstar_cluster_pval,
+                                             breaks=c(0, 0.01, 0.05, 0.1, 1), include.lowest=T, right=F),
+         diffLE_gstar_cluster_pval_cat=cut(diffLE_gstar_cluster_pval,
+                                             breaks=c(0, 0.01, 0.05, 0.1, 1), include.lowest=T, right=F))
+gstar_baseline_sign<-allpval01 %>% 
+  group_by(gender) %>% 
+  group_map(~{
+    #.x<-allpval01 %>% filter(significance==0.1, gender=="Men");.y<-data.frame(gender="Men")
+    ggplot()+
+      geom_sf(data=.x %>% filter(!is.na(baseline_gstar_cluster)), size=0,color=NA,
+              aes(geometry=geometry, fill=(baseline_gstar_cluster),
+                  alpha=baseline_gstar_cluster_pval_cat))+
+      geom_sf(data=.x %>% filter(baseline_gstar_cluster=="Not significant"), size=0,color=NA,
+              fill=moran_colors[1],
+              aes(geometry=geometry))+
+      geom_sf(data=.x, size=.1,fill=NA,color="black",
+              aes(geometry=geometry))+
+      geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
+      geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+      geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+      geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+      geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
+      geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
+      annotate("text", x=st_bbox(.x)$xmin, 
+               y=st_bbox(.x)$ymax, 
+               hjust=0, vjust=0,
+               size=10,
+               label=ifelse(.y$gender=="Men", "A", "B"))+
+      scale_fill_manual(values=moran_colors, name="",
+                        labels=c("Not Significant", "High or Increase", "Low or Decrease", "N/A"))+
+      scale_alpha_manual(values=c(1, 0.7, 0.5, 0))+
+      coord_sf(xlim=st_bbox(.x)[c("xmin", "xmax")],
+               ylim=st_bbox(.x)[c("ymin", "ymax")])+
+      guides(size=F, alpha=F,
+             fill=guide_legend(nrow=1)) +
+      #labs(title="", tag="A")+
+      map_theme +
+      theme(legend.background = element_blank(),
+            legend.box.background = element_blank()) +
+      guides(fill="none")
+  })
+gstar_change_sign<-allpval01 %>% 
+  group_by(gender) %>% 
+  group_map(~{
+    #.x<-allpval01 %>% filter(significance==0.1, gender=="Men");.y<-data.frame(gender="Men")
+    ggplot()+
+      geom_sf(data=.x %>% filter(!is.na(diffLE_gstar_cluster)), size=0,color=NA,
+              aes(geometry=geometry, fill=(diffLE_gstar_cluster),
+                  alpha=diffLE_gstar_cluster_pval_cat))+
+      geom_sf(data=.x %>% filter(diffLE_gstar_cluster=="Not significant"), size=0,color=NA,
+              fill=moran_colors[1],
+              aes(geometry=geometry))+
+      geom_sf(data=.x, size=.1,fill=NA,color="black",
+              aes(geometry=geometry))+
+      geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
+      geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+      geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+      geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+      geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
+      geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
+      annotate("text", x=st_bbox(.x)$xmin, 
+               y=st_bbox(.x)$ymax, 
+               hjust=0, vjust=0,
+               size=10,
+               label=ifelse(.y$gender=="Men", "C", "D"))+
+      scale_fill_manual(values=moran_colors, name="",
+                        labels=c("Not Significant", "High or Increase", "Low or Decrease", "N/A"))+
+      scale_alpha_manual(values=c(1, 0.7, 0.5, 0))+
+      coord_sf(xlim=st_bbox(.x)[c("xmin", "xmax")],
+               ylim=st_bbox(.x)[c("ymin", "ymax")])+
+      guides(size=F, alpha=F,
+             fill=guide_legend(nrow=1)) +
+      #labs(title="", tag="A")+
+      map_theme +
+      theme(legend.background = element_blank(),
+            legend.box.background = element_blank()) +
+      guides(fill="none")
+  })
 
-# exploring: features and size of CZs by type of clustering
-# first, create average pop and other variables across periods
-pop<-dta %>% group_by(cz, year) %>% 
-  summarize(pop=sum(pop_denom)) %>% 
-  group_by(cz) %>% 
-  summarise(avg_pop=mean(pop)) %>% 
-  rename(LM_Code=cz)
-biscale_pop<-bind_rows(all_women %>% as_tibble() %>% left_join(pop) %>% 
-            select(LM_Code, type, le, abs_dif,avg_pop, baseline_gstar_cluster, diffLE_gstar_cluster) %>% mutate(gender="Women"),
-          all_men %>% as_tibble() %>% left_join(pop) %>% 
-            select(LM_Code, type, le, abs_dif, avg_pop, baseline_gstar_cluster, diffLE_gstar_cluster) %>% mutate(gender="Men")) %>% 
-  mutate(type=sub(" - ", " -\n", type)) %>% 
-  filter(!is.na(type))
-# table with LE and changes in LE by cluster
-bind_rows(biscale_pop %>% group_by(baseline_gstar_cluster) %>% 
-            summarise(median=median(le),
-                      q1=quantile(le, probs=0.25),
-                      q3=quantile(le, probs=0.75)) %>% 
-            mutate(type="Baseline",
-                   cluster=factor(baseline_gstar_cluster, 
-                                  levels=c("Low-Low", "Not significant", "High-High"),
-                                  labels=c("Low", "Not Significant", "High")),
-                   le_ci=paste0(median=format(median, digits=1, nsmall=1), 
-                                " [",
-                                format(q1, digits=1, nsmall=1), " to ",
-                                format(q3, digits=1, nsmall=1),
-                                "]")) %>% 
-            select(type, cluster, le_ci) %>% 
-            arrange(cluster),
-          biscale_pop %>% group_by(diffLE_gstar_cluster) %>% 
-            summarise(median=median(abs_dif),
-                      q1=quantile(abs_dif, probs=0.25),
-                      q3=quantile(abs_dif, probs=0.75)) %>% 
-            mutate(type="Change",
-                   cluster=factor(diffLE_gstar_cluster, 
-                                  levels=c("Low-Low", "Not significant", "High-High"),
-                                  labels=c("Low", "Not Significant", "High")),
-                   le_ci=paste0(median=format(median, digits=1, nsmall=1), 
-                                " [",
-                                format(q1, digits=1, nsmall=1), " to ",
-                                format(q3, digits=1, nsmall=1),
-                                "]")) %>% 
-            select(type, cluster, le_ci) %>% 
-            arrange(cluster)) %>% 
-  pivot_wider(id_cols=cluster, names_from=type, values_from=le_ci) %>% 
-  write_csv("../Tables & Figures/APpendix_Table_1.csv")
-# pop size by cluster type
-ggplot(biscale_pop, aes(x=type, y=avg_pop)) +
-  geom_boxplot()+
-  scale_y_continuous(trans="log10", breaks=10^(4:7),
-                     labels=c("10K", "100K", "1M", "10M")) +
-  facet_wrap(~gender) +
-  labs(x="",
-       #title="Range (maximum-minimum)",
-       y="Average population over study period",
-       color="", fill="", linetype="")+
-  guides(linetype="none")+
-  scale_x_discrete(labels=label_wrap(40))+
-  isabel_theme+
-  theme(legend.position = c(0.2, 0.2),
-        legend.background = element_blank(),
-        axis.text.x=element_text(angle=90))
-  ggsave("../Tables & Figures/Appendix_Figure_Size.pdf", width=12, height=7)
+pall<-arrangeGrob(grobs=list(gstar_baseline_sign[[1]], 
+                             gstar_baseline_sign[[2]], 
+                             gstar_change_sign[[1]], 
+                             gstar_change_sign[[2]]), 
+                  ncol=2)
+pall<-arrangeGrob(grobs=list(pall, legend_sep_baseline), heights=c(20, 1), ncol=1)
+ggsave("../Tables & Figures/Figure3_sepb.pdf", pall, width=29, height=19)
