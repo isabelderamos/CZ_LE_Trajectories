@@ -19,6 +19,7 @@ library(scales)
 library(multcomp)
 library(RColorBrewer)
 library(scales)
+library(furrr)
 library(ggpubr)
 #install.packages("devtools")
 #library(devtools)
@@ -149,6 +150,24 @@ le_lv<-function(.x, .y, age_num, sex="B"){
              uci=ci[2],
              lv_sd=lv_sd,
              lv_cv=lv_cv)
+}
+# crearing a simpler version (Since we dont use LV here)
+le_only<-function(.x, .y, age_num, sex="B"){
+  ## .x -> the data with one race and CBSA
+  # example: .x<- dta %>% filter(gender=="Men", cbsa=="10100", year5%in%'2015-2019')
+  ## .y -> a dataframe wtih whichever CBSA or race category you are looking at
+  # using lifetable() function from Camarda to create lifetable 
+  lt <- lifetable(x=.x$age_5yr_group, Nx=.x$pop_denom, Dx=.x$count, sex=sex, ax=NULL) 
+  # using CIex function from Camarda to obtain confidence intervals 
+  ci_dta <- CIex(x=.x$age_5yr_group, Nx=.x$pop_denom, Dx=.x$count, sex=sex, ax=NULL, which.x=age_num, ns=1000, level=0.95)
+  # extracting LE
+  le <- lt %>% filter(x==age_num) %>% pull(ex)
+  # extracting 95% CI
+  ci <- ci_dta %>% pluck("CIex") %>% unname() 
+  # building df that summarizes results
+  data.frame(le=le,
+             lci=ci[1],
+             uci=ci[2])
 }
 
 ## (2.C) GET_BIVARIATE FUNCTION 
@@ -322,7 +341,7 @@ df_canada <- ne_countries(country='canada', scale=50, returnclass = "sf") %>% se
 
 # IMPORTANT NOTE: ALL RESULTS BELOW HAVE ALREADY BEEN STORED IN LE_CBSA_RESULTS.RDATA
 ## now just doing 5-year and CZ only to save time
-run_LE<-F
+run_LE<-T
 n_iter<-1000
 if (run_LE){
   # ## cz, 3 yr pooled ----
@@ -352,12 +371,13 @@ if (run_LE){
   #       group_modify(~le_lv(., age_num=0, sex="W"))
   #   )
   
-  ## cz, 5 yr pooled ---- 
-  results_czyr5 <-
-    dta %>% group_by(year5, cz, age_5yr_group, gender) %>%  
+  ## cz, 5 yr pooled ----  (old code)
+  cz_data<-dta %>% group_by(year5, cz, age_5yr_group, gender) %>%  
     summarise(count=sum(count, na.rm=T),
               pop_denom=sum(pop_denom, na.rm=T)) %>%
-    ungroup() %>%
+    ungroup() 
+  
+  results_czyr5 <-cz_data %>% 
     filter(gender=="Men") %>%
     # creating age-specific death rates variable, Mx
     mutate(mx=count/pop_denom,
@@ -379,28 +399,25 @@ if (run_LE){
         group_modify(~le_lv(., age_num=0, sex="W"))
     )
   ## cz, 5-year pooled, resampled, in case it's needed
-  results_czyr5_iter <-
-    dta %>%
-    #filter(cz%in%c("10", "11", "12")) %>% for testing purposes
-    group_by(year5, cz, age_5yr_group, gender) %>%
-    summarise(count=sum(count, na.rm=T),
-              pop_denom=sum(pop_denom, na.rm=T)) %>%
-    group_by(year5, cz, gender) %>%
-    group_modify(~{
-      # .x<-iter %>% filter(cz==1, year5=="1990-1994", gender=="Men")
-      .x %>% group_by(age_5yr_group) %>%
-        group_modify(~{
-          data.frame(count=rpois(n=n_iter, lambda=.x$count), iter=1:n_iter,
-                     pop_denom=.x$pop_denom)
-        })
-    }) %>%
-    # creating age-specific death rates variable, Mx
-    mutate(mx=count/pop_denom,
-           age_5yr_group=as.numeric(age_5yr_group)) %>%
-    arrange(year5, cz, iter, age_5yr_group, gender) %>%
-    group_by(year5, cz, gender, iter) %>%
-    group_modify(~le_lv(., age_num=0, sex=ifelse(.y$gender=="Men", "M", "W")))
-  # CHECK https://stackoverflow.com/questions/56241404/how-to-parallelize-a-grouped-mutate-summarise-in-r
+  n_workers<-availableCores()-1
+  plan(multisession, workers=n_workers)
+  results_czyr5_iter_split <- cz_data %>% 
+    # since ethis is for resampling baseline and change, estimate only first and last period
+    filter(year5%in%c("1990-1994", "2015-2019")) %>% 
+    #filter(cz%in%c("10", "11", "12")) %>% # for testing purposes
+    group_split(year5, cz, gender, .keep = T)
+  results_czyr5_iter<-future_map_dfr(results_czyr5_iter_split, function(temp){
+    #temp<-results_czyr5_iter_split[[1]]
+    t<-temp %>% 
+      group_by(year5, cz, gender, age_5yr_group, pop_denom) %>%
+      group_modify(~{
+        #.x<-temp %>% filter(age_5yr_group==0)
+        data.frame(count=rpois(n=n_iter, lambda=.x$count), iter=1:n_iter)
+      }) %>% 
+      mutate(mx=count/pop_denom) %>%
+      group_by(year5, cz, gender, iter) %>%
+      group_modify(~le_only(., age_num=0, sex=ifelse(.y$gender=="Men", "M", "W")))
+    }, .options=furrr_options(seed=333))
   ## cbsa, 3 yr pooled ----
   # results_cbsayr3 <-
   #   dta %>% filter(!cbsa%in%"") %>% filter(!is.na(cbsa)==TRUE) %>% 
@@ -464,7 +481,6 @@ if (run_LE){
   save(results_czyr5, 
        results_czyr5_iter,
        file='le_cbsa_results.rdata')
-  
 } else {
   load('le_cbsa_results.rdata')
 }
