@@ -336,3 +336,107 @@ ggsave("../Tables & Figures/men_cz_5yr_map.pdf", men_cz_5yr_map, width=15, heigh
 women_cz_5yr_map <- all_results_bivariate[[4]]
 ggsave("../Tables & Figures/women_cz_5yr_map.pdf", women_cz_5yr_map, width=15, height=10)
 
+
+
+
+
+## testing resampled getis ord
+
+getis_ord_fun_iter<-function(shp, data, gender_select, significance, correct="none"){
+  #gender_select<-"Men";significance<-0.05; correct="none"
+  #shp<-shp_cz; data<-results_czyr5_iter %>% filter(iter==1)
+  shp_clusters <- right_join(shp, 
+                             data %>% 
+                               get_bivarite(., gender_mw=gender_select, 
+                                            yr_35="year5", cbsa_cz="cz"), by=c("LM_Code"="id")) 
+  shp_clusters <- shp_clusters %>% filter(!LM_Code%in%"587")
+  queen_w <- queen_weights(shp_clusters)
+  gstar_baseline <- local_gstar(queen_w,shp_clusters %>% select(le), significance_cutoff = 1) 
+  #significance_cutoff = significance, permutations = 99999)
+  gstar_change <- local_gstar(queen_w,shp_clusters %>% select(abs_dif), significance_cutoff = 1)
+  #significance_cutoff = significance, permutations = 99999)
+  shp_clusters$diffLE_gstar_cluster_pval<-lisa_pvalues(gstar_change)
+  shp_clusters$baseline_gstar_cluster_pval<-lisa_pvalues(gstar_baseline)
+  if (correct=="none"){
+    shp_clusters$baseline_gstar_cluster <- lisa_clusters(gstar_baseline)
+    shp_clusters$diffLE_gstar_cluster <- lisa_clusters(gstar_change)
+  } else if (correct=="fdr"){
+    fdr_baseline<-lisa_fdr(gstar_baseline, current_p = significance)
+    fdr_change<-lisa_fdr(gstar_change, current_p = significance)
+    shp_clusters$baseline_gstar_cluster <- lisa_clusters(gstar_baseline, cutoff = fdr_baseline)
+    shp_clusters$diffLE_gstar_cluster <- lisa_clusters(gstar_change, cutoff=fdr_change)
+  } else if (correct=="bonf"){
+    bonf_baseline<-lisa_bo(gstar_baseline, current_p = significance)
+    bonf_change<-lisa_fdr(gstar_change, current_p = significance)
+    shp_clusters$baseline_gstar_cluster <- lisa_clusters(gstar_baseline, cutoff = bonf_baseline)
+    shp_clusters$diffLE_gstar_cluster <- lisa_clusters(gstar_change, cutoff=bonf_change)
+  }
+  shp_clusters <- shp_clusters %>%
+    mutate(baseline_gstar_cluster=factor(baseline_gstar_cluster, levels=0:4, labels=lisa_labels(gstar_baseline)),
+           diffLE_gstar_cluster=factor(diffLE_gstar_cluster, levels=0:4, labels=lisa_labels(gstar_change)),
+           gender=gender_select,
+           significance=significance)
+  print(table(shp_clusters$baseline_gstar_cluster, shp_clusters$diffLE_gstar_cluster))
+  
+  # combining both df's and droplevel unused factor levels (Undefined, Isolated)
+  df <- shp_clusters %>% st_drop_geometry %>% 
+    select(LM_Code, baseline_gstar_cluster, diffLE_gstar_cluster) %>% 
+    filter(!baseline_gstar_cluster%in%c("Undefined", "Isolated")) %>% 
+    filter(!diffLE_gstar_cluster%in%c("Undefined", "Isolated"))
+  df$baseline_gstar_cluster <- droplevels(df$baseline_gstar_cluster)
+  df$diffLE_gstar_cluster <- droplevels(df$diffLE_gstar_cluster)
+  df <- df %>% mutate(baseline_gstar_cluster=case_when(baseline_gstar_cluster%in%"Low-Low" ~ "Low",
+                                                       baseline_gstar_cluster%in%"High-High"~ "High",
+                                                       baseline_gstar_cluster%in%"Not significant" ~ "Not significant"),
+                      diffLE_gstar_cluster=case_when(diffLE_gstar_cluster%in%"Low-Low" ~ "Low",
+                                                     diffLE_gstar_cluster%in%"High-High"~ "High",
+                                                     diffLE_gstar_cluster%in%"Not significant" ~ "Not significant"))
+  
+  
+  df <- df %>% mutate(type=case_when(
+    baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="Low" ~ "Low Baseline - Decreased",
+    baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="Not significant" ~ "Low Baseline - NS Change",
+    baseline_gstar_cluster=="Low" & diffLE_gstar_cluster=="High" ~ "Low Baseline - Increased",
+    baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="Low" ~ "NS Baseline - Decreased",
+    baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="Not significant" ~ "NS Baseline - NS Change",
+    baseline_gstar_cluster=="Not significant" & diffLE_gstar_cluster=="High" ~ "NS Baseline - Increased",
+    baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="Low" ~ "High Baseline - Decreased",
+    baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="Not significant" ~ "High Baseline - NS Change",
+    baseline_gstar_cluster=="High" & diffLE_gstar_cluster=="High" ~ "High Baseline - Increased"))
+  
+  df <- df %>% mutate(type=factor(type,
+                                  levels=c("Low Baseline - Decreased",
+                                           "Low Baseline - NS Change",
+                                           "Low Baseline - Increased",
+                                           "NS Baseline - Decreased",
+                                           "NS Baseline - NS Change",
+                                           "NS Baseline - Increased", 
+                                           "High Baseline - Decreased",
+                                           "High Baseline - NS Change",
+                                           "High Baseline - Increased"))) %>% 
+    arrange(type)
+  print(df %>% count(type))
+  
+  # now that everyhting is checked, merge back into the original one
+  shp_clusters<-full_join(shp_clusters, df %>% select(LM_Code, type))
+  
+  return(shp_clusters)
+}
+
+test<-results_czyr5_iter %>% 
+  group_by(iter) %>% 
+  group_modify(~{
+    getis_ord_fun_iter(shp = shp_cz, data = .x, gender_select="Men", significance=0.05, correct = "none")
+  })
+test<-test %>% 
+  filter(baseline_gstar_cluster!="Isolated") %>% 
+  mutate(c_high=ifelse(baseline_gstar_cluster=="High-High", 1, 0),
+         c_low=ifelse(baseline_gstar_cluster=="Low-Low", 1, 0)) %>% 
+  group_by(LM_Code) %>% 
+  summarise(prob_high=mean(c_high),
+            prob_low=mean(c_low))
+
+
+
+all_men<-getis_ord_fun(gender_select="Men", significance=0.05, correct = "none")
+all_women<-getis_ord_fun(gender_select="Women", significance=0.05, correct = "none")

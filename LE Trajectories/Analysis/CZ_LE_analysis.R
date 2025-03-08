@@ -97,7 +97,7 @@ moran_colors<-c("lightgray", "dodgerblue4", "firebrick", "black", "white")
 # bivariat3 palette
 cols<-brewer.divdiv(n=9)
 # change middle color for a darker gray
-cols[5]<-"gray50"
+cols[5]<-"lightgray"
 cols[6]<- "skyblue3"
 
 get_legend<-function(plot){
@@ -170,7 +170,7 @@ le_only<-function(.x, .y, age_num, sex="B"){
              uci=ci[2])
 }
 
-## (2.C) GET_BIVARIATE FUNCTION 
+## (2.C) GET_BIVARIATE FUNCTION  (old verison when we didnt do clustering)
 
 # creates bi_class by CBSA/CZ, gender, year3/year5
 # NOTE: uses first period (1990-1992 for year, or 3 1990-1994 for year5) as baseline ref
@@ -342,7 +342,7 @@ df_canada <- ne_countries(country='canada', scale=50, returnclass = "sf") %>% se
 # IMPORTANT NOTE: ALL RESULTS BELOW HAVE ALREADY BEEN STORED IN LE_CBSA_RESULTS.RDATA
 ## now just doing 5-year and CZ only to save time
 run_LE<-T
-n_iter<-1000
+n_iter<-100
 if (run_LE){
   # ## cz, 3 yr pooled ----
   # results_czyr3 <-
@@ -399,25 +399,25 @@ if (run_LE){
         group_modify(~le_lv(., age_num=0, sex="W"))
     )
   ## cz, 5-year pooled, resampled, in case it's needed
-  n_workers<-availableCores()-1
-  plan(multisession, workers=n_workers)
-  results_czyr5_iter_split <- cz_data %>% 
-    # since ethis is for resampling baseline and change, estimate only first and last period
-    filter(year5%in%c("1990-1994", "2015-2019")) %>% 
-    #filter(cz%in%c("10", "11", "12")) %>% # for testing purposes
-    group_split(year5, cz, gender, .keep = T)
-  results_czyr5_iter<-future_map_dfr(results_czyr5_iter_split, function(temp){
-    #temp<-results_czyr5_iter_split[[1]]
-    t<-temp %>% 
-      group_by(year5, cz, gender, age_5yr_group, pop_denom) %>%
-      group_modify(~{
-        #.x<-temp %>% filter(age_5yr_group==0)
-        data.frame(count=rpois(n=n_iter, lambda=.x$count), iter=1:n_iter)
-      }) %>% 
-      mutate(mx=count/pop_denom) %>%
-      group_by(year5, cz, gender, iter) %>%
-      group_modify(~le_only(., age_num=0, sex=ifelse(.y$gender=="Men", "M", "W")))
-    }, .options=furrr_options(seed=333))
+  # n_workers<-availableCores()-1
+  # results_czyr5_iter_split <- cz_data %>% 
+  #   # since ethis is for resampling baseline and change, estimate only first and last period
+  #   filter(year5%in%c("1990-1994", "2015-2019")) %>% 
+  #  # filter(cz%in%c("10")) %>% # for testing purposes
+  #   group_split(year5, cz, gender, .keep = T)
+  # plan(multisession, workers=n_workers)
+  # results_czyr5_iter<-future_map_dfr(results_czyr5_iter_split, function(temp){
+  #   #temp<-results_czyr5_iter_split[[1]]
+  #   t<-temp %>% 
+  #     group_by(year5, cz, gender, age_5yr_group, pop_denom) %>%
+  #     group_modify(~{
+  #       #.x<-temp %>% filter(age_5yr_group==0)
+  #       data.frame(count=rpois(n=n_iter, lambda=.x$count), iter=1:n_iter)
+  #     }) %>% 
+  #     mutate(mx=count/pop_denom) %>%
+  #     group_by(year5, cz, gender, iter) %>%
+  #     group_modify(~le_only(., age_num=0, sex=ifelse(.y$gender=="Men", "M", "W")))
+  #   }, .options=furrr_options(seed=333))
   ## cbsa, 3 yr pooled ----
   # results_cbsayr3 <-
   #   dta %>% filter(!cbsa%in%"") %>% filter(!is.na(cbsa)==TRUE) %>% 
@@ -479,7 +479,7 @@ if (run_LE){
   #   )
   # 
   save(results_czyr5, 
-       results_czyr5_iter,
+       #results_czyr5_iter,
        file='le_cbsa_results.rdata')
 } else {
   load('le_cbsa_results.rdata')
@@ -1265,152 +1265,23 @@ ggsave("../Tables & Figures/Appendix_Figure_Size.pdf", width=12, height=7)
 
 allpval<-bind_rows(getis_ord_fun(gender_select="Men", significance=0.1),
                 getis_ord_fun(gender_select="Men", significance=0.01),
+                getis_ord_fun(gender_select="Men", significance=0.001),
                 getis_ord_fun(gender_select="Men", significance=0.05) ) %>% 
   bind_rows(getis_ord_fun(gender_select="Women", significance=0.1),
             getis_ord_fun(gender_select="Women", significance=0.01),
+            getis_ord_fun(gender_select="Women", significance=0.001),
             getis_ord_fun(gender_select="Women", significance=0.05) )
 # tags for maps: baseline A/B (men/women), change C/D
-
-baseline_pval<-allpval %>% group_by(gender, significance) %>% 
-  group_map(~{
-    ggplot()+
-      geom_sf(data=.x %>% filter(!is.na(baseline_gstar_cluster)), size=0,color=NA,
-              aes(geometry=geometry, fill=(baseline_gstar_cluster)))+
-      geom_sf(data=.x, size=.1,fill=NA,color="black",
-              aes(geometry=geometry))+
-      geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
-      geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-      geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-      geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
-      geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
-      geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
-      annotate("text", x=st_bbox(.x)$xmin, 
-               y=st_bbox(.x)$ymax, 
-               hjust=0, vjust=0,
-               size=10,
-               label=ifelse(.y$gender=="Men", "A", "B"))+
-      annotate("text", x=mean(c(st_bbox(.x)$xmin, st_bbox(.x)$xmax)),
-               y=st_bbox(.x)$ymax, 
-               hjust=.5, vjust=0,
-               size=10,
-               label=paste0("Threshold for clustering: pval<", .y$significance))+
-      scale_fill_manual(values=moran_colors, name="",
-                        labels=c("Not Significant", "High or Increase", "Low or Decrease", "N/A"))+
-      coord_sf(xlim=st_bbox(.x)[c("xmin", "xmax")],
-               ylim=st_bbox(.x)[c("ymin", "ymax")])+
-      guides(size=F, alpha=F,
-             fill=guide_legend(nrow=1)) +
-      #labs(title="", tag="A")+
-      map_theme +
-      theme(legend.background = element_blank(),
-            legend.box.background = element_blank())
-    
-  })
-
-legend_sep<-get_legend(baseline_pval[[1]])
-legend_sep_baseline<-legend_sep
-baseline_pval<-map(baseline_pval, function(x) x+guides(fill="none"))
-pall<-arrangeGrob(grobs=baseline_pval, 
-                  ncol=3)
-pall<-arrangeGrob(grobs=list(pall, legend_sep), heights=c(20, 1), ncol=1)
-ggsave("../Tables & Figures/Appendix_Figure_Pval_Baseline.pdf", pall, width=43, height=19)
-
-change_pval<-allpval %>% group_by(gender, significance) %>% 
-  group_map(~{
-    ggplot()+
-      geom_sf(data=.x %>% filter(!is.na(diffLE_gstar_cluster)), size=0,color=NA,
-              aes(geometry=geometry, fill=(diffLE_gstar_cluster)))+
-      geom_sf(data=.x, size=.1,fill=NA,color="black",
-              aes(geometry=geometry))+
-      geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
-      geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-      geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-      geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
-      geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
-      geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
-      annotate("text", x=st_bbox(.x)$xmin, 
-               y=st_bbox(.x)$ymax, 
-               hjust=0, vjust=0,
-               size=10,
-               label=ifelse(.y$gender=="Men", "C", "D"))+
-      annotate("text", x=mean(c(st_bbox(.x)$xmin, st_bbox(.x)$xmax)),
-               y=st_bbox(.x)$ymax, 
-               hjust=.5, vjust=0,
-               size=10,
-               label=paste0("Threshold for clustering: pval<", .y$significance))+
-      scale_fill_manual(values=moran_colors, name="",
-                        labels=c("Not Significant", "High or Increase", "Low or Decrease", "N/A"))+
-      coord_sf(xlim=st_bbox(.x)[c("xmin", "xmax")],
-               ylim=st_bbox(.x)[c("ymin", "ymax")])+
-      guides(size=F, alpha=F,
-             fill=guide_legend(nrow=1)) +
-      #labs(title="", tag="A")+
-      map_theme +
-      theme(legend.background = element_blank(),
-            legend.box.background = element_blank())
-    
-  })
-
-legend_sep<-get_legend(change_pval[[1]])
-change_pval<-map(change_pval, function(x) x+guides(fill="none"))
-pall<-arrangeGrob(grobs=change_pval, 
-                  ncol=3)
-pall<-arrangeGrob(grobs=list(pall, legend_sep), heights=c(20, 1), ncol=1)
-ggsave("../Tables & Figures/Appendix_Figure_Pval_Change.pdf", pall, width=43, height=19)
-
-biscale_pval<-allpval %>% group_by(gender, significance) %>% 
-  group_map(~{
-    ggplot()+
-      geom_sf(data=.x %>% filter(!is.na(type)), size=0,color=NA,
-              aes(geometry=geometry, fill=(type)))+
-      geom_sf(data=.x, size=.1,fill=NA,color="black",
-              aes(geometry=geometry))+
-      geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
-      geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-      geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
-      geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
-      geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
-      geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
-      annotate("text", x=st_bbox(.x)$xmin, 
-               y=st_bbox(.x)$ymax, 
-               hjust=0, vjust=0,
-               size=10,
-               label=ifelse(.y$gender=="Men", "A", "B"))+
-      annotate("text", x=mean(c(st_bbox(.x)$xmin, st_bbox(.x)$xmax)),
-               y=st_bbox(.x)$ymax, 
-               hjust=.5, vjust=0,
-               size=10,
-               label=paste0("Threshold for clustering: pval<", .y$significance))+
-      scale_fill_manual(values=cols)+
-      coord_sf(xlim=st_bbox(.x)[c("xmin", "xmax")],
-               ylim=st_bbox(.x)[c("ymin", "ymax")])+
-      guides(color=guide_legend(reverse=TRUE),
-             fill=guide_legend(nrow=3, byrow=TRUE))+
-      #labs(title="Men")+
-      #labs(tag="A")+
-      map_theme+
-      theme(legend.position="bottom", legend.title=element_blank())+
-      theme(legend.background = element_blank(),
-            legend.box.background = element_blank())
-  })
-
-legend_sep<-get_legend(biscale_pval[[1]])
-legend_sep_biscale<-legend_sep
-biscale_pval<-map(biscale_pval, function(x) x+guides(fill="none"))
-pall<-arrangeGrob(grobs=biscale_pval, 
-                  ncol=3)
-pall<-arrangeGrob(grobs=list(pall, legend_sep), heights=c(15, 1), ncol=1)
-ggsave("../Tables & Figures/Appendix_Figure_Pval_Biscale.pdf", pall, width=43, height=19)
 
 
 # map with shades for different significance levels
 # start with the highest type 1 error
-#simplifting
 allpval01<-allpval %>% filter(significance==0.1) %>% 
   mutate(baseline_gstar_cluster_pval_cat=cut(baseline_gstar_cluster_pval,
-                                             breaks=c(0, 0.01, 0.05, 0.1, 1), include.lowest=T, right=F),
+                                             breaks=c(0, 0.001, 0.01, 0.05, 0.1, 1), include.lowest=T, right=F),
          diffLE_gstar_cluster_pval_cat=cut(diffLE_gstar_cluster_pval,
-                                             breaks=c(0, 0.01, 0.05, 0.1, 1), include.lowest=T, right=F))
+                                             breaks=c(0, 0.001, 0.01, 0.05, 0.1, 1), include.lowest=T, right=F))
+alpha_vals<-c(1, 0.7, 0.5, 0.3, 0)
 gstar_baseline_sign<-allpval01 %>% 
   group_by(gender) %>% 
   group_map(~{
@@ -1437,7 +1308,7 @@ gstar_baseline_sign<-allpval01 %>%
                label=ifelse(.y$gender=="Men", "A", "B"))+
       scale_fill_manual(values=moran_colors, name="",
                         labels=c("Not Significant", "High or Increase", "Low or Decrease", "N/A"))+
-      scale_alpha_manual(values=c(1, 0.7, 0.5, 0))+
+      scale_alpha_manual(values=alpha_vals)+
       coord_sf(xlim=st_bbox(.x)[c("xmin", "xmax")],
                ylim=st_bbox(.x)[c("ymin", "ymax")])+
       guides(size=F, alpha=F,
@@ -1474,7 +1345,7 @@ gstar_change_sign<-allpval01 %>%
                label=ifelse(.y$gender=="Men", "C", "D"))+
       scale_fill_manual(values=moran_colors, name="",
                         labels=c("Not Significant", "High or Increase", "Low or Decrease", "N/A"))+
-      scale_alpha_manual(values=c(1, 0.7, 0.5, 0))+
+      scale_alpha_manual(values=alpha_vals)+
       coord_sf(xlim=st_bbox(.x)[c("xmin", "xmax")],
                ylim=st_bbox(.x)[c("ymin", "ymax")])+
       guides(size=F, alpha=F,
@@ -1492,4 +1363,145 @@ pall<-arrangeGrob(grobs=list(gstar_baseline_sign[[1]],
                              gstar_change_sign[[2]]), 
                   ncol=2)
 pall<-arrangeGrob(grobs=list(pall, legend_sep_baseline), heights=c(20, 1), ncol=1)
-ggsave("../Tables & Figures/Figure3_sepb.pdf", pall, width=29, height=19)
+ggsave("../Tables & Figures/Figure3_sep_shadedpval.pdf", pall, width=29, height=19)
+
+
+baseline_pval<-allpval %>% group_by(gender, significance) %>% 
+  group_map(~{
+    ggplot()+
+      geom_sf(data=.x %>% filter(!is.na(baseline_gstar_cluster)), size=0,color=NA,
+              aes(geometry=geometry, fill=(baseline_gstar_cluster)))+
+      geom_sf(data=.x, size=.1,fill=NA,color="black",
+              aes(geometry=geometry))+
+      geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
+      geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+      geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+      geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+      geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
+      geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
+      annotate("text", x=st_bbox(.x)$xmin, 
+               y=st_bbox(.x)$ymax, 
+               hjust=0, vjust=0,
+               size=10,
+               label=ifelse(.y$gender=="Men", "A", "B"))+
+      annotate("text", x=mean(c(st_bbox(.x)$xmin, st_bbox(.x)$xmax)),
+               y=st_bbox(.x)$ymax, 
+               hjust=.5, vjust=0,
+               size=10,
+               label=paste0("Threshold for clustering: pval<", .y$significance))+
+      scale_fill_manual(values=moran_colors, name="",
+                        labels=c("Not Significant", "High or Increase", "Low or Decrease", "N/A"))+
+      coord_sf(xlim=st_bbox(.x)[c("xmin", "xmax")],
+               ylim=st_bbox(.x)[c("ymin", "ymax")])+
+      guides(size=F, alpha=F,
+             fill=guide_legend(nrow=1)) +
+      #labs(title="", tag="A")+
+      map_theme +
+      theme(legend.background = element_blank(),
+            legend.box.background = element_blank(),
+            legend.text = element_text(size=36))
+    
+  })
+
+legend_sep<-get_legend(baseline_pval[[1]])
+legend_sep_baseline<-legend_sep
+baseline_pval<-map(baseline_pval, function(x) x+guides(fill="none"))
+pall<-arrangeGrob(grobs=baseline_pval, 
+                  ncol=4)
+pall<-arrangeGrob(grobs=list(pall, legend_sep), heights=c(20, 1), ncol=1)
+ggsave("../Tables & Figures/Appendix_Figure_Pval_Baseline.pdf", pall, width=55, height=18, limitsize=F)
+
+change_pval<-allpval %>% group_by(gender, significance) %>% 
+  group_map(~{
+    ggplot()+
+      geom_sf(data=.x %>% filter(!is.na(diffLE_gstar_cluster)), size=0,color=NA,
+              aes(geometry=geometry, fill=(diffLE_gstar_cluster)))+
+      geom_sf(data=.x, size=.1,fill=NA,color="black",
+              aes(geometry=geometry))+
+      geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
+      geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+      geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+      geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+      geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
+      geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
+      annotate("text", x=st_bbox(.x)$xmin, 
+               y=st_bbox(.x)$ymax, 
+               hjust=0, vjust=0,
+               size=10,
+               label=ifelse(.y$gender=="Men", "C", "D"))+
+      annotate("text", x=mean(c(st_bbox(.x)$xmin, st_bbox(.x)$xmax)),
+               y=st_bbox(.x)$ymax, 
+               hjust=.5, vjust=0,
+               size=10,
+               label=paste0("Threshold for clustering: pval<", .y$significance))+
+      scale_fill_manual(values=moran_colors, name="",
+                        labels=c("Not Significant", "High or Increase", "Low or Decrease", "N/A"))+
+      coord_sf(xlim=st_bbox(.x)[c("xmin", "xmax")],
+               ylim=st_bbox(.x)[c("ymin", "ymax")])+
+      guides(size=F, alpha=F,
+             fill=guide_legend(nrow=1)) +
+      #labs(title="", tag="A")+
+      map_theme +
+      theme(legend.background = element_blank(),
+            legend.box.background = element_blank(),
+            legend.text = element_text(size=36))
+    
+  })
+
+legend_sep<-get_legend(change_pval[[1]])
+change_pval<-map(change_pval, function(x) x+guides(fill="none"))
+pall<-arrangeGrob(grobs=change_pval, 
+                  ncol=4)
+pall<-arrangeGrob(grobs=list(pall, legend_sep), heights=c(20, 1), ncol=1)
+ggsave("../Tables & Figures/Appendix_Figure_Pval_Change.pdf", pall, width=55, height=18, limitsize = F)
+
+biscale_factors<-allpval %>% pull(type) %>% levels
+
+biscale_pval<-allpval %>% group_by(gender, significance) %>% 
+  group_map(~{
+    #.x<- allpval %>% filter(significance=="0.001", gender=="Men")
+    .x<-.x %>% 
+      mutate(type=factor(type, levels=allpval %>% pull(type) %>% levels))
+    ggplot()+
+      geom_sf(data=.x %>% filter(!is.na(type)), size=0,color=NA,
+              aes(geometry=geometry, fill=(type)))+
+      geom_sf(data=.x, size=.1,fill=NA,color="black",
+              aes(geometry=geometry))+
+      geom_sf(data=st_transform(df_state, crs = st_crs(shp_cz)), size=0.1, color="black", fill=NA)+
+      geom_sf(data=st_transform(df_mexico, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+      geom_sf(data=st_transform(df_canada, crs=st_crs(shp_cz)), size=0.1, color="black", fill="darkgrey")+
+      geom_sf(data=shp_cz %>% filter(LM_Code%in%"587") %>% select(geometry), size=0.1, color="black", fill="black")+
+      geom_sf(data=st_transform(shp_census_region, crs = st_crs(shp_cz)), size=1.5, color="black", fill=NA)+
+      geom_sf(data=st_transform(shp_census_division, crs = st_crs(shp_cz)), size=0.75, color="black", fill=NA)+
+      annotate("text", x=st_bbox(.x)$xmin, 
+               y=st_bbox(.x)$ymax, 
+               hjust=0, vjust=0,
+               size=10,
+               label=ifelse(.y$gender=="Men", "A", "B"))+
+      annotate("text", x=mean(c(st_bbox(.x)$xmin, st_bbox(.x)$xmax)),
+               y=st_bbox(.x)$ymax, 
+               hjust=.5, vjust=0,
+               size=10,
+               label=paste0("Threshold for clustering: pval<", .y$significance))+
+      scale_fill_manual(values=setNames(cols, biscale_factors))+
+      coord_sf(xlim=st_bbox(.x)[c("xmin", "xmax")],
+               ylim=st_bbox(.x)[c("ymin", "ymax")])+
+      guides(color=guide_legend(reverse=TRUE),
+             fill=guide_legend(nrow=3, byrow=TRUE))+
+      #labs(title="Men")+
+      #labs(tag="A")+
+      map_theme+
+      theme(legend.position="bottom", legend.title=element_blank())+
+      theme(legend.background = element_blank(),
+            legend.box.background = element_blank(),
+            legend.text = element_text(size=36))
+  })
+
+legend_sep<-get_legend(biscale_pval[[4]])
+legend_sep_biscale<-legend_sep
+biscale_pval<-map(biscale_pval, function(x) x+guides(fill="none"))
+pall<-arrangeGrob(grobs=biscale_pval, 
+                  ncol=4)
+pall<-arrangeGrob(grobs=list(pall, legend_sep), heights=c(15, 2), ncol=1)
+ggsave("../Tables & Figures/Appendix_Figure_Pval_Biscale.pdf", pall, width=56, height=19, limitsize = F)
+
