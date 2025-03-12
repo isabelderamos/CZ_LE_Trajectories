@@ -14,6 +14,7 @@
 library(tidyverse)
 library(classInt)
 library(grid)
+library(broom)
 library(gridExtra)
 library(scales)
 library(multcomp)
@@ -341,7 +342,7 @@ df_canada <- ne_countries(country='canada', scale=50, returnclass = "sf") %>% se
 
 # IMPORTANT NOTE: ALL RESULTS BELOW HAVE ALREADY BEEN STORED IN LE_CBSA_RESULTS.RDATA
 ## now just doing 5-year and CZ only to save time
-run_LE<-T
+run_LE<-F
 n_iter<-100
 if (run_LE){
   # ## cz, 3 yr pooled ----
@@ -834,15 +835,18 @@ globalmoran_table<-shp_clusters %>%
     # 600 == .x[600,] == CZ 91  (Sussex County, DE)
     
     # use the moran.mc function
-    temp <- moran.mc(x = .x %>% pull(le), 
+    temp <- moran.test(x = .x %>% pull(le), 
                      # listw = list of neighbors, obtained from the nb adjacency matrix by using the nb2listw spdep function
-                     listw = nb2listw(neighbors, style = "B"), 
-                     # last, number of permutations for the permutation-based moran test
-                     nsim = 99999)
-    # extract moran statistic and p value
-    globalmoran <- data.frame(statistic=temp$statistic[1], pval=temp$p.value) %>% 
-      mutate(out=paste0(round(statistic, digits=3), " (", ifelse(pval<0.001, "<0.001", round(pval, digits=3)), ")")) 
-    globalmoran
+                     listw = nb2listw(neighbors, style = "B"))
+    # extract moran statistic and confidence intervals
+    tidy(temp) %>% 
+      # estimate1=moran, estimate3=variance
+      mutate(lci=estimate1-1.96*sqrt(estimate3),
+             uci=estimate1+1.96*sqrt(estimate3),
+             out=paste0(format(estimate1, digits=3, nsmall=3),
+                              " (", format(lci, digits=3, nsmall=3), ";",
+                              format(uci, digits=3, nsmall=3), ")")) %>% 
+      select(out)
   })
 # now create table
 globalmoran_table_formatted<-globalmoran_table %>% select(year, gender, out) %>% 
@@ -1365,7 +1369,15 @@ pall<-arrangeGrob(grobs=list(gstar_baseline_sign[[1]],
 pall<-arrangeGrob(grobs=list(pall, legend_sep_baseline), heights=c(20, 1), ncol=1)
 ggsave("../Tables & Figures/Figure3_sep_shadedpval.pdf", pall, width=29, height=19)
 
+# trying the same for biscale
+allpval01<-allpval %>% filter(significance==0.1) %>% 
+  mutate(baseline_gstar_cluster_pval_cat=cut(baseline_gstar_cluster_pval,
+                                             breaks=c(0, 0.001, 0.01, 0.05, 0.1, 1), include.lowest=T, right=F),
+         diffLE_gstar_cluster_pval_cat=cut(diffLE_gstar_cluster_pval,
+                                             breaks=c(0, 0.001, 0.01, 0.05, 0.1, 1), include.lowest=T, right=F))
 
+
+# separate maps for each threshold
 baseline_pval<-allpval %>% group_by(gender, significance) %>% 
   group_map(~{
     ggplot()+
@@ -1505,3 +1517,5 @@ pall<-arrangeGrob(grobs=biscale_pval,
 pall<-arrangeGrob(grobs=list(pall, legend_sep), heights=c(15, 2), ncol=1)
 ggsave("../Tables & Figures/Appendix_Figure_Pval_Biscale.pdf", pall, width=56, height=19, limitsize = F)
 
+
+allpval %>% group_by(sign)
